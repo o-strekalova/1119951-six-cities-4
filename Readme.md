@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ольга Стрекалова](https://up.htmlacademy.ru/react/4/user/1119951).
-* Наставник: `Неизвестно`.
+* Наставник: [Богдан Волик](https://htmlacademy.ru/profile/id997699).
 
 ---
 
