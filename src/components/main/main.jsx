@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const Main = (props) => {
-  const {placesCount, offersTitles} = props;
+  const {placesCount, offersTitles, onCardTitleClick} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -90,6 +90,7 @@ const Main = (props) => {
               </form>
               <CardsList
                 offersTitles={offersTitles}
+                onCardTitleClick={onCardTitleClick}
               />
             </section>
             <div className="cities__right-section">
@@ -104,7 +105,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   placesCount: PropTypes.number.isRequired,
-  offersTitles: PropTypes.arrayOf(PropTypes.string).isRequired
+  offersTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onCardTitleClick: PropTypes.func,
 };
 
 export default Main;

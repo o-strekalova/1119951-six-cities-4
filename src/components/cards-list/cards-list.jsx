@@ -4,7 +4,7 @@ import React from "react";
 
 const CardsList = (props) => {
 
-  const {offersTitles} = props;
+  const {offersTitles, onCardTitleClick} = props;
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -13,6 +13,7 @@ const CardsList = (props) => {
           <Card
             key={it}
             title={it}
+            onCardTitleClick={onCardTitleClick}
           />
         );
       })}
@@ -21,7 +22,8 @@ const CardsList = (props) => {
 };
 
 CardsList.propTypes = {
-  offersTitles: PropTypes.arrayOf(PropTypes.string).isRequired
+  offersTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onCardTitleClick: PropTypes.func,
 };
 
 export default CardsList;
