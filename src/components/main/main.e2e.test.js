@@ -2,6 +2,7 @@ import Adapter from "enzyme-adapter-react-16";
 import Main from "./main.jsx";
 import Enzyme, {mount} from "enzyme";
 import React from "react";
+import {offers} from "../mocks";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -13,7 +14,7 @@ it(`Press title`, () => {
   const main = mount(
       <Main
         placesCount={312}
-        offersTitles={[`Wood and stone place`]}
+        offers={offers}
         onCardTitleClick={onCardTitleClick}
       />
   );
