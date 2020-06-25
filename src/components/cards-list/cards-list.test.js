@@ -1,11 +1,12 @@
 import CardsList from "./cards-list.jsx";
 import React from "react";
 import renderer from "react-test-renderer";
+import {offers} from "../mocks";
 
 it(`Render CardsList`, () => {
   const tree = renderer
     .create(<CardsList
-      offersTitles={[`Wood and stone place`]}
+      offers={offers}
     />)
     .toJSON();
 

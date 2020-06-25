@@ -6,6 +6,7 @@ exports[`Render CardsList 1`] = `
 >
   <article
     className="cities__place-card place-card"
+    onMouseOver={[Function]}
   >
     <div
       className="place-card__mark"
@@ -21,7 +22,7 @@ exports[`Render CardsList 1`] = `
         href="#"
       >
         <img
-          alt="Place image"
+          alt="Wood and stone place"
           className="place-card__image"
           height="200"
           src="img/apartment-01.jpg"
@@ -41,7 +42,8 @@ exports[`Render CardsList 1`] = `
           <b
             className="place-card__price-value"
           >
-            €120
+            €
+            999
           </b>
           <span
             className="place-card__price-text"
@@ -91,6 +93,7 @@ exports[`Render CardsList 1`] = `
       </div>
       <h2
         className="place-card__name"
+        onClick={[Function]}
       >
         <a
           href="#"
@@ -101,7 +104,7 @@ exports[`Render CardsList 1`] = `
       <p
         className="place-card__type"
       >
-        Apartment
+        Room
       </p>
     </div>
   </article>
