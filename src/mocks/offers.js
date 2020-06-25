@@ -20,14 +20,14 @@ const generateOffer = () => {
     type: getRandomArrayItem(OFFERS_TYPES),
     price: getRandomIntegerNumber(50, 1000),
     isPremium: Math.random() > 0.5,
-    rating: getRandomIntegerNumber(0, 5) + Math.random(),
-    description: ``,
+    rating: getRandomIntegerNumber(0, 5) + Math.round(Math.random() * 10) / 10,
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
     bedrooms: getRandomIntegerNumber(1, 10),
     guests: getRandomIntegerNumber(1, 20),
-    features: [],
+    features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
     owner: {
       avatar: AVATAR_URL,
-      name: ``,
+      name: `Angelina`,
       isSuper: Math.random() > 0.5,
     },
   };

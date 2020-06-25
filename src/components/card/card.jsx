@@ -1,12 +1,10 @@
 import PropTypes from "prop-types";
 import React from "react";
+import {getRatingPercentage} from "../../utils";
 
 const Card = (props) => {
   const {offer, onCardTitleClick, onCardHover} = props;
   const {pictures, title, type, price, isPremium, rating} = offer;
-  const getRatingPercentage = () => {
-    return Math.round(rating) * 20;
-  };
 
   return (
     <article
@@ -39,14 +37,14 @@ const Card = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: getRatingPercentage() + `%`}}></span>
+            <span style={{width: getRatingPercentage(rating) + `%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2
           className="place-card__name"
           onClick={() => {
-            onCardTitleClick();
+            onCardTitleClick(offer);
           }}
         >
           <a href="#">{title}</a>

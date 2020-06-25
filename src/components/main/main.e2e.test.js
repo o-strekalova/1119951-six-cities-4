@@ -22,5 +22,5 @@ it(`Press title`, () => {
   const cardTitle = main.find(`h2.place-card__name`);
   cardTitle.simulate(`click`);
 
-  expect(onCardTitleClick.mock.calls.length).toBe(1);
+  expect(onCardTitleClick).toHaveBeenCalledTimes(1);
 });
