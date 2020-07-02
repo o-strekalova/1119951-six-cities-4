@@ -1,6 +1,7 @@
-import CardsList from "../cards-list/cards-list.jsx";
 import PropTypes from "prop-types";
 import React from "react";
+import CardsList from "../cards-list/cards-list.jsx";
+import Map from "../map/map.jsx";
 
 const Main = (props) => {
   const {placesCount, offers, onCardTitleClick} = props;
@@ -94,7 +95,12 @@ const Main = (props) => {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map
+                  city = {[52.38333, 4.9]}
+                  cityOffers = {offers}
+                />
+              </section>
             </div>
           </div>
         </div>
