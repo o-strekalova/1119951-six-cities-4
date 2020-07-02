@@ -8,7 +8,11 @@ it(`Render Map`, () => {
       <Map
         city={[52.38333, 4.9]}
         cityOffers={offers}
-      />).toJSON();
+      />, {
+        createNodeMock: () => {
+          return document.createElement(`DIV`);
+        }
+      }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

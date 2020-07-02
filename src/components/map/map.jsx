@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, {PureComponent} from "react";
+import React, {PureComponent, createRef} from "react";
 import leaflet from "leaflet";
 
 const ZOOM = 12;
@@ -11,30 +11,33 @@ const ICON = leaflet.icon({
 export default class Map extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._mapRef = createRef();
+    this._map = null;
   }
 
   componentDidMount() {
     const {city, cityOffers} = this.props;
 
-    const map = leaflet.map(`map`, {
+    this._map = leaflet.map(this._mapRef.current, {
       center: city,
       zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
 
-    map.setView(city, ZOOM);
+    this._map.setView(city, ZOOM);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
+      .addTo(this._map);
 
     cityOffers.map((offer) => {
       return leaflet
         .marker(offer.coords, {ICON})
-        .addTo(map);
+        .addTo(this._map);
     });
   }
 
@@ -42,6 +45,7 @@ export default class Map extends PureComponent {
     return (
       <div
         id="map"
+        ref={this._mapRef}
         style={{height: 100 + `%`}}
       />
     );
