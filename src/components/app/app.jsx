@@ -20,7 +20,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {placesCount, offers} = this.props;
+    const {placesCount, offers, reviews} = this.props;
     const {activeOffer} = this.state;
 
     if (!activeOffer) {
@@ -39,6 +39,11 @@ class App extends PureComponent {
       return (
         <Property
           offer={activeOffer}
+          reviews={reviews}
+          offersNear={offers}
+          onCardTitleClick={(offer) => {
+            this.handleCardTitleClick(offer);
+          }}
         />
       );
     }
@@ -56,6 +61,11 @@ class App extends PureComponent {
           <Route exact path="/dev-property">
             <Property
               offer={this.props.offers[0]}
+              reviews={this.props.reviews}
+              offersNear={this.props.offers}
+              onCardTitleClick={(offer) => {
+                this.handleCardTitleClick(offer);
+              }}
             />
           </Route>
         </Switch>
@@ -68,23 +78,33 @@ App.propTypes = {
   placesCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]),
+    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
     price: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    description: PropTypes.string,
+    description: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
-    features: PropTypes.array,
+    features: PropTypes.array.isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
-      name: PropTypes.string,
+      name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
     }),
   }))
-  .isRequired
+  .isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    avatar: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    date: PropTypes.instanceOf(Date).isRequired,
+    text: PropTypes.string.isRequired,
+  }))
+  .isRequired,
 };
 
 export default App;

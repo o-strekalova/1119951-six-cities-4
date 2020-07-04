@@ -1,6 +1,7 @@
-import Card from "../card/card.jsx";
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
+import Card from "../card/card.jsx";
+import {CardsListClass, CardClass} from "../../utils";
 
 class CardsList extends PureComponent {
   constructor(props) {
@@ -20,13 +21,15 @@ class CardsList extends PureComponent {
   }
 
   render() {
-    const {offers, onCardTitleClick} = this.props;
+    const {className, offers, onCardTitleClick} = this.props;
+    const cardClassName = className === CardsListClass.MAIN ? CardClass.MAIN : CardClass.PROPERTY;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className={className + ` places__list`}>
         {offers.map((offer) => {
           return <Card
             key={offer.title + offer.id}
+            className={cardClassName}
             offer={offer}
             onCardTitleClick={onCardTitleClick}
             onCardHover={() => {
@@ -40,21 +43,23 @@ class CardsList extends PureComponent {
 }
 
 CardsList.propTypes = {
+  className: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]),
+    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
     price: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    description: PropTypes.string,
+    description: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
-    features: PropTypes.array,
+    features: PropTypes.array.isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
-      name: PropTypes.string,
+      name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
     }),
   }))

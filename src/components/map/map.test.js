@@ -6,8 +6,8 @@ import {offers} from "../mocks";
 it(`Render Map`, () => {
   const tree = renderer.create(
       <Map
-        city={[52.38333, 4.9]}
-        cityOffers={offers}
+        center={[52.38333, 4.9]}
+        offers={offers}
       />, {
         createNodeMock: () => {
           return document.createElement(`DIV`);
