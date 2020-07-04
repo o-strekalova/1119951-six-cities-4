@@ -28,7 +28,7 @@ const Review = (props) => {
         <p className="reviews__text">
           {text}
         </p>
-        <time className="reviews__time" dateTime={date}>{MONTHS[date.getMonth()] + ` ` + date.getFullYear()}</time>
+        <time className="reviews__time" dateTime={date.toLocaleString()}> {MONTHS[date.getMonth()] + ` ` + date.getFullYear()}</time>
       </div>
     </li>
   );

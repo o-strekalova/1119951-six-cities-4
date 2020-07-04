@@ -57,8 +57,9 @@ exports[`Render Reviews List 1`] = `
       </p>
       <time
         className="reviews__time"
-        dateTime={2020-11-30T21:00:00.000Z}
+        dateTime="2020-12-1 0:00:00"
       >
+         
         December 2020
       </time>
     </div>
