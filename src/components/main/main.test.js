@@ -8,7 +8,11 @@ it(`Render Main`, () => {
     .create(<Main
       placesCount={312}
       offers={offers}
-    />)
+    />, {
+      createNodeMock: () => {
+        return document.createElement(`DIV`);
+      }
+    })
     .toJSON();
 
   expect(tree).toMatchSnapshot();
