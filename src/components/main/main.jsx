@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
+import {CardsListClass} from "../../utils";
 
 const Main = (props) => {
   const {placesCount, offers, onCardTitleClick} = props;
@@ -90,6 +91,7 @@ const Main = (props) => {
                 </ul>
               </form>
               <CardsList
+                className={CardsListClass.MAIN}
                 offers={offers}
                 onCardTitleClick={onCardTitleClick}
               />
@@ -97,8 +99,8 @@ const Main = (props) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  city = {[52.38333, 4.9]}
-                  cityOffers = {offers}
+                  center = {[52.38333, 4.9]}
+                  offers = {offers}
                 />
               </section>
             </div>
@@ -113,19 +115,20 @@ Main.propTypes = {
   placesCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]),
+    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
     price: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    description: PropTypes.string,
+    description: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
-    features: PropTypes.array,
+    features: PropTypes.array.isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
-      name: PropTypes.string,
+      name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
     }),
   }))

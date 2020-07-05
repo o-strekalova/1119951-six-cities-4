@@ -15,6 +15,7 @@ it(`Mouseover on offer card should pass active offer to the callback`, () => {
   const card = shallow(
       <Card
         key={offer.title + offer.id}
+        className={`cities__place-card`}
         offer={offer}
         onCardTitleClick={onCardTitleClick}
         onCardHover={onCardHover}
@@ -32,6 +33,7 @@ it(`Click on offer card title should pass active offer to the callback`, () => {
   const card = shallow(
       <Card
         key={offer.title + offer.id}
+        className={`cities__place-card`}
         offer={offer}
         onCardTitleClick={onCardTitleClick}
         onCardHover={onCardHover}

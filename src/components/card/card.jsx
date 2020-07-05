@@ -3,12 +3,12 @@ import React from "react";
 import {getRatingPercentage} from "../../utils";
 
 const Card = (props) => {
-  const {offer, onCardTitleClick, onCardHover} = props;
+  const {className, offer, onCardTitleClick, onCardHover} = props;
   const {pictures, title, type, price, isPremium, rating} = offer;
 
   return (
     <article
-      className="cities__place-card place-card"
+      className={className + ` place-card`}
       onMouseOver={() => {
         onCardHover(offer);
       }}
@@ -56,21 +56,23 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
+  className: PropTypes.string.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]),
+    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
     price: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     description: PropTypes.string,
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
-    features: PropTypes.array,
+    features: PropTypes.array.isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
-      name: PropTypes.string,
+      name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
     }),
   })

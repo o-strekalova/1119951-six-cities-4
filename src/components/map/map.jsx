@@ -17,16 +17,16 @@ export default class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {city, cityOffers} = this.props;
+    const {center, offers} = this.props;
 
     this._map = leaflet.map(this._mapRef.current, {
-      center: city,
+      center,
       zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(city, ZOOM);
+    this._map.setView(center, ZOOM);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -34,7 +34,7 @@ export default class Map extends PureComponent {
       })
       .addTo(this._map);
 
-    cityOffers.map((offer) => {
+    offers.map((offer) => {
       return leaflet
         .marker(offer.coords, {ICON})
         .addTo(this._map);
@@ -53,6 +53,25 @@ export default class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  city: PropTypes.array.isRequired,
-  cityOffers: PropTypes.array.isRequired,
+  center: PropTypes.arrayOf(PropTypes.number.isRequired),
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
+    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
+    price: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    guests: PropTypes.number.isRequired,
+    features: PropTypes.array.isRequired,
+    owner: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired,
+    }),
+  }))
+  .isRequired,
 };
