@@ -347,10 +347,10 @@ exports[`Render Property 1`] = `
                   </p>
                   <time
                     className="reviews__time"
-                    dateTime="Mon, 30 Nov 2020 21:00:00 GMT"
+                    dateTime="2020-10-5"
                   >
                      
-                    December 2020
+                    November 2020
                   </time>
                 </div>
               </li>

@@ -28,7 +28,7 @@ const Review = (props) => {
         <p className="reviews__text">
           {text}
         </p>
-        <time className="reviews__time" dateTime={date.toUTCString()}> {MONTHS[date.getMonth()] + ` ` + date.getFullYear()}</time>
+        <time className="reviews__time" dateTime={date.getFullYear() + `-` + date.getMonth() + `-` + date.getDate()}> {MONTHS[date.getMonth()] + ` ` + date.getFullYear()}</time>
       </div>
     </li>
   );

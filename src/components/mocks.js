@@ -23,6 +23,6 @@ export const reviews = [{
   avatar: `https://api.adorable.io/avatars/128`,
   name: `Angelina`,
   rating: 4.4,
-  date: new Date(2020, 11, 1),
+  date: new Date(2020, 10, 5, 10),
   text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
 }];
