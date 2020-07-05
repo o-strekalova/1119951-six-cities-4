@@ -347,7 +347,7 @@ exports[`Render Property 1`] = `
                   </p>
                   <time
                     className="reviews__time"
-                    dateTime="2020-12-1 0:00:00"
+                    dateTime="Mon, 30 Nov 2020 21:00:00 GMT"
                   >
                      
                     December 2020
