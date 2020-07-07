@@ -10,8 +10,12 @@ const MAX_OFFERS_NEAR_COUNT = 3;
 const STARS_REVIEWS = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 
 const Property = (props) => {
-  const {offer, reviews, offersNear, onCardTitleClick} = props;
-  const {pictures, title, type, price, isPremium, rating, description, bedrooms, guests, features, owner} = offer;
+  const {
+    offer,
+    onCardTitleClick
+  } = props;
+
+  const {pictures, title, type, price, isPremium, rating, description, bedrooms, guests, features, owner, reviews, offersNear} = offer;
   const picturesShown = pictures.length <= MAX_PICTURES_COUNT ? pictures : pictures.slice(0, MAX_PICTURES_COUNT);
   const offersNearShown = offersNear.length <= MAX_OFFERS_NEAR_COUNT ? offersNear : offersNear.slice(0, MAX_OFFERS_NEAR_COUNT);
 
@@ -200,38 +204,17 @@ Property.propTypes = {
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
-    }),
-  })
-  .isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    avatar: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    date: PropTypes.instanceOf(Date).isRequired,
-    text: PropTypes.string.isRequired,
-  }))
-  .isRequired,
-  offersNear: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    owner: PropTypes.shape({
+    }).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-    }),
-  }))
-  .isRequired,
+      rating: PropTypes.number.isRequired,
+      date: PropTypes.instanceOf(Date).isRequired,
+      text: PropTypes.string.isRequired,
+    })).isRequired,
+    offersNear: PropTypes.array,
+  }).isRequired,
   onCardTitleClick: PropTypes.func,
 };
 

@@ -2,11 +2,11 @@ import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Card from "./card.jsx";
-import {offers} from "../mocks";
+import {offersAll} from "../mocks";
 
 configure({adapter: new Adapter()});
 
-const offer = offers[0];
+const offer = offersAll[0].offers[0];
 
 it(`Mouseover on offer card should pass active offer to the callback`, () => {
   const onCardHover = jest.fn();

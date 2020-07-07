@@ -3,7 +3,13 @@ import React from "react";
 import {getRatingPercentage} from "../../utils";
 
 const Card = (props) => {
-  const {className, offer, onCardTitleClick, onCardHover} = props;
+  const {
+    className,
+    offer,
+    onCardTitleClick,
+    onCardHover
+  } = props;
+
   const {pictures, title, type, price, isPremium, rating} = offer;
 
   return (
