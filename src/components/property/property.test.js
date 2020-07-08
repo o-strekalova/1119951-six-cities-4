@@ -1,16 +1,15 @@
 import Property from "./property.jsx";
 import React from "react";
 import renderer from "react-test-renderer";
-import {offers, reviews} from "../mocks";
+import {offersAll} from "../mocks";
 
-const offer = offers[0];
+const offer = offersAll[0].offers[0];
 
 it(`Render Property`, () => {
   const tree = renderer
     .create(<Property
       offer={offer}
-      reviews={reviews}
-      offersNear={offers}
+      onCardTitleClick={() => {}}
     />, {
       createNodeMock: () => {
         return document.createElement(`DIV`);

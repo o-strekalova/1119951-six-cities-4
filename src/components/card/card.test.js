@@ -1,9 +1,9 @@
 import Card from "./card.jsx";
 import React from "react";
 import renderer from "react-test-renderer";
-import {offers} from "../mocks";
+import {offersAll} from "../mocks";
 
-const offer = offers[0];
+const offer = offersAll[0].offers[0];
 
 it(`Render Card Main`, () => {
   const tree = renderer

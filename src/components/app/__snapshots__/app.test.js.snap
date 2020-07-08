@@ -75,45 +75,11 @@ exports[`Render App 1`] = `
         >
           <li
             className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Paris
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Cologne
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Brussels
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
+            onClick={[Function]}
           >
             <a
               className="locations__item-link tabs__item tabs__item--active"
+              href="#"
             >
               <span>
                 Amsterdam
@@ -122,25 +88,14 @@ exports[`Render App 1`] = `
           </li>
           <li
             className="locations__item"
+            onClick={[Function]}
           >
             <a
               className="locations__item-link tabs__item"
               href="#"
             >
               <span>
-                Hamburg
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Dusseldorf
+                Paris
               </span>
             </a>
           </li>
@@ -164,7 +119,7 @@ exports[`Render App 1`] = `
           <b
             className="places__found"
           >
-            312
+            2
              places to stay in Amsterdam
           </b>
           <form

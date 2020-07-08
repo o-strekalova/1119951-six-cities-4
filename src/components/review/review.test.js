@@ -1,9 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Review from "./review.jsx";
-import {reviews} from "../mocks";
+import {offersAll} from "../mocks";
 
-const review = reviews[0];
+const review = offersAll[0].offers[0].reviews[0];
 
 it(`Render Review`, () => {
   const tree = renderer
