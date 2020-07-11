@@ -1,29 +1,27 @@
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
+
 class CitiesList extends PureComponent {
 
   render() {
     const {
       cities,
-      city,
+      activeCity,
       onCityClick
     } = this.props;
 
     return (
       <ul className="locations__list tabs__list">
-        {cities.map((it) => {
-          const className = it === city ? `locations__item-link tabs__item tabs__item--active` : `locations__item-link tabs__item`;
+        {cities.map((city) => {
+          const className = city === activeCity ? ` tabs__item--active` : ``;
 
           return (
             <li
-              key={it}
+              key={city}
               className="locations__item"
-              onClick={(evt) => {
-                const activeCity = evt.target.textContent;
-                onCityClick(activeCity);
-              }}>
-              <a className={className} href="#">
-                <span>{it}</span>
+              onClick={() => onCityClick(city)}>
+              <a className={`locations__item-link tabs__item` + className} href="#">
+                <span>{city}</span>
               </a>
             </li>
           );
@@ -35,7 +33,7 @@ class CitiesList extends PureComponent {
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string.isRequired),
-  city: PropTypes.string.isRequired,
+  activeCity: PropTypes.string.isRequired,
   onCityClick: PropTypes.func,
 };
 

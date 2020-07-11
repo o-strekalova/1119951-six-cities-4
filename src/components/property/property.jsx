@@ -12,7 +12,8 @@ const STARS_REVIEWS = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 const Property = (props) => {
   const {
     offer,
-    onCardTitleClick
+    onCardTitleClick,
+    onCardHover,
   } = props;
 
   const {pictures, title, type, price, isPremium, rating, description, bedrooms, guests, features, owner, reviews, offersNear} = offer;
@@ -166,8 +167,9 @@ const Property = (props) => {
           </div>
           <section className="property__map map">
             <Map
-              center = {offer.coords}
-              offers = {offersNearShown}
+              center={offer.coords}
+              offers={offersNearShown}
+              activePin={offer}
             />
           </section>
         </section>
@@ -178,6 +180,7 @@ const Property = (props) => {
               className={CardsListClass.PROPERTY}
               offers={offersNearShown}
               onCardTitleClick={onCardTitleClick}
+              onCardHover={onCardHover}
             />
           </section>
         </div>
@@ -216,6 +219,7 @@ Property.propTypes = {
     offersNear: PropTypes.array,
   }).isRequired,
   onCardTitleClick: PropTypes.func,
+  onCardHover: PropTypes.func,
 };
 
 export default Property;

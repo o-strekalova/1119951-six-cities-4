@@ -4,14 +4,19 @@ import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
 import {CardsListClass} from "../../utils";
 import CitiesList from "../cities-list/cities-list.jsx";
+import SortingList from "../sorting-list/sorting-list.jsx";
 
 const Main = (props) => {
   const {
+    activeCity,
+    activePin,
+    activeSort,
     offersAll,
-    city,
-    offers,
+    sortedOffers,
     onCardTitleClick,
+    onCardHover,
     onCityClick,
+    onSortClick,
   } = props;
 
   const cities = offersAll.map((offer) => offer.city);
@@ -47,7 +52,7 @@ const Main = (props) => {
           <section className="locations container">
             <CitiesList
               cities={cities}
-              city={city}
+              activeCity={activeCity}
               onCityClick={onCityClick}
             />
           </section>
@@ -56,33 +61,24 @@ const Main = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cities.length} places to stay in Amsterdam</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-              </form>
+              <b className="places__found">{cities.length} places to stay in {activeCity}</b>
+              <SortingList
+                activeSort={activeSort}
+                onSortClick={onSortClick}
+              />
               <CardsList
                 className={CardsListClass.MAIN}
-                offers={offers}
+                offers={sortedOffers}
                 onCardTitleClick={onCardTitleClick}
+                onCardHover={onCardHover}
               />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
                   center={[52.38333, 4.9]}
-                  offers={offers}
+                  offers={sortedOffers}
+                  activePin={activePin}
                 />
               </section>
             </div>
@@ -116,7 +112,7 @@ Main.propTypes = {
       }),
     })).isRequired,
   })).isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
+  sortedOffers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
@@ -143,9 +139,16 @@ Main.propTypes = {
       text: PropTypes.string.isRequired,
     })).isRequired,
   })).isRequired,
-  city: PropTypes.string.isRequired,
+  activePin: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
+  }),
+  activeCity: PropTypes.string.isRequired,
+  activeSort: PropTypes.string.isRequired,
   onCardTitleClick: PropTypes.func,
+  onCardHover: PropTypes.func,
   onCityClick: PropTypes.func,
+  onSortClick: PropTypes.func,
 };
 
 export default Main;

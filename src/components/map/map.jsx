@@ -5,7 +5,12 @@ import leaflet from "leaflet";
 const ZOOM = 12;
 const ICON = leaflet.icon({
   iconUrl: `img/pin.svg`,
-  iconSize: [30, 30]
+  iconSize: [27, 39]
+});
+
+const ACTIVE_ICON = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [27, 39]
 });
 
 export default class Map extends PureComponent {
@@ -14,10 +19,16 @@ export default class Map extends PureComponent {
 
     this._mapRef = createRef();
     this._map = null;
+    this._activeOffer = null;
+    this._activeMarker = {};
   }
 
   componentDidMount() {
-    const {center, offers} = this.props;
+    const {
+      center,
+      offers,
+      activePin,
+    } = this.props;
 
     this._map = leaflet.map(this._mapRef.current, {
       center,
@@ -34,11 +45,36 @@ export default class Map extends PureComponent {
       })
       .addTo(this._map);
 
-    offers.map((offer) => {
-      return leaflet
-        .marker(offer.coords, {ICON})
+    if (activePin) {
+      leaflet
+        .marker(activePin.coords, {icon: ACTIVE_ICON})
         .addTo(this._map);
-    });
+    } else {
+      offers.map((offer) => {
+        leaflet
+          .marker(offer.coords, {icon: ICON})
+          .addTo(this._map);
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    const {
+      activePin,
+    } = this.props;
+
+    if (activePin !== this._activeOffer) {
+
+      if (this._activeOffer !== null) {
+        this._activeMarker.remove();
+      }
+
+      this._activeOffer = activePin;
+
+      this._activeMarker = leaflet
+        .marker(this._activeOffer.coords, {icon: ACTIVE_ICON})
+        .addTo(this._map);
+    }
   }
 
   render() {
@@ -74,4 +110,8 @@ Map.propTypes = {
     }),
   }))
   .isRequired,
+  activePin: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
+  }),
 };
