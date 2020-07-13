@@ -10,14 +10,19 @@ const Card = (props) => {
     onCardHover
   } = props;
 
-  const {pictures, title, type, price, isPremium, rating} = offer;
+  const {
+    pictures,
+    title,
+    type,
+    price,
+    isPremium,
+    rating
+  } = offer;
 
   return (
     <article
       className={className + ` place-card`}
-      onMouseOver={() => {
-        onCardHover(offer);
-      }}
+      onMouseOver={() => onCardHover(offer)}
     >
       {isPremium ?
         <div className="place-card__mark">
@@ -49,9 +54,7 @@ const Card = (props) => {
         </div>
         <h2
           className="place-card__name"
-          onClick={() => {
-            onCardTitleClick(offer);
-          }}
+          onClick={() => onCardTitleClick(offer)}
         >
           <a href="#">{title}</a>
         </h2>

@@ -5,26 +5,35 @@ import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
+import {SortType} from "../../utils";
 
 class App extends PureComponent {
   _renderApp() {
     const {
-      offersAll,
-      city,
-      offers,
+      activeCity,
       activeOffer,
+      activePin,
+      activeSort,
+      offersAll,
+      sortedOffers,
       onCardTitleClick,
+      onCardHover,
       onCityClick,
+      onSortClick,
     } = this.props;
 
     if (!activeOffer) {
       return (
         <Main
           offersAll={offersAll}
-          city={city}
-          offers={offers}
+          activeCity={activeCity}
+          sortedOffers={sortedOffers}
+          activePin={activePin}
+          activeSort={activeSort}
           onCardTitleClick={onCardTitleClick}
+          onCardHover={onCardHover}
           onCityClick={onCityClick}
+          onSortClick={onSortClick}
         />
       );
     }
@@ -34,6 +43,7 @@ class App extends PureComponent {
         <Property
           offer={activeOffer}
           onCardTitleClick={onCardTitleClick}
+          onCardHover={() => {}}
         />
       );
     }
@@ -50,8 +60,9 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-property">
             <Property
-              offer={this.props.offers[0]}
+              offer={this.props.sortedOffers[0]}
               onCardTitleClick={this.props.onCardTitleClick}
+              onCardHover={() => {}}
             />
           </Route>
         </Switch>
@@ -92,8 +103,7 @@ App.propTypes = {
       offersNear: PropTypes.array,
     })).isRequired,
   })).isRequired,
-  city: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
+  sortedOffers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
@@ -147,24 +157,42 @@ App.propTypes = {
       text: PropTypes.string.isRequired,
     })).isRequired,
   }),
+  activePin: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
+  }),
+  activeCity: PropTypes.string.isRequired,
+  activeSort: PropTypes.string.isRequired,
   onCardTitleClick: PropTypes.func,
+  onCardHover: PropTypes.func,
   onCityClick: PropTypes.func,
+  onSortClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  offersAll: state.offersAll,
-  offers: state.offers,
-  city: state.city,
+  activeCity: state.activeCity,
   activeOffer: state.activeOffer,
+  activePin: state.activePin,
+  activeSort: state.activeSort,
+  offersAll: state.offersAll,
+  sortedOffers: state.sortedOffers,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCardTitleClick(offer) {
     dispatch(ActionCreator.getActiveOffer(offer));
   },
+  onCardHover(offer) {
+    dispatch(ActionCreator.getActivePin(offer));
+  },
   onCityClick(city) {
     dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.getOffers(city));
+    dispatch(ActionCreator.getOffersByCity(city));
+    dispatch(ActionCreator.sortOffers(SortType.POPULAR));
+  },
+  onSortClick(sort) {
+    dispatch(ActionCreator.changeSortType(sort));
+    dispatch(ActionCreator.sortOffers(sort));
   },
 });
 

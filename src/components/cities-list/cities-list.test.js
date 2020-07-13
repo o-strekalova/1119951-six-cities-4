@@ -6,7 +6,7 @@ it(`Render CitiesList`, () => {
   const tree = renderer
     .create(<CitiesList
       cities={[`Amsterdam`]}
-      city={`Amsterdam`}
+      activeCity={`Amsterdam`}
       onCityClick={() => {}}
     />)
     .toJSON();

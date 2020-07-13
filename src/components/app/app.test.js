@@ -4,6 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
 import {offersAll} from "../mocks";
+import {SortType} from "../../utils";
 
 const mockStore = configureStore([]);
 
@@ -15,12 +16,16 @@ it(`Render App`, () => {
   .create(
       <Provider store={store}>
         <App
-          offersAll={offersAll}
-          offers={offersAll[0].offers}
-          city={offersAll[0].city}
+          activeCity={offersAll[0].city}
           activeOffer={null}
+          activePin={null}
+          activeSort={SortType.POPULAR}
+          offersAll={offersAll}
+          sortedOffers={offersAll[0].offers}
           onCardTitleClick={() => {}}
+          onCardHover={() => {}}
           onCityClick={() => {}}
+          onSortClick={() => {}}
         />
       </Provider>, {
         createNodeMock: () => {

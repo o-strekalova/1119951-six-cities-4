@@ -11,7 +11,7 @@ it(`Click on city name should pass active city to the callback`, () => {
   const list = mount(
       <CitiesList
         cities={[`Amsterdam`, `Paris`]}
-        city={`Amsterdam`}
+        activeCity={`Amsterdam`}
         onCityClick={onCityClick}
       />);
 

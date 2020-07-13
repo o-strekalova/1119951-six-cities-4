@@ -3,21 +3,26 @@ import Main from "./main.jsx";
 import Enzyme, {mount} from "enzyme";
 import React from "react";
 import {offersAll} from "../mocks";
+import {SortType} from "../../utils";
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Press title`, () => {
+it(`Press card title in Main`, () => {
   const onCardTitleClick = jest.fn();
 
   const main = mount(
       <Main
         offersAll={offersAll}
-        city={`Amsterdame`}
-        offers={offersAll[0].offers}
+        activeCity={`Amsterdame`}
+        sortedOffers={offersAll[0].offers}
+        activePin={null}
+        activeSort={SortType.POPULAR}
         onCardTitleClick={onCardTitleClick}
+        onCardHover={() => {}}
         onCityClick={() => {}}
+        onSortClick={() => {}}
       />
   );
 
@@ -33,10 +38,14 @@ it(`Press city`, () => {
   const main = mount(
       <Main
         offersAll={offersAll}
-        city={`Amsterdame`}
-        offers={offersAll[0].offers}
+        activeCity={`Amsterdame`}
+        sortedOffers={offersAll[0].offers}
+        activePin={null}
+        activeSort={SortType.POPULAR}
         onCardTitleClick={() => {}}
+        onCardHover={() => {}}
         onCityClick={onCityClick}
+        onSortClick={() => {}}
       />
   );
 
@@ -44,4 +53,27 @@ it(`Press city`, () => {
   cities.forEach((it) => it.simulate(`click`));
 
   expect(onCityClick).toHaveBeenCalledTimes(2);
+});
+
+it(`Press sorting option`, () => {
+  const onSortClick = jest.fn();
+
+  const main = mount(
+      <Main
+        offersAll={offersAll}
+        activeCity={`Amsterdame`}
+        sortedOffers={offersAll[0].offers}
+        activePin={null}
+        activeSort={SortType.POPULAR}
+        onCardTitleClick={() => {}}
+        onCardHover={() => {}}
+        onCityClick={() => {}}
+        onSortClick={onSortClick}
+      />
+  );
+
+  const sortingOptions = main.find(`li.places__option`);
+  sortingOptions.forEach((it) => it.simulate(`click`));
+
+  expect(onSortClick).toHaveBeenCalledTimes(4);
 });
