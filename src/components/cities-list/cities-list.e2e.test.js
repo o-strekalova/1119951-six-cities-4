@@ -7,12 +7,14 @@ configure({adapter: new Adapter()});
 
 it(`Click on city name should pass active city to the callback`, () => {
   const onCityClick = jest.fn();
+  const onActiveItemChange = jest.fn();
 
   const list = mount(
       <CitiesList
+        activeItem={`Amsterdam`}
         cities={[`Amsterdam`, `Paris`]}
-        activeCity={`Amsterdam`}
         onCityClick={onCityClick}
+        onActiveItemChange={onActiveItemChange}
       />);
 
   const cities = list.find(`li.locations__item`);

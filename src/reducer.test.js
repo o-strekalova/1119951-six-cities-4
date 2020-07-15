@@ -5,7 +5,6 @@ import {SortType} from "./utils";
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer({
     activeOffer: null,
-    activePin: null,
     activeSort: SortType.POPULAR,
     offersAll,
     offersByCity: offersAll[0].offers,
@@ -13,54 +12,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     sortedOffers: offersAll[0].offers,
   }, {})).toEqual({
     activeOffer: null,
-    activePin: null,
     activeSort: SortType.POPULAR,
-    offersAll,
-    offersByCity: offersAll[0].offers,
-    activeCity: offersAll[0].city,
-    sortedOffers: offersAll[0].offers,
-  });
-});
-
-it(`Reducer should change city`, () => {
-  expect(reducer({
-    activeOffer: null,
-    activePin: null,
-    activeSort: SortType.POPULAR,
-    offersAll,
-    offersByCity: offersAll[0].offers,
-    activeCity: offersAll[0].city,
-    sortedOffers: offersAll[0].offers,
-  }, {
-    type: ActionType.CHANGE_CITY,
-    activeCity: `Paris`,
-  })).toEqual({
-    activeOffer: null,
-    activePin: null,
-    activeSort: SortType.POPULAR,
-    offersAll,
-    offersByCity: offersAll[0].offers,
-    activeCity: `Paris`,
-    sortedOffers: offersAll[0].offers,
-  });
-});
-
-it(`Reducer should change sort type`, () => {
-  expect(reducer({
-    activeOffer: null,
-    activePin: null,
-    activeSort: SortType.POPULAR,
-    offersAll,
-    offersByCity: offersAll[0].offers,
-    activeCity: offersAll[0].city,
-    sortedOffers: offersAll[0].offers,
-  }, {
-    type: ActionType.CHANGE_SORT_TYPE,
-    activeSort: SortType.TOP_RATED,
-  })).toEqual({
-    activeOffer: null,
-    activePin: null,
-    activeSort: SortType.TOP_RATED,
     offersAll,
     offersByCity: offersAll[0].offers,
     activeCity: offersAll[0].city,
@@ -83,29 +35,6 @@ it(`Reducer should get active offer`, () => {
   })).toEqual({
     activeOffer: offersAll[0].offers[0],
     activePin: null,
-    activeSort: SortType.POPULAR,
-    offersAll,
-    offersByCity: offersAll[0].offers,
-    activeCity: offersAll[0].city,
-    sortedOffers: offersAll[0].offers,
-  });
-});
-
-it(`Reducer should get active pin`, () => {
-  expect(reducer({
-    activeOffer: null,
-    activePin: null,
-    activeSort: SortType.POPULAR,
-    offersAll,
-    offersByCity: offersAll[0].offers,
-    activeCity: offersAll[0].city,
-    sortedOffers: offersAll[0].offers,
-  }, {
-    type: ActionType.GET_ACTIVE_PIN,
-    activePin: offersAll[0].offers[0],
-  })).toEqual({
-    activeOffer: null,
-    activePin: offersAll[0].offers[0],
     activeSort: SortType.POPULAR,
     offersAll,
     offersByCity: offersAll[0].offers,
@@ -161,31 +90,10 @@ it(`Reducer should sort offers found by city`, () => {
 });
 
 describe(`Action creators work correctly`, () => {
-  it(`Action creator for changing city returns correct action`, () => {
-    expect(ActionCreator.changeCity(`Paris`)).toEqual({
-      type: ActionType.CHANGE_CITY,
-      activeCity: `Paris`,
-    });
-  });
-
-  it(`Action creator for changing sort type returns correct action`, () => {
-    expect(ActionCreator.changeSortType(SortType.TOP_RATED)).toEqual({
-      type: ActionType.CHANGE_SORT_TYPE,
-      activeSort: SortType.TOP_RATED,
-    });
-  });
-
   it(`Action creator for getting active offer returns correct action`, () => {
     expect(ActionCreator.getActiveOffer(offersAll[0].offers[0])).toEqual({
       type: ActionType.GET_ACTIVE_OFFER,
       activeOffer: offersAll[0].offers[0],
-    });
-  });
-
-  it(`Action creator for getting active pin returns correct action`, () => {
-    expect(ActionCreator.getActivePin(offersAll[0].offers[0])).toEqual({
-      type: ActionType.GET_ACTIVE_PIN,
-      activePin: offersAll[0].offers[0],
     });
   });
 

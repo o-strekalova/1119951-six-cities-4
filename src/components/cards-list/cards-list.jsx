@@ -1,32 +1,44 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, {PureComponent} from "react";
 import Card from "../card/card.jsx";
 import {CardsListClass, CardClass} from "../../utils";
 
-const CardsList = (props) => {
-  const {
-    className,
-    offers,
-    onCardTitleClick,
-    onCardHover,
-  } = props;
+class CardsList extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  const cardClassName = className === CardsListClass.MAIN ? CardClass.MAIN : CardClass.PROPERTY;
+    this._handleCardHover = this._handleCardHover.bind(this);
+  }
 
-  return (
-    <div className={className + ` places__list`}>
-      {offers.map((offer) => {
-        return <Card
-          key={offer.title + offer.id}
-          className={cardClassName}
-          offer={offer}
-          onCardTitleClick={onCardTitleClick}
-          onCardHover={onCardHover}
-        />;
-      })}
-    </div>
-  );
-};
+  _handleCardHover(offer) {
+    this.props.onActiveItemChange(offer);
+    this.props.onCardHover(offer);
+  }
+
+  render() {
+    const {
+      className,
+      offers,
+      onCardTitleClick,
+    } = this.props;
+
+    const cardClassName = className === CardsListClass.MAIN ? CardClass.MAIN : CardClass.PROPERTY;
+
+    return (
+      <div className={className + ` places__list`}>
+        {offers.map((offer) => {
+          return <Card
+            key={offer.title + offer.id}
+            className={cardClassName}
+            offer={offer}
+            onCardTitleClick={onCardTitleClick}
+            onCardHover={this._handleCardHover}
+          />;
+        })}
+      </div>
+    );
+  }
+}
 
 CardsList.propTypes = {
   className: PropTypes.string.isRequired,
@@ -50,6 +62,7 @@ CardsList.propTypes = {
     }),
   }))
   .isRequired,
+  onActiveItemChange: PropTypes.func,
   onCardTitleClick: PropTypes.func,
   onCardHover: PropTypes.func,
 };
