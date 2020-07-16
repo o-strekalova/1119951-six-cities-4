@@ -18,12 +18,10 @@ it(`Render App`, () => {
         <App
           activeCity={offersAll[0].city}
           activeOffer={null}
-          activePin={null}
           activeSort={SortType.POPULAR}
           offersAll={offersAll}
           sortedOffers={offersAll[0].offers}
           onCardTitleClick={() => {}}
-          onCardHover={() => {}}
           onCityClick={() => {}}
           onSortClick={() => {}}
         />

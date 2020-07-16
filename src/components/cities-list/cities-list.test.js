@@ -5,8 +5,8 @@ import renderer from "react-test-renderer";
 it(`Render CitiesList`, () => {
   const tree = renderer
     .create(<CitiesList
+      activeItem={`Amsterdam`}
       cities={[`Amsterdam`]}
-      activeCity={`Amsterdam`}
       onCityClick={() => {}}
     />)
     .toJSON();

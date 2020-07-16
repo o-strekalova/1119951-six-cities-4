@@ -3,49 +3,24 @@ import {offersAll} from "./mocks/offers";
 
 const initialState = {
   activeOffer: null,
-  activePin: null,
+  activeCity: offersAll[0].city,
   activeSort: SortType.POPULAR,
   offersAll,
   offersByCity: offersAll[0].offers,
-  activeCity: offersAll[0].city,
   sortedOffers: offersAll[0].offers,
 };
 
 const ActionType = {
-  CHANGE_CITY: `CHANGE_CITY`,
-  CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   GET_OFFERS_BY_CITY: `GET_OFFERS_BY_CITY`,
   GET_ACTIVE_OFFER: `GET_ACTIVE_OFFER`,
-  GET_ACTIVE_PIN: `GET_ACTIVE_PIN`,
   SORT_OFFERS: `SORT_OFFERS`,
 };
 
 const ActionCreator = {
-  changeCity: (city) => {
-    return {
-      type: ActionType.CHANGE_CITY,
-      activeCity: city,
-    };
-  },
-
-  changeSortType: (sort) => {
-    return {
-      type: ActionType.CHANGE_SORT_TYPE,
-      activeSort: sort,
-    };
-  },
-
   getActiveOffer: (offer) => {
     return {
       type: ActionType.GET_ACTIVE_OFFER,
       activeOffer: offer,
-    };
-  },
-
-  getActivePin: (offer) => {
-    return {
-      type: ActionType.GET_ACTIVE_PIN,
-      activePin: offer,
     };
   },
 
@@ -57,7 +32,6 @@ const ActionCreator = {
   },
 
   sortOffers: (sort) => {
-
     return {
       type: ActionType.SORT_OFFERS,
       activeSort: sort,
@@ -67,18 +41,6 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_CITY:
-
-      return extend(state, {
-        activeCity: action.activeCity,
-      });
-
-    case ActionType.CHANGE_SORT_TYPE:
-
-      return extend(state, {
-        activeSort: action.activeSort,
-      });
-
     case ActionType.GET_OFFERS_BY_CITY:
 
       const cityOffers = state.offersAll.find((offer) => {
@@ -94,12 +56,6 @@ const reducer = (state = initialState, action) => {
 
       return extend(state, {
         activeOffer: action.activeOffer,
-      });
-
-    case ActionType.GET_ACTIVE_PIN:
-
-      return extend(state, {
-        activePin: action.activePin,
       });
 
     case ActionType.SORT_OFFERS:

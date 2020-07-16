@@ -6,9 +6,9 @@ import {offersAll} from "../mocks";
 it(`Render Map`, () => {
   const tree = renderer.create(
       <Map
+        activePin={null}
         center={[52.38333, 4.9]}
         offers={offersAll[0].offers}
-        activePin={null}
       />, {
         createNodeMock: () => {
           return document.createElement(`DIV`);

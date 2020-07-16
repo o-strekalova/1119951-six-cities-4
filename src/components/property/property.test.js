@@ -11,7 +11,6 @@ it(`Render Property`, () => {
         <Property
           offer={offer}
           onCardTitleClick={() => {}}
-          onCardHover={() => {}}
         />, {
           createNodeMock: () => {
             return document.createElement(`DIV`);

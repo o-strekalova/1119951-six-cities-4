@@ -11,10 +11,8 @@ it(`Render Main`, () => {
           offersAll={offersAll}
           activeCity={`Amsterdame`}
           sortedOffers={offersAll[0].offers}
-          activePin={null}
           activeSort={SortType.POPULAR}
           onCardTitleClick={() => {}}
-          onCardHover={() => {}}
           onCityClick={() => {}}
           onSortClick={() => {}}
         />, {

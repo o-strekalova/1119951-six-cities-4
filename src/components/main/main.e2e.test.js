@@ -17,10 +17,8 @@ it(`Press card title in Main`, () => {
         offersAll={offersAll}
         activeCity={`Amsterdame`}
         sortedOffers={offersAll[0].offers}
-        activePin={null}
         activeSort={SortType.POPULAR}
         onCardTitleClick={onCardTitleClick}
-        onCardHover={() => {}}
         onCityClick={() => {}}
         onSortClick={() => {}}
       />
@@ -40,10 +38,8 @@ it(`Press city`, () => {
         offersAll={offersAll}
         activeCity={`Amsterdame`}
         sortedOffers={offersAll[0].offers}
-        activePin={null}
         activeSort={SortType.POPULAR}
         onCardTitleClick={() => {}}
-        onCardHover={() => {}}
         onCityClick={onCityClick}
         onSortClick={() => {}}
       />
@@ -63,10 +59,8 @@ it(`Press sorting option`, () => {
         offersAll={offersAll}
         activeCity={`Amsterdame`}
         sortedOffers={offersAll[0].offers}
-        activePin={null}
         activeSort={SortType.POPULAR}
         onCardTitleClick={() => {}}
-        onCardHover={() => {}}
         onCityClick={() => {}}
         onSortClick={onSortClick}
       />
