@@ -1,6 +1,6 @@
-import Card from "./card.jsx";
 import React from "react";
 import renderer from "react-test-renderer";
+import Card from "./card.jsx";
 import {offersAll} from "../mocks";
 
 const offer = offersAll[0].offers[0];

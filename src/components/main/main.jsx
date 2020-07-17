@@ -1,37 +1,54 @@
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
-import CardsList from "../cards-list/cards-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
-import Map from "../map/map.jsx";
-import SortingList from "../sorting-list/sorting-list.jsx";
+import MainEmpty from "../main-empty/main-empty.jsx";
+import OffersSection from "../offers-section/offers-section.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import {CardsListClass} from "../../utils";
 
-const CardsListWrapped = withActiveItem(CardsList);
+const OffersSectionWrapped = withActiveItem(OffersSection);
 const CitiesListWrapped = withActiveItem(CitiesList);
 
 class Main extends PureComponent {
-  constructor(props) {
-    super(props);
+  _renderOffersSection() {
+    const {
+      activeCity,
+      sortedOffers,
+      activeSort,
+      onSortClick,
+      onCardTitleClick,
+    } = this.props;
 
-    this.state = {
-      activePin: null,
-    };
+    if (sortedOffers.length > 0) {
+      return (
+        <OffersSectionWrapped
+          activeCity={activeCity}
+          activeSort={activeSort}
+          className={CardsListClass.MAIN}
+          offers={sortedOffers}
+          onCardTitleClick={onCardTitleClick}
+          onSortClick={onSortClick}
+        />
+      );
+    } else {
+      return (
+        <MainEmpty
+          activeCity={activeCity}
+        />
+      );
+    }
   }
 
   render() {
     const {
       activeCity,
-      activeSort,
       offersAll,
       sortedOffers,
-      onCardTitleClick,
       onCityClick,
-      onSortClick,
     } = this.props;
 
-    const {activePin} = this.state;
     const cities = offersAll.map((offer) => offer.city);
+    const isEmpty = sortedOffers.length === 0 ? ` page__main--index-empty` : ``;
 
     return (
       <div className="page page--gray page--main">
@@ -58,7 +75,7 @@ class Main extends PureComponent {
           </div>
         </header>
 
-        <main className="page__main page__main--index">
+        <main className={`page__main page__main--index` + isEmpty}>
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
@@ -70,36 +87,7 @@ class Main extends PureComponent {
             </section>
           </div>
           <div className="cities">
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{cities.length} places to stay in {activeCity}</b>
-                <SortingList
-                  activeSort={activeSort}
-                  onSortClick={onSortClick}
-                />
-                <CardsListWrapped
-                  activePin={activePin}
-                  className={CardsListClass.MAIN}
-                  offers={sortedOffers}
-                  onCardHover={(offer) => {
-                    this.setState({
-                      activePin: offer,
-                    });
-                  }}
-                  onCardTitleClick={onCardTitleClick}
-                />
-              </section>
-              <div className="cities__right-section">
-                <section className="cities__map map">
-                  <Map
-                    activePin={activePin}
-                    center={[52.38333, 4.9]}
-                    offers={sortedOffers}
-                  />
-                </section>
-              </div>
-            </div>
+            {this._renderOffersSection()}
           </div>
         </main>
       </div>

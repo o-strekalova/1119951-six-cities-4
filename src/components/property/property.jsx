@@ -13,10 +13,24 @@ const Property = (props) => {
   const {
     offer,
     onCardTitleClick,
-    onCardHover,
   } = props;
 
-  const {pictures, title, type, price, isPremium, rating, description, bedrooms, guests, features, owner, reviews, offersNear} = offer;
+  const {
+    pictures,
+    title,
+    type,
+    price,
+    isPremium,
+    rating,
+    description,
+    bedrooms,
+    guests,
+    features,
+    owner,
+    reviews,
+    offersNear
+  } = offer;
+
   const picturesShown = pictures.length <= MAX_PICTURES_COUNT ? pictures : pictures.slice(0, MAX_PICTURES_COUNT);
   const offersNearShown = offersNear.length <= MAX_OFFERS_NEAR_COUNT ? offersNear : offersNear.slice(0, MAX_OFFERS_NEAR_COUNT);
 
@@ -167,9 +181,9 @@ const Property = (props) => {
           </div>
           <section className="property__map map">
             <Map
+              activePin={offer}
               center={offer.coords}
               offers={offersNearShown}
-              activePin={offer}
             />
           </section>
         </section>
@@ -179,8 +193,8 @@ const Property = (props) => {
             <CardsList
               className={CardsListClass.PROPERTY}
               offers={offersNearShown}
+              onCardHover={() => {}}
               onCardTitleClick={onCardTitleClick}
-              onCardHover={onCardHover}
             />
           </section>
         </div>
@@ -219,7 +233,6 @@ Property.propTypes = {
     offersNear: PropTypes.array,
   }).isRequired,
   onCardTitleClick: PropTypes.func,
-  onCardHover: PropTypes.func,
 };
 
-export default Property;
+export default React.memo(Property);

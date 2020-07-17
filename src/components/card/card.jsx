@@ -90,4 +90,4 @@ Card.propTypes = {
   onCardHover: PropTypes.func,
 };
 
-export default Card;
+export default React.memo(Card);
