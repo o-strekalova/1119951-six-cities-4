@@ -25,9 +25,9 @@ export default class Map extends PureComponent {
 
   componentDidMount() {
     const {
+      activePin,
       center,
       offers,
-      activePin,
     } = this.props;
 
     this._map = leaflet.map(this._mapRef.current, {

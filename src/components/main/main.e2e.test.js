@@ -1,7 +1,7 @@
-import Adapter from "enzyme-adapter-react-16";
-import Main from "./main.jsx";
-import Enzyme, {mount} from "enzyme";
 import React from "react";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme, {mount} from "enzyme";
+import Main from "./main.jsx";
 import {offersAll} from "../mocks";
 import {SortType} from "../../utils";
 

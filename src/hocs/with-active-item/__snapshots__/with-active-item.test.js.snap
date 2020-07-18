@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withActiveItem is rendered correctly for CitiesList 1`] = `<div />`;
+
+exports[`withActiveItem is rendered correctly for OffersSection 1`] = `<div />`;

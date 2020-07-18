@@ -1,13 +1,12 @@
-import CardsList from "./cards-list.jsx";
 import React from "react";
 import renderer from "react-test-renderer";
+import CardsList from "./cards-list.jsx";
 import {offersAll} from "../mocks";
 
 it(`Render CardsList Main`, () => {
   const tree = renderer
     .create(
         <CardsList
-          activePin={null}
           className={`cities__places-list tabs__content`}
           offers={offersAll[0].offers}
           onCardTitleClick={() => {}}
@@ -22,7 +21,6 @@ it(`Render CardsList Property`, () => {
   const tree = renderer
     .create(
         <CardsList
-          activePin={null}
           className={`near-places__list`}
           offers={offersAll[0].offers}
           onCardTitleClick={() => {}}

@@ -35,4 +35,4 @@ ReviewsList.propTypes = {
   .isRequired,
 };
 
-export default ReviewsList;
+export default React.memo(ReviewsList);

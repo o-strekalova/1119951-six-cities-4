@@ -6,7 +6,13 @@ const MONTHS = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, 
 
 const Review = (props) => {
   const {review} = props;
-  const {avatar, name, rating, date, text} = review;
+  const {
+    avatar,
+    name,
+    rating,
+    date,
+    text
+  } = review;
 
   return (
     <li className="reviews__item">
@@ -46,4 +52,4 @@ Review.propTypes = {
   .isRequired,
 };
 
-export default Review;
+export default React.memo(Review);
