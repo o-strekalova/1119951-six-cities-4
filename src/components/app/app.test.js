@@ -20,7 +20,7 @@ it(`Render App`, () => {
           activeOffer={null}
           activeSort={SortType.POPULAR}
           offersAll={offersAll}
-          sortedOffers={offersAll[0].offers}
+          sortedOffers={offersAll}
           onCardTitleClick={() => {}}
           onCityClick={() => {}}
           onSortClick={() => {}}

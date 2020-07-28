@@ -22,15 +22,15 @@ class CitiesList extends PureComponent {
     return (
       <ul className="locations__list tabs__list">
         {cities.map((city) => {
-          const className = city === activeItem ? ` tabs__item--active` : ``;
+          const className = city.name === activeItem.name ? ` tabs__item--active` : ``;
 
           return (
             <li
-              key={city}
+              key={city.name}
               className="locations__item"
               onClick={() => this._handleCityClick(city)}>
               <a className={`locations__item-link tabs__item` + className} href="#">
-                <span>{city}</span>
+                <span>{city.name}</span>
               </a>
             </li>
           );
@@ -41,8 +41,22 @@ class CitiesList extends PureComponent {
 }
 
 CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string.isRequired),
-  activeItem: PropTypes.string.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape({
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }),
+    name: PropTypes.string.isRequired,
+  }).isRequired),
+  activeItem: PropTypes.shape({
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }),
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   onActiveItemChange: PropTypes.func,
   onCityClick: PropTypes.func,
 };

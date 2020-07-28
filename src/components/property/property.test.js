@@ -3,13 +3,11 @@ import renderer from "react-test-renderer";
 import Property from "./property.jsx";
 import {offersAll} from "../mocks";
 
-const offer = offersAll[0].offers[0];
-
 it(`Render Property`, () => {
   const tree = renderer
     .create(
         <Property
-          offer={offer}
+          offer={offersAll[0]}
           onCardTitleClick={() => {}}
         />, {
           createNodeMock: () => {

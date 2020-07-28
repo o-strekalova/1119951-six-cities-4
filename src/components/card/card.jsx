@@ -11,7 +11,7 @@ const Card = (props) => {
   } = props;
 
   const {
-    pictures,
+    preview,
     title,
     type,
     price,
@@ -30,7 +30,7 @@ const Card = (props) => {
         </div> : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={pictures[0]} width="260" height="200" alt={title} />
+          <img className="place-card__image" src={preview} width="260" height="200" alt={title} />
         </a>
       </div>
       <div className="place-card__info">
@@ -68,22 +68,37 @@ Card.propTypes = {
   className: PropTypes.string.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
     price: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    description: PropTypes.string,
+    description: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
     features: PropTypes.array.isRequired,
+    preview: PropTypes.string.isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
-    }),
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        long: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
   })
   .isRequired,
   onCardTitleClick: PropTypes.func,

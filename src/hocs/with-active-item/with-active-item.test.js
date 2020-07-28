@@ -12,7 +12,7 @@ const MockComponentWrapped = withActiveItem(MockComponent);
 it(`withActiveItem is rendered correctly for CitiesList`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
-      activeItem={`Amsterdam`}
+      activeItem={offersAll[0].city}
       onActiveItemChange={() => {}}
     />
   ), {
@@ -27,7 +27,7 @@ it(`withActiveItem is rendered correctly for CitiesList`, () => {
 it(`withActiveItem is rendered correctly for OffersSection`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
-      activeItem={offersAll[0].offers[0]}
+      activeItem={offersAll[0]}
       onActiveItemChange={() => {}}
     />
   ), {

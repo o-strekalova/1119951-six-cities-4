@@ -17,5 +17,18 @@ exports[`Render CitiesList 1`] = `
       </span>
     </a>
   </li>
+  <li
+    className="locations__item"
+    onClick={[Function]}
+  >
+    <a
+      className="locations__item-link tabs__item"
+      href="#"
+    >
+      <span>
+        Paris
+      </span>
+    </a>
+  </li>
 </ul>
 `;

@@ -39,15 +39,30 @@ class Main extends PureComponent {
     }
   }
 
+  _getCitiesForList() {
+    const {offersAll} = this.props;
+
+    const allCities = offersAll.map((offer) => offer.city);
+    const allCitiesNames = allCities.map((city) => city.name);
+    const uniqueCitiesNames = [...new Set(allCitiesNames)];
+    const uniqueCities = [];
+
+    for (let cityName of uniqueCitiesNames) {
+      const cityForList = allCities.find((city) => cityName === city.name);
+      uniqueCities.push(cityForList);
+    }
+
+    return uniqueCities;
+  }
+
   render() {
     const {
       activeCity,
-      offersAll,
       sortedOffers,
       onCityClick,
     } = this.props;
 
-    const cities = offersAll.map((offer) => offer.city);
+    const cities = this._getCitiesForList();
     const isEmpty = sortedOffers.length === 0 ? ` page__main--index-empty` : ``;
 
     return (
@@ -97,55 +112,81 @@ class Main extends PureComponent {
 
 Main.propTypes = {
   offersAll: PropTypes.arrayOf(PropTypes.shape({
-    city: PropTypes.string.isRequired,
-    offers: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number.isRequired),
-      pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-      title: PropTypes.string.isRequired,
-      type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-      price: PropTypes.number.isRequired,
-      isPremium: PropTypes.bool.isRequired,
-      rating: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-      bedrooms: PropTypes.number.isRequired,
-      guests: PropTypes.number.isRequired,
-      features: PropTypes.array.isRequired,
-      owner: PropTypes.shape({
-        avatar: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        isSuper: PropTypes.bool.isRequired,
-      }),
-    })).isRequired,
-  })).isRequired,
-  sortedOffers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
     price: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
     features: PropTypes.array.isRequired,
+    preview: PropTypes.string.isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
-    }).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        long: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  })).isRequired,
+  sortedOffers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
+    price: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    guests: PropTypes.number.isRequired,
+    features: PropTypes.array.isRequired,
+    preview: PropTypes.string.isRequired,
+    owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      date: PropTypes.instanceOf(Date).isRequired,
-      text: PropTypes.string.isRequired,
-    })).isRequired,
+      isSuper: PropTypes.bool.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        long: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
   })).isRequired,
-  activeCity: PropTypes.string.isRequired,
+  activeCity: PropTypes.shape({
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }),
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   activeSort: PropTypes.string.isRequired,
   onCardTitleClick: PropTypes.func,
   onCityClick: PropTypes.func,

@@ -9,7 +9,7 @@ const MainEmpty = (props) => {
       <section className="cities__no-places">
         <div className="cities__status-wrapper tabs__content">
           <b className="cities__status">No places to stay available</b>
-          <p className="cities__status-description">We could not find any property availbale at the moment in {activeCity}</p>
+          <p className="cities__status-description">We could not find any property availbale at the moment in {activeCity.name}</p>
         </div>
       </section>
       <div className="cities__right-section"></div>
@@ -18,7 +18,14 @@ const MainEmpty = (props) => {
 };
 
 MainEmpty.propTypes = {
-  activeCity: PropTypes.string.isRequired,
+  activeCity: PropTypes.shape({
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }),
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default React.memo(MainEmpty);
