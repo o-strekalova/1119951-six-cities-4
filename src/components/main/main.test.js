@@ -9,8 +9,8 @@ it(`Render Main with offers`, () => {
     .create(
         <Main
           offersAll={offersAll}
-          activeCity={`Amsterdam`}
-          sortedOffers={offersAll[0].offers}
+          activeCity={offersAll[0].city}
+          sortedOffers={offersAll}
           activeSort={SortType.POPULAR}
           onCardTitleClick={() => {}}
           onCityClick={() => {}}
@@ -30,7 +30,7 @@ it(`Render Main without offers`, () => {
     .create(
         <Main
           offersAll={[]}
-          activeCity={`Amsterdam`}
+          activeCity={offersAll[0].city}
           sortedOffers={[]}
           activeSort={SortType.POPULAR}
           onCardTitleClick={() => {}}

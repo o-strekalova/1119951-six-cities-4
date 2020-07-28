@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import Card from "./card.jsx";
 import {offersAll} from "../mocks";
 
-const offer = offersAll[0].offers[0];
+const offer = offersAll[0];
 
 it(`Render Card Main`, () => {
   const tree = renderer

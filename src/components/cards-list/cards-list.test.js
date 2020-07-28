@@ -8,7 +8,7 @@ it(`Render CardsList Main`, () => {
     .create(
         <CardsList
           className={`cities__places-list tabs__content`}
-          offers={offersAll[0].offers}
+          offers={offersAll}
           onCardTitleClick={() => {}}
           onCardHover={() => {}}
         />)
@@ -22,7 +22,7 @@ it(`Render CardsList Property`, () => {
     .create(
         <CardsList
           className={`near-places__list`}
-          offers={offersAll[0].offers}
+          offers={offersAll}
           onCardTitleClick={() => {}}
           onCardHover={() => {}}
         />)

@@ -4,8 +4,13 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
+import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
 import {SortType} from "../../utils";
+import {getActiveOffer} from "../../reducer/app/selectors";
+import {getOffersAll, getActiveCity, getActiveSort, getSortedOffers} from "../../reducer/data/selectors";
+// import {getAuthorizationStatus} from "../../reducer/user/selectors";
+// import {Operation as UserOperation} from "../../reducer/user/user";
 
 class App extends PureComponent {
   _renderApp() {
@@ -67,91 +72,115 @@ class App extends PureComponent {
 
 App.propTypes = {
   offersAll: PropTypes.arrayOf(PropTypes.shape({
-    city: PropTypes.string.isRequired,
-    offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
+    price: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    guests: PropTypes.number.isRequired,
+    features: PropTypes.array.isRequired,
+    preview: PropTypes.string.isRequired,
+    owner: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired,
       id: PropTypes.number.isRequired,
-      coords: PropTypes.arrayOf(PropTypes.number.isRequired),
-      pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-      title: PropTypes.string.isRequired,
-      type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-      price: PropTypes.number.isRequired,
-      isPremium: PropTypes.bool.isRequired,
-      rating: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-      bedrooms: PropTypes.number.isRequired,
-      guests: PropTypes.number.isRequired,
-      features: PropTypes.array.isRequired,
-      owner: PropTypes.shape({
-        avatar: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        isSuper: PropTypes.bool.isRequired,
-      }).isRequired,
-      reviews: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        avatar: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        date: PropTypes.instanceOf(Date).isRequired,
-        text: PropTypes.string.isRequired,
-      })).isRequired,
-      offersNear: PropTypes.array,
-    })).isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        long: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
   })).isRequired,
   sortedOffers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
     price: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
     features: PropTypes.array.isRequired,
+    preview: PropTypes.string.isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
-    }).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
-      avatar: PropTypes.string.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        long: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
       name: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      date: PropTypes.instanceOf(Date).isRequired,
-      text: PropTypes.string.isRequired,
-    })).isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
   })).isRequired,
   activeOffer: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
     price: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
     features: PropTypes.array.isRequired,
+    preview: PropTypes.string.isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
-    }).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
-      avatar: PropTypes.string.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        long: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
       name: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      date: PropTypes.instanceOf(Date).isRequired,
-      text: PropTypes.string.isRequired,
-    })).isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
   }),
-  activeCity: PropTypes.string.isRequired,
+  activeCity: PropTypes.shape({
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }),
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   activeSort: PropTypes.string.isRequired,
   onCardTitleClick: PropTypes.func,
   onCityClick: PropTypes.func,
@@ -159,23 +188,25 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  activeOffer: state.activeOffer,
-  activeSort: state.activeSort,
-  offersAll: state.offersAll,
-  sortedOffers: state.sortedOffers,
+  activeCity: getActiveCity(state),
+  activeOffer: getActiveOffer(state),
+  activeSort: getActiveSort(state),
+  offersAll: getOffersAll(state),
+  sortedOffers: getSortedOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCardTitleClick(offer) {
-    dispatch(ActionCreator.getActiveOffer(offer));
+    dispatch(AppActionCreator.changeActiveOffer(offer));
   },
   onCityClick(city) {
-    dispatch(ActionCreator.getOffersByCity(city));
-    dispatch(ActionCreator.sortOffers(SortType.POPULAR));
+    dispatch(DataActionCreator.changeActiveCity(city));
+    dispatch(DataActionCreator.changeActiveSort(SortType.POPULAR));
+    dispatch(getSortedOffers());
   },
   onSortClick(sort) {
-    dispatch(ActionCreator.sortOffers(sort));
+    dispatch(DataActionCreator.changeActiveSort(sort));
+    dispatch(getSortedOffers());
   },
 });
 

@@ -2,6 +2,7 @@ import React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import CitiesList from "./cities-list.jsx";
+import {offersAll} from "../mocks";
 
 configure({adapter: new Adapter()});
 
@@ -11,8 +12,8 @@ it(`Click on city name should pass active city to the callback`, () => {
 
   const list = mount(
       <CitiesList
-        activeItem={`Amsterdam`}
-        cities={[`Amsterdam`, `Paris`]}
+        activeItem={offersAll[0].city}
+        cities={[offersAll[0].city, offersAll[1].city]}
         onCityClick={onCityClick}
         onActiveItemChange={onActiveItemChange}
       />);
@@ -21,5 +22,5 @@ it(`Click on city name should pass active city to the callback`, () => {
   cities.forEach((it) => it.simulate(`click`));
 
   expect(onCityClick).toHaveBeenCalledTimes(2);
-  expect(onCityClick.mock.calls[1][0]).toMatch(`Paris`);
+  expect(onCityClick.mock.calls[1][0]).toMatchObject(offersAll[1].city);
 });

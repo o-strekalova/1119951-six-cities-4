@@ -26,11 +26,11 @@ const Property = (props) => {
     bedrooms,
     guests,
     features,
-    owner,
-    reviews,
-    offersNear
+    owner
   } = offer;
 
+  const reviews = [];
+  const offersNear = [];
   const picturesShown = pictures.length <= MAX_PICTURES_COUNT ? pictures : pictures.slice(0, MAX_PICTURES_COUNT);
   const offersNearShown = offersNear.length <= MAX_OFFERS_NEAR_COUNT ? offersNear : offersNear.slice(0, MAX_OFFERS_NEAR_COUNT);
 
@@ -182,8 +182,10 @@ const Property = (props) => {
           <section className="property__map map">
             <Map
               activePin={offer}
-              center={offer.coords}
-              offers={offersNearShown}
+              centerLat={offer.location.lat}
+              centerLong={offer.location.long}
+              zoom={offer.location.zoom}
+              offers={[]}
             />
           </section>
         </section>
@@ -206,31 +208,37 @@ const Property = (props) => {
 Property.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number.isRequired),
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
     price: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     guests: PropTypes.number.isRequired,
     features: PropTypes.array.isRequired,
+    preview: PropTypes.string.isRequired,
     owner: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       isSuper: PropTypes.bool.isRequired,
-    }).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
-      avatar: PropTypes.string.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        long: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
       name: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      date: PropTypes.instanceOf(Date).isRequired,
-      text: PropTypes.string.isRequired,
-    })).isRequired,
-    offersNear: PropTypes.array,
+    }).isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
   }).isRequired,
   onCardTitleClick: PropTypes.func,
 };

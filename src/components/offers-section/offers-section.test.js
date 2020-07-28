@@ -8,11 +8,11 @@ it(`Render OffersSection`, () => {
   const tree = renderer
     .create(
         <OffersSection
-          activeCity={`Amsterdam`}
-          activeItem={offersAll[0].offers[0]}
+          activeCity={offersAll[0].city}
+          activeItem={offersAll[0]}
           activeSort={SortType.POPULAR}
           className={`cities__places-list tabs__content`}
-          offers={offersAll[0].offers}
+          offers={offersAll}
           onActiveItemChange={() => {}}
           onCardTitleClick={() => {}}
           onSortClick={() => {}}

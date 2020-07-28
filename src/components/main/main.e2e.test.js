@@ -15,8 +15,8 @@ it(`Press card title in Main`, () => {
   const main = mount(
       <Main
         offersAll={offersAll}
-        activeCity={`Amsterdame`}
-        sortedOffers={offersAll[0].offers}
+        activeCity={offersAll[0].city}
+        sortedOffers={offersAll}
         activeSort={SortType.POPULAR}
         onCardTitleClick={onCardTitleClick}
         onCityClick={() => {}}
@@ -24,10 +24,10 @@ it(`Press card title in Main`, () => {
       />
   );
 
-  const cardTitle = main.find(`h2.place-card__name`);
-  cardTitle.simulate(`click`);
+  const cardTitles = main.find(`h2.place-card__name`);
+  cardTitles.forEach((it) => it.simulate(`click`));
 
-  expect(onCardTitleClick).toHaveBeenCalledTimes(1);
+  expect(onCardTitleClick).toHaveBeenCalledTimes(2);
 });
 
 it(`Press city`, () => {
@@ -36,8 +36,8 @@ it(`Press city`, () => {
   const main = mount(
       <Main
         offersAll={offersAll}
-        activeCity={`Amsterdame`}
-        sortedOffers={offersAll[0].offers}
+        activeCity={offersAll[0].city}
+        sortedOffers={offersAll}
         activeSort={SortType.POPULAR}
         onCardTitleClick={() => {}}
         onCityClick={onCityClick}
@@ -57,8 +57,8 @@ it(`Press sorting option`, () => {
   const main = mount(
       <Main
         offersAll={offersAll}
-        activeCity={`Amsterdame`}
-        sortedOffers={offersAll[0].offers}
+        activeCity={offersAll[0].city}
+        sortedOffers={offersAll}
         activeSort={SortType.POPULAR}
         onCardTitleClick={() => {}}
         onCityClick={() => {}}

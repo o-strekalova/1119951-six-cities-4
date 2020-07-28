@@ -21,43 +21,57 @@ const withActiveItem = (Component) => {
 
     render() {
       return <Component
-        {...this.props}
         activeItem={this.state.activeItem}
         onActiveItemChange={this.handleActiveItemChange}
+        {...this.props}
       />;
     }
   }
 
   WithActiveItem.propTypes = {
     activeItem: PropTypes.oneOfType([
-      PropTypes.string,
+      PropTypes.shape({
+        location: PropTypes.shape({
+          lat: PropTypes.number.isRequired,
+          long: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired,
+        }),
+        name: PropTypes.string.isRequired,
+      }),
       PropTypes.shape({
         id: PropTypes.number.isRequired,
-        coords: PropTypes.arrayOf(PropTypes.number.isRequired),
         pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
         title: PropTypes.string.isRequired,
         type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
         price: PropTypes.number.isRequired,
         isPremium: PropTypes.bool.isRequired,
+        isFavorite: PropTypes.bool.isRequired,
         rating: PropTypes.number.isRequired,
         description: PropTypes.string.isRequired,
         bedrooms: PropTypes.number.isRequired,
         guests: PropTypes.number.isRequired,
         features: PropTypes.array.isRequired,
+        preview: PropTypes.string.isRequired,
         owner: PropTypes.shape({
           avatar: PropTypes.string.isRequired,
           name: PropTypes.string.isRequired,
           isSuper: PropTypes.bool.isRequired,
-        }).isRequired,
-        reviews: PropTypes.arrayOf(PropTypes.shape({
           id: PropTypes.number.isRequired,
-          avatar: PropTypes.string.isRequired,
+        }).isRequired,
+        city: PropTypes.shape({
+          location: PropTypes.shape({
+            lat: PropTypes.number.isRequired,
+            long: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }),
           name: PropTypes.string.isRequired,
-          rating: PropTypes.number.isRequired,
-          date: PropTypes.instanceOf(Date).isRequired,
-          text: PropTypes.string.isRequired,
-        })).isRequired,
-      }),
+        }).isRequired,
+        location: PropTypes.shape({
+          lat: PropTypes.number.isRequired,
+          long: PropTypes.number.isRequired,
+          zoom: PropTypes.number.isRequired,
+        }).isRequired,
+      })
     ]),
     onActiveItemChange: PropTypes.func,
   };
