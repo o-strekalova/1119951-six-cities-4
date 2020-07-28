@@ -17,8 +17,7 @@ exports[`Render Property 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link"
-            href="main.html"
+            className="header__logo-linkheader__logo-link--active"
           >
             <img
               alt="6 cities logo"
@@ -48,7 +47,7 @@ exports[`Render Property 1`] = `
                 <span
                   className="header__user-name user__name"
                 >
-                  Oliver.conner@gmail.com
+                  mail@mail.ru
                 </span>
               </a>
             </li>

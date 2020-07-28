@@ -1,15 +1,34 @@
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 import CitiesList from "../cities-list/cities-list.jsx";
+import Header from "../header/header.jsx";
+import Login from "../login/login.jsx";
 import MainEmpty from "../main-empty/main-empty.jsx";
 import OffersSection from "../offers-section/offers-section.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import {AuthorizationStatus} from "../../reducer/user/user";
 import {CardsListClass} from "../../utils";
 
 const OffersSectionWrapped = withActiveItem(OffersSection);
 const CitiesListWrapped = withActiveItem(CitiesList);
 
 class Main extends PureComponent {
+  _getCitiesForList() {
+    const {offersAll} = this.props;
+
+    const allCities = offersAll.map((offer) => offer.city);
+    const allCitiesNames = allCities.map((city) => city.name);
+    const uniqueCitiesNames = [...new Set(allCitiesNames)];
+    const uniqueCities = [];
+
+    for (let cityName of uniqueCitiesNames) {
+      const cityForList = allCities.find((city) => cityName === city.name);
+      uniqueCities.push(cityForList);
+    }
+
+    return uniqueCities;
+  }
+
   _renderOffersSection() {
     const {
       activeCity,
@@ -39,78 +58,73 @@ class Main extends PureComponent {
     }
   }
 
-  _getCitiesForList() {
-    const {offersAll} = this.props;
-
-    const allCities = offersAll.map((offer) => offer.city);
-    const allCitiesNames = allCities.map((city) => city.name);
-    const uniqueCitiesNames = [...new Set(allCitiesNames)];
-    const uniqueCities = [];
-
-    for (let cityName of uniqueCitiesNames) {
-      const cityForList = allCities.find((city) => cityName === city.name);
-      uniqueCities.push(cityForList);
-    }
-
-    return uniqueCities;
-  }
-
-  render() {
+  _renderMain() {
     const {
+      authorizationStatus,
       activeCity,
       sortedOffers,
+      onAuthFormSubmit,
       onCityClick,
     } = this.props;
 
     const cities = this._getCitiesForList();
     const isEmpty = sortedOffers.length === 0 ? ` page__main--index-empty` : ``;
 
-    return (
-      <div className="page page--gray page--main">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <a className="header__logo-link header__logo-link--active">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-                </a>
-              </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
+    switch (authorizationStatus) {
+      case AuthorizationStatus.NO_AUTH:
+        return (
+          <Login
+            onSubmit={onAuthFormSubmit}
+          />
+        );
 
-        <main className={`page__main page__main--index` + isEmpty}>
-          <h1 className="visually-hidden">Cities</h1>
-          <div className="tabs">
-            <section className="locations container">
-              <CitiesListWrapped
-                activeItem={activeCity}
-                cities={cities}
-                onCityClick={onCityClick}
-              />
-            </section>
-          </div>
-          <div className="cities">
-            {this._renderOffersSection()}
-          </div>
-        </main>
+      case AuthorizationStatus.AUTH:
+        return (
+          <main className={`page__main page__main--index` + isEmpty}>
+            <h1 className="visually-hidden">Cities</h1>
+            <div className="tabs">
+              <section className="locations container">
+                <CitiesListWrapped
+                  activeItem={activeCity}
+                  cities={cities}
+                  onCityClick={onCityClick}
+                />
+              </section>
+            </div>
+            <div className="cities">
+              {this._renderOffersSection()}
+            </div>
+          </main>
+        );
+    }
+
+    return null;
+  }
+
+  render() {
+    const {
+      login,
+      authorizationStatus,
+    } = this.props;
+
+    const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
+    const pageClass = isAuthorized ? ` page--main` : ` page--login`;
+
+    return (
+      <div className={`page page--gray` + pageClass}>
+        <Header
+          login={login}
+          authorizationStatus={authorizationStatus}
+        />
+        {this._renderMain()}
       </div>
     );
   }
 }
 
 Main.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  login: PropTypes.string.isRequired,
   offersAll: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
@@ -191,6 +205,7 @@ Main.propTypes = {
   onCardTitleClick: PropTypes.func,
   onCityClick: PropTypes.func,
   onSortClick: PropTypes.func,
+  onAuthFormSubmit: PropTypes.func,
 };
 
 export default Main;
