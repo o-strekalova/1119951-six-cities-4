@@ -1,3 +1,5 @@
+import AuthInfo from "../../models/auth-info";
+
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
@@ -5,10 +7,14 @@ const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authInfo: {},
+  login: ``,
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  CHANGE_AUTH_INFO: `CHANGE_AUTH_INFO`,
+  CHANGE_LOGIN: `CHANGE_LOGIN`,
 };
 
 const ActionCreator = {
@@ -16,6 +22,20 @@ const ActionCreator = {
     return {
       type: ActionType.REQUIRED_AUTHORIZATION,
       payload: status,
+    };
+  },
+
+  changeAuthInfo: (authInfo) => {
+    return {
+      type: ActionType.CHANGE_AUTH_INFO,
+      payload: authInfo,
+    };
+  },
+
+  changeLogin: (email) => {
+    return {
+      type: ActionType.CHANGE_LOGIN,
+      payload: email,
     };
   },
 };
@@ -26,6 +46,16 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         authorizationStatus: action.payload,
       });
+
+    case ActionType.CHANGE_AUTH_INFO:
+      return Object.assign({}, state, {
+        authInfo: action.payload,
+      });
+
+    case ActionType.CHANGE_LOGIN:
+      return Object.assign({}, state, {
+        login: action.payload,
+      });
   }
 
   return state;
@@ -34,6 +64,15 @@ const reducer = (state = initialState, action) => {
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
+      .then((response) => {
+        return AuthInfo.parseAuthInfo(response.data);
+      })
+      .then((authInfo) => {
+        dispatch(ActionCreator.changeAuthInfo(authInfo));
+      })
+      .then((authInfo) => {
+        dispatch(ActionCreator.changeLogin(authInfo.email));
+      })
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
@@ -47,9 +86,9 @@ const Operation = {
       email: authData.login,
       password: authData.password,
     })
-      .then(() => {
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      });
+    .then(() => {
+      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+    });
   },
 };
 

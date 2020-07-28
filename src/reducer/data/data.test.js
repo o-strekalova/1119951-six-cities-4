@@ -10,18 +10,18 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer({
     offersAll: [],
     activeSort: SortType.POPULAR,
-    activeCity: ``,
+    activeCity: {},
   }, {})).toEqual({
     offersAll: [],
     activeSort: SortType.POPULAR,
-    activeCity: ``,
+    activeCity: {},
   });
 });
 
 it(`Reducer should update offersAll and activeCity by load offersAll`, () => {
   expect(reducer({
     offersAll: [],
-    activeCity: ``,
+    activeCity: {},
   }, {
     type: ActionType.LOAD_OFFERS,
     offersAll,

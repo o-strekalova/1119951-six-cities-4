@@ -3,7 +3,7 @@ import Offer from "../../models/offer";
 
 const initialState = {
   offersAll: [],
-  activeCity: ``,
+  activeCity: {},
   activeSort: SortType.POPULAR,
 };
 

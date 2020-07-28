@@ -4,6 +4,7 @@ import Enzyme, {mount} from "enzyme";
 import Main from "./main.jsx";
 import {offersAll} from "../mocks";
 import {SortType} from "../../utils";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -14,6 +15,8 @@ it(`Press card title in Main`, () => {
 
   const main = mount(
       <Main
+        login={`mail@mail.ru`}
+        authorizationStatus={AuthorizationStatus.AUTH}
         offersAll={offersAll}
         activeCity={offersAll[0].city}
         sortedOffers={offersAll}
@@ -21,6 +24,7 @@ it(`Press card title in Main`, () => {
         onCardTitleClick={onCardTitleClick}
         onCityClick={() => {}}
         onSortClick={() => {}}
+        onAuthFormSubmit={() => {}}
       />
   );
 
@@ -35,6 +39,8 @@ it(`Press city`, () => {
 
   const main = mount(
       <Main
+        login={`mail@mail.ru`}
+        authorizationStatus={AuthorizationStatus.AUTH}
         offersAll={offersAll}
         activeCity={offersAll[0].city}
         sortedOffers={offersAll}
@@ -42,6 +48,7 @@ it(`Press city`, () => {
         onCardTitleClick={() => {}}
         onCityClick={onCityClick}
         onSortClick={() => {}}
+        onAuthFormSubmit={() => {}}
       />
   );
 
@@ -56,6 +63,8 @@ it(`Press sorting option`, () => {
 
   const main = mount(
       <Main
+        login={`mail@mail.ru`}
+        authorizationStatus={AuthorizationStatus.AUTH}
         offersAll={offersAll}
         activeCity={offersAll[0].city}
         sortedOffers={offersAll}
@@ -63,6 +72,7 @@ it(`Press sorting option`, () => {
         onCardTitleClick={() => {}}
         onCityClick={() => {}}
         onSortClick={onSortClick}
+        onAuthFormSubmit={() => {}}
       />
   );
 
@@ -70,4 +80,28 @@ it(`Press sorting option`, () => {
   sortingOptions.forEach((it) => it.simulate(`click`));
 
   expect(onSortClick).toHaveBeenCalledTimes(4);
+});
+
+it(`Submit login form`, () => {
+  const onAuthFormSubmit = jest.fn();
+
+  const main = mount(
+      <Main
+        login={``}
+        authorizationStatus={AuthorizationStatus.NO_AUTH}
+        offersAll={offersAll}
+        activeCity={offersAll[0].city}
+        sortedOffers={offersAll}
+        activeSort={SortType.POPULAR}
+        onCardTitleClick={() => {}}
+        onCityClick={() => {}}
+        onSortClick={() => {}}
+        onAuthFormSubmit={onAuthFormSubmit}
+      />
+  );
+
+  const authForm = main.find(`form.login__form`);
+  authForm.simulate(`submit`);
+
+  expect(onAuthFormSubmit).toHaveBeenCalledTimes(1);
 });
