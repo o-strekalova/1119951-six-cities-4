@@ -175,7 +175,7 @@ Map.propTypes = {
         zoom: PropTypes.number.isRequired,
       }),
       name: PropTypes.string.isRequired,
-    }).isRequired,
+    }),
     location: PropTypes.shape({
       lat: PropTypes.number.isRequired,
       long: PropTypes.number.isRequired,

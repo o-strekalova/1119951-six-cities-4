@@ -24,8 +24,8 @@ MainEmpty.propTypes = {
       long: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired,
     }),
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+    name: PropTypes.string,
+  }),
 };
 
 export default React.memo(MainEmpty);

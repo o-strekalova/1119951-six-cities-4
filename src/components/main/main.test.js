@@ -11,6 +11,7 @@ it(`Render Main with offers`, () => {
         <Main
           login={`mail@mail.ru`}
           authorizationStatus={AuthorizationStatus.AUTH}
+          errorMessage={null}
           offersAll={offersAll}
           activeCity={offersAll[0].city}
           sortedOffers={offersAll}
@@ -35,6 +36,7 @@ it(`Render Main without offers`, () => {
         <Main
           login={`mail@mail.ru`}
           authorizationStatus={AuthorizationStatus.AUTH}
+          errorMessage={null}
           offersAll={[]}
           activeCity={offersAll[0].city}
           sortedOffers={[]}
@@ -59,6 +61,32 @@ it(`Render Main for unauthorized user`, () => {
         <Main
           login={``}
           authorizationStatus={AuthorizationStatus.NO_AUTH}
+          errorMessage={null}
+          offersAll={[]}
+          activeCity={offersAll[0].city}
+          sortedOffers={[]}
+          activeSort={SortType.POPULAR}
+          onCardTitleClick={() => {}}
+          onCityClick={() => {}}
+          onSortClick={() => {}}
+          onAuthFormSubmit={() => {}}
+        />, {
+          createNodeMock: () => {
+            return document.createElement(`DIV`);
+          }
+        })
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Render Main for with ErrorMessage`, () => {
+  const tree = renderer
+    .create(
+        <Main
+          login={``}
+          authorizationStatus={AuthorizationStatus.NO_AUTH}
+          errorMessage={`Failed to load offers`}
           offersAll={[]}
           activeCity={offersAll[0].city}
           sortedOffers={[]}

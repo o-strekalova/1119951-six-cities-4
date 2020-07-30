@@ -1,15 +1,16 @@
 import PropTypes from "prop-types";
 import React from "react";
 import CardsList from "../cards-list/cards-list.jsx";
+import ErrorMessage from "../error-message/error-message.jsx";
 import Header from "../header/header.jsx";
 import Map from "../map/map.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
+import ReviewForm from "../review-form/review-form.jsx";
 import {CardsListClass, getRatingPercentage} from "../../utils";
 import {AuthorizationStatus} from "../../reducer/user/user";
 
 const MAX_PICTURES_COUNT = 6;
 const MAX_OFFERS_NEAR_COUNT = 3;
-const STARS_REVIEWS = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 
 const Property = (props) => {
   const {
@@ -17,9 +18,12 @@ const Property = (props) => {
     onCardTitleClick,
     login,
     authorizationStatus,
+    errorMessage,
+    onReviewSubmit,
   } = props;
 
   const {
+    id,
     pictures,
     title,
     type,
@@ -41,32 +45,11 @@ const Property = (props) => {
   const renderReviewForm = () => {
     if (authorizationStatus === AuthorizationStatus.AUTH) {
       return (
-        <form className="reviews__form form" action="#" method="post">
-          <label className="reviews__label form__label" htmlFor="review">Your review</label>
-          <div className="reviews__rating-form form__rating">
-            {STARS_REVIEWS.map((starTitle, i) => {
-              let count = STARS_REVIEWS.length - i;
-
-              return (
-                <React.Fragment key={count}>
-                  <input className="form__rating-input visually-hidden" name="rating" value={count} id={count + `-stars`} type="radio" />
-                  <label htmlFor={count + `-stars`} className="reviews__rating-label form__rating-label" title={starTitle}>
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"></use>
-                    </svg>
-                  </label>
-                </React.Fragment>
-              );
-            })}
-          </div>
-          <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
-          <div className="reviews__button-wrapper">
-            <p className="reviews__help">
-              To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-            </p>
-            <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
-          </div>
-        </form>);
+        <ReviewForm
+          onSubmit={onReviewSubmit}
+          id={id}
+        />
+      );
     } else {
       return null;
     }
@@ -192,6 +175,9 @@ const Property = (props) => {
           </section>
         </div>
       </main>
+      <ErrorMessage
+        errorMessage={errorMessage}
+      />
     </div>
   );
 };
@@ -199,6 +185,7 @@ const Property = (props) => {
 Property.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   login: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
@@ -234,6 +221,7 @@ Property.propTypes = {
     }).isRequired,
   }).isRequired,
   onCardTitleClick: PropTypes.func,
+  onReviewSubmit: PropTypes.func,
 };
 
 export default React.memo(Property);

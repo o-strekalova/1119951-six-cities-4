@@ -1,4 +1,5 @@
 import AuthInfo from "../../models/auth-info";
+import {ActionCreator as AppActionCreator} from "../app/app";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -87,7 +88,17 @@ const Operation = {
       password: authData.password,
     })
     .then(() => {
+      dispatch(ActionCreator.changeLogin(authData.login));
+    })
+    .then(() => {
       dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+    })
+    .catch((err) => {
+      dispatch(AppActionCreator.changeErrorMessage(`Failed to log in. Try again later`));
+      setTimeout(() => {
+        dispatch(AppActionCreator.changeErrorMessage(null));
+      }, 5000);
+      throw err;
     });
   },
 };
