@@ -1,18 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import withActiveItem from "./with-active-item";
+import withToggle from "./with-toggle";
 import {offersAll} from "../../components/mocks";
 
 const MockComponent = () => {
   return <div/>;
 };
 
-const MockComponentWrapped = withActiveItem(MockComponent);
+const MockComponentWrapped = withToggle(MockComponent);
 
-it(`withActiveItem is rendered correctly for CitiesList`, () => {
+it(`withToggle is rendered correctly for Card`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
-      activeItem={offersAll[0].city}
+      offer={offersAll[0]}
     />
   ), {
     createNodeMock() {
@@ -23,10 +23,10 @@ it(`withActiveItem is rendered correctly for CitiesList`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-it(`withActiveItem is rendered correctly for OffersSection`, () => {
+it(`withToggle is rendered correctly for Property`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
-      activeItem={offersAll[0]}
+      offer={offersAll[1]}
     />
   ), {
     createNodeMock() {

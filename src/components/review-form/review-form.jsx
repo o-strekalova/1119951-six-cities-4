@@ -90,7 +90,7 @@ class ReviewForm extends PureComponent {
 }
 
 ReviewForm.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 

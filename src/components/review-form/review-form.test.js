@@ -6,7 +6,7 @@ it(`Render Review`, () => {
   const tree = renderer
     .create(
         <ReviewForm
-          id={11}
+          id={`11`}
           onSubmit={() => {}}
         />)
     .toJSON();

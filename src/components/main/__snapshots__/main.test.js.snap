@@ -37,19 +37,20 @@ exports[`Render Main for unauthorized user 1`] = `
             <li
               className="header__nav-item user"
             >
-              <a
+              <span
                 className="header__nav-link header__nav-link--profile"
-                href="#"
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
-                <span
+                <a
                   className="header__login"
+                  href="/login"
+                  onClick={[Function]}
                 >
                   Sign in
-                </span>
-              </a>
+                </a>
+              </span>
             </li>
           </ul>
         </nav>
@@ -146,19 +147,20 @@ exports[`Render Main for with ErrorMessage 1`] = `
             <li
               className="header__nav-item user"
             >
-              <a
+              <span
                 className="header__nav-link header__nav-link--profile"
-                href="#"
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
-                <span
+                <a
                   className="header__login"
+                  href="/login"
+                  onClick={[Function]}
                 >
                   Sign in
-                </span>
-              </a>
+                </a>
+              </span>
             </li>
           </ul>
         </nav>
@@ -273,19 +275,20 @@ exports[`Render Main with offers 1`] = `
             <li
               className="header__nav-item user"
             >
-              <a
+              <span
                 className="header__nav-link header__nav-link--profile"
-                href="#"
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
-                <span
+                <a
                   className="header__user-name user__name"
+                  href="/favorites"
+                  onClick={[Function]}
                 >
                   mail@mail.ru
-                </span>
-              </a>
+                </a>
+              </span>
             </li>
           </ul>
         </nav>
@@ -469,6 +472,7 @@ exports[`Render Main with offers 1`] = `
                   </div>
                   <button
                     className="place-card__bookmark-button button"
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -512,7 +516,8 @@ exports[`Render Main with offers 1`] = `
                   onClick={[Function]}
                 >
                   <a
-                    href="#"
+                    href="/offer/1010"
+                    onClick={[Function]}
                   >
                     Wood and stone place
                   </a>
@@ -573,6 +578,7 @@ exports[`Render Main with offers 1`] = `
                   </div>
                   <button
                     className="place-card__bookmark-button button"
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -616,7 +622,8 @@ exports[`Render Main with offers 1`] = `
                   onClick={[Function]}
                 >
                   <a
-                    href="#"
+                    href="/offer/2020"
+                    onClick={[Function]}
                   >
                     Wood and stone place
                   </a>
@@ -689,19 +696,20 @@ exports[`Render Main without offers 1`] = `
             <li
               className="header__nav-item user"
             >
-              <a
+              <span
                 className="header__nav-link header__nav-link--profile"
-                href="#"
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
-                <span
+                <a
                   className="header__user-name user__name"
+                  href="/favorites"
+                  onClick={[Function]}
                 >
                   mail@mail.ru
-                </span>
-              </a>
+                </a>
+              </span>
             </li>
           </ul>
         </nav>

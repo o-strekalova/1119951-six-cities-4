@@ -14,6 +14,7 @@ const OffersSection = (props) => {
     onActiveItemChange,
     onCardTitleClick,
     onSortClick,
+    onFavoriteButtonClick,
   } = props;
 
   return (
@@ -30,6 +31,7 @@ const OffersSection = (props) => {
           offers={offers}
           onCardHover={onActiveItemChange}
           onCardTitleClick={onCardTitleClick}
+          onFavoriteButtonClick={onFavoriteButtonClick}
         />
       </section>
       <div className="cities__right-section">
@@ -57,7 +59,7 @@ OffersSection.propTypes = {
     name: PropTypes.string.isRequired,
   }).isRequired,
   activeItem: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
@@ -93,7 +95,7 @@ OffersSection.propTypes = {
   activeSort: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
@@ -129,6 +131,7 @@ OffersSection.propTypes = {
   onActiveItemChange: PropTypes.func,
   onCardTitleClick: PropTypes.func,
   onSortClick: PropTypes.func,
+  onFavoriteButtonClick: PropTypes.func,
 };
 
 export default React.memo(OffersSection);
