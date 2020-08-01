@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 import CitiesList from "../cities-list/cities-list.jsx";
+import ErrorMessage from "../error-message/error-message.jsx";
 import Header from "../header/header.jsx";
-import Login from "../login/login.jsx";
 import MainEmpty from "../main-empty/main-empty.jsx";
 import OffersSection from "../offers-section/offers-section.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
-import {AuthorizationStatus} from "../../reducer/user/user";
 import {CardsListClass} from "../../utils";
 
 const OffersSectionWrapped = withActiveItem(OffersSection);
@@ -19,14 +18,12 @@ class Main extends PureComponent {
     const allCities = offersAll.map((offer) => offer.city);
     const allCitiesNames = allCities.map((city) => city.name);
     const uniqueCitiesNames = [...new Set(allCitiesNames)];
-    const uniqueCities = [];
 
-    for (let cityName of uniqueCitiesNames) {
-      const cityForList = allCities.find((city) => cityName === city.name);
-      uniqueCities.push(cityForList);
-    }
+    const checkCitiesForList = (cityName) => {
+      return allCities.find((city) => city.name === cityName);
+    };
 
-    return uniqueCities;
+    return uniqueCitiesNames.map(checkCitiesForList);
   }
 
   _renderOffersSection() {
@@ -58,57 +55,19 @@ class Main extends PureComponent {
     }
   }
 
-  _renderMain() {
-    const {
-      authorizationStatus,
-      activeCity,
-      sortedOffers,
-      onAuthFormSubmit,
-      onCityClick,
-    } = this.props;
-
-    const cities = this._getCitiesForList();
-    const isEmpty = sortedOffers.length === 0 ? ` page__main--index-empty` : ``;
-
-    switch (authorizationStatus) {
-      case AuthorizationStatus.NO_AUTH:
-        return (
-          <Login
-            onSubmit={onAuthFormSubmit}
-          />
-        );
-
-      case AuthorizationStatus.AUTH:
-        return (
-          <main className={`page__main page__main--index` + isEmpty}>
-            <h1 className="visually-hidden">Cities</h1>
-            <div className="tabs">
-              <section className="locations container">
-                <CitiesListWrapped
-                  activeItem={activeCity}
-                  cities={cities}
-                  onCityClick={onCityClick}
-                />
-              </section>
-            </div>
-            <div className="cities">
-              {this._renderOffersSection()}
-            </div>
-          </main>
-        );
-    }
-
-    return null;
-  }
-
   render() {
     const {
       login,
       authorizationStatus,
+      errorMessage,
+      activeCity,
+      sortedOffers,
+      onCityClick,
     } = this.props;
 
-    const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
-    const pageClass = isAuthorized ? ` page--main` : ` page--login`;
+    const pageClass = ` page--main`;
+    const cities = this._getCitiesForList();
+    const isEmpty = sortedOffers.length === 0 ? ` page__main--index-empty` : ``;
 
     return (
       <div className={`page page--gray` + pageClass}>
@@ -116,7 +75,24 @@ class Main extends PureComponent {
           login={login}
           authorizationStatus={authorizationStatus}
         />
-        {this._renderMain()}
+        <main className={`page__main page__main--index` + isEmpty}>
+          <h1 className="visually-hidden">Cities</h1>
+          <div className="tabs">
+            <section className="locations container">
+              <CitiesListWrapped
+                activeItem={activeCity}
+                cities={cities}
+                onCityClick={onCityClick}
+              />
+            </section>
+          </div>
+          <div className="cities">
+            {this._renderOffersSection()}
+          </div>
+        </main>
+        <ErrorMessage
+          errorMessage={errorMessage}
+        />
       </div>
     );
   }
@@ -125,6 +101,7 @@ class Main extends PureComponent {
 Main.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   login: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
   offersAll: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
@@ -199,8 +176,8 @@ Main.propTypes = {
       long: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired,
     }),
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+    name: PropTypes.string,
+  }),
   activeSort: PropTypes.string.isRequired,
   onCardTitleClick: PropTypes.func,
   onCityClick: PropTypes.func,

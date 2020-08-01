@@ -48,15 +48,15 @@ CitiesList.propTypes = {
       zoom: PropTypes.number.isRequired,
     }),
     name: PropTypes.string.isRequired,
-  }).isRequired),
+  })),
   activeItem: PropTypes.shape({
     location: PropTypes.shape({
       lat: PropTypes.number.isRequired,
       long: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired,
     }),
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+    name: PropTypes.string,
+  }),
   onActiveItemChange: PropTypes.func,
   onCityClick: PropTypes.func,
 };

@@ -36,7 +36,7 @@ const withActiveItem = (Component) => {
           long: PropTypes.number.isRequired,
           zoom: PropTypes.number.isRequired,
         }),
-        name: PropTypes.string.isRequired,
+        name: PropTypes.string,
       }),
       PropTypes.shape({
         id: PropTypes.number.isRequired,

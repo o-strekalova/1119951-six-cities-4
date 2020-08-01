@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render with ErrorMessage 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "red",
+      "color": "white",
+      "left": 0,
+      "margin": "auto",
+      "padding": "10px 20px",
+      "position": "fixed",
+      "right": 0,
+      "textAlign": "center",
+      "top": 0,
+      "width": "200px",
+    }
+  }
+>
+  Faild to complete action
+</div>
+`;
+
+exports[`Render without ErrorMessage 1`] = `null`;

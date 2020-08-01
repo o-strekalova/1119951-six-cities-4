@@ -12,8 +12,14 @@ const Header = (props) => {
   const logoLinkClass = isAuthorized ? `header__logo-link--active` : ``;
 
   const headerUserName = isAuthorized ?
-    <span className="header__user-name user__name">{login}</span> :
-    <span className="header__login">Sign in</span>;
+    <span
+      className="header__user-name user__name">
+      {login}
+    </span> :
+    <span
+      className="header__login">
+        Sign in
+    </span>;
 
   return (
     <header className="header">

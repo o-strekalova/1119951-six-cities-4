@@ -1,5 +1,6 @@
 import {extend, SortType} from "../../utils";
 import Offer from "../../models/offer";
+import {ActionCreator as AppActionCreator} from "../app/app";
 
 const initialState = {
   offersAll: [],
@@ -45,6 +46,13 @@ const Operation = {
       })
       .then((offersAll) => {
         dispatch(ActionCreator.loadOffers(offersAll));
+      })
+      .catch((err) => {
+        dispatch(AppActionCreator.changeErrorMessage(`Failed to load offers. Try again later`));
+        setTimeout(() => {
+          dispatch(AppActionCreator.changeErrorMessage(null));
+        }, 5000);
+        throw err;
       });
   },
 };

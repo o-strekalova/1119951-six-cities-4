@@ -54,7 +54,6 @@ it(`Reducer should change activeSort`, () => {
   });
 });
 
-
 describe(`Operation work correctly`, () => {
   it(`Should make a correct API call to /hotels`, function () {
     const apiMock = new MockAdapter(api);

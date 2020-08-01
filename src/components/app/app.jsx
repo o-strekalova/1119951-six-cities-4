@@ -5,18 +5,19 @@ import {connect} from "react-redux";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
-import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
+import {Operation as AppOperation, ActionCreator as AppActionCreator} from "../../reducer/app/app";
 import {SortType} from "../../utils";
-import {getActiveOffer} from "../../reducer/app/selectors";
+import {getActiveOffer, getErrorMessage} from "../../reducer/app/selectors";
 import {getOffersAll, getActiveCity, getActiveSort, getSortedOffers} from "../../reducer/data/selectors";
 import {getAuthorizationStatus, getLogin} from "../../reducer/user/selectors";
-import {Operation as UserOperation, ActionCreator as UserActionCreator} from "../../reducer/user/user";
+import {Operation as UserOperation} from "../../reducer/user/user";
 
 class App extends PureComponent {
   _renderApp() {
     const {
       login,
       authorizationStatus,
+      errorMessage,
       activeCity,
       activeOffer,
       activeSort,
@@ -26,6 +27,7 @@ class App extends PureComponent {
       onCityClick,
       onSortClick,
       onAuthFormSubmit,
+      onReviewSubmit,
     } = this.props;
 
     if (!activeOffer) {
@@ -33,6 +35,7 @@ class App extends PureComponent {
         <Main
           login={login}
           authorizationStatus={authorizationStatus}
+          errorMessage={errorMessage}
           offersAll={offersAll}
           activeCity={activeCity}
           sortedOffers={sortedOffers}
@@ -52,6 +55,8 @@ class App extends PureComponent {
           onCardTitleClick={onCardTitleClick}
           login={login}
           authorizationStatus={authorizationStatus}
+          errorMessage={errorMessage}
+          onReviewSubmit={onReviewSubmit}
         />
       );
     }
@@ -65,6 +70,7 @@ class App extends PureComponent {
       authorizationStatus,
       activeOffer,
       onCardTitleClick,
+      onReviewSubmit,
     } = this.props;
 
     return (
@@ -79,6 +85,7 @@ class App extends PureComponent {
               onCardTitleClick={onCardTitleClick}
               login={login}
               authorizationStatus={authorizationStatus}
+              onReviewSubmit={onReviewSubmit}
             />
           </Route>
         </Switch>
@@ -89,7 +96,8 @@ class App extends PureComponent {
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  login: PropTypes.string.isRequired,
+  login: PropTypes.string,
+  errorMessage: PropTypes.string,
   offersAll: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
@@ -198,13 +206,14 @@ App.propTypes = {
       long: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired,
     }),
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+    name: PropTypes.string,
+  }),
   activeSort: PropTypes.string.isRequired,
   onCardTitleClick: PropTypes.func,
   onCityClick: PropTypes.func,
   onSortClick: PropTypes.func,
   onAuthFormSubmit: PropTypes.func,
+  onReviewSubmit: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -213,6 +222,7 @@ const mapStateToProps = (state) => ({
   activeCity: getActiveCity(state),
   activeOffer: getActiveOffer(state),
   activeSort: getActiveSort(state),
+  errorMessage: getErrorMessage(state),
   offersAll: getOffersAll(state),
   sortedOffers: getSortedOffers(state),
 });
@@ -220,7 +230,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onAuthFormSubmit(authData) {
     dispatch(UserOperation.login(authData));
-    dispatch(UserActionCreator.changeLogin(authData.login));
+  },
+  onReviewSubmit(reviewData, id) {
+    dispatch(AppOperation.postReview(reviewData, id));
   },
   onCardTitleClick(offer) {
     dispatch(AppActionCreator.changeActiveOffer(offer));

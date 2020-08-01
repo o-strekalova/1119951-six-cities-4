@@ -19,6 +19,7 @@ it(`Render App for authorized user`, () => {
         <App
           login={`mail@mail.ru`}
           authorizationStatus={AuthorizationStatus.AUTH}
+          errorMessage={null}
           activeCity={offersAll[0].city}
           activeOffer={null}
           activeSort={SortType.POPULAR}
@@ -28,6 +29,7 @@ it(`Render App for authorized user`, () => {
           onCityClick={() => {}}
           onSortClick={() => {}}
           onAuthFormSubmit={() => {}}
+          onReviewSubmit={() => {}}
         />
       </Provider>, {
         createNodeMock: () => {
@@ -49,6 +51,7 @@ it(`Render App for not authorized user`, () => {
         <App
           login={``}
           authorizationStatus={AuthorizationStatus.NO_AUTH}
+          errorMessage={null}
           activeCity={offersAll[0].city}
           activeOffer={null}
           activeSort={SortType.POPULAR}
@@ -58,6 +61,40 @@ it(`Render App for not authorized user`, () => {
           onCityClick={() => {}}
           onSortClick={() => {}}
           onAuthFormSubmit={() => {}}
+          onReviewSubmit={() => {}}
+        />
+      </Provider>, {
+        createNodeMock: () => {
+          return document.createElement(`DIV`);
+        }
+      })
+  .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+
+it(`Render App with error`, () => {
+  const store = mockStore({
+  });
+
+  const tree = renderer
+  .create(
+      <Provider store={store}>
+        <App
+          login={``}
+          authorizationStatus={AuthorizationStatus.NO_AUTH}
+          errorMessage={`Failed to load offers`}
+          activeCity={{}}
+          activeOffer={null}
+          activeSort={SortType.POPULAR}
+          offersAll={[]}
+          sortedOffers={[]}
+          onCardTitleClick={() => {}}
+          onCityClick={() => {}}
+          onSortClick={() => {}}
+          onAuthFormSubmit={() => {}}
+          onReviewSubmit={() => {}}
         />
       </Provider>, {
         createNodeMock: () => {

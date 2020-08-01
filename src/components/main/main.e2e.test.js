@@ -81,27 +81,3 @@ it(`Press sorting option`, () => {
 
   expect(onSortClick).toHaveBeenCalledTimes(4);
 });
-
-it(`Submit login form`, () => {
-  const onAuthFormSubmit = jest.fn();
-
-  const main = mount(
-      <Main
-        login={``}
-        authorizationStatus={AuthorizationStatus.NO_AUTH}
-        offersAll={offersAll}
-        activeCity={offersAll[0].city}
-        sortedOffers={offersAll}
-        activeSort={SortType.POPULAR}
-        onCardTitleClick={() => {}}
-        onCityClick={() => {}}
-        onSortClick={() => {}}
-        onAuthFormSubmit={onAuthFormSubmit}
-      />
-  );
-
-  const authForm = main.find(`form.login__form`);
-  authForm.simulate(`submit`);
-
-  expect(onAuthFormSubmit).toHaveBeenCalledTimes(1);
-});
