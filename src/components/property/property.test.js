@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Property from "./property.jsx";
 import {Router} from "react-router-dom";
-import {offersAll, authInfo} from "../mocks";
+import {offersAll, authInfo, reviews} from "../mocks";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import history from "../../history";
 
@@ -13,15 +13,18 @@ it(`Render Property for authorized user`, () => {
           history={history}
         >
           <Property
-            offer={offersAll[0]}
             authInfo={authInfo}
             authorizationStatus={AuthorizationStatus.AUTH}
             errorMessage={null}
             isToggleChecked={offersAll[0].isFavorite}
+            offer={offersAll[0]}
+            offersNear={offersAll}
+            reviews={reviews}
             onCardTitleClick={() => {}}
-            onReviewSubmit={() => {}}
             onFavoriteButtonClick={() => {}}
+            onReviewSubmit={() => {}}
             onToggleClick={() => {}}
+            onUserNameClick={() => {}}
           />
         </Router>, {
           createNodeMock: () => {
@@ -40,15 +43,18 @@ it(`Render Property for unauthorized user`, () => {
           history={history}
         >
           <Property
-            offer={offersAll[0]}
             authInfo={{}}
             authorizationStatus={AuthorizationStatus.NO_AUTH}
             errorMessage={null}
             isToggleChecked={offersAll[0].isFavorite}
+            offer={offersAll[0]}
+            offersNear={offersAll}
+            reviews={reviews}
             onCardTitleClick={() => {}}
-            onReviewSubmit={() => {}}
             onFavoriteButtonClick={() => {}}
+            onReviewSubmit={() => {}}
             onToggleClick={() => {}}
+            onUserNameClick={() => {}}
           />
         </Router>, {
           createNodeMock: () => {
@@ -67,15 +73,18 @@ it(`Render Property with ErrorMessage`, () => {
           history={history}
         >
           <Property
-            offer={offersAll[0]}
             authInfo={authInfo}
             authorizationStatus={AuthorizationStatus.AUTH}
             errorMessage={`Failed to post review`}
             isToggleChecked={offersAll[0].isFavorite}
+            offer={offersAll[0]}
+            offersNear={offersAll}
+            reviews={reviews}
             onCardTitleClick={() => {}}
-            onReviewSubmit={() => {}}
             onFavoriteButtonClick={() => {}}
+            onReviewSubmit={() => {}}
             onToggleClick={() => {}}
+            onUserNameClick={() => {}}
           />
         </Router>, {
           createNodeMock: () => {

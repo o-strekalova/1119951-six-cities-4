@@ -3,13 +3,13 @@ import React from "react";
 import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
 import SortingList from "../sorting-list/sorting-list.jsx";
+import {CardClass} from "../../utils";
 
 const OffersSection = (props) => {
   const {
     activeCity,
     activeItem,
     activeSort,
-    className,
     offers,
     onActiveItemChange,
     onCardTitleClick,
@@ -26,13 +26,15 @@ const OffersSection = (props) => {
           activeSort={activeSort}
           onSortClick={onSortClick}
         />
-        <CardsList
-          className={className}
-          offers={offers}
-          onCardHover={onActiveItemChange}
-          onCardTitleClick={onCardTitleClick}
-          onFavoriteButtonClick={onFavoriteButtonClick}
-        />
+        <div className={`cities__places-list tabs__content places__list`}>
+          <CardsList
+            offers={offers}
+            cardClass={CardClass.MAIN}
+            onCardHover={onActiveItemChange}
+            onCardTitleClick={onCardTitleClick}
+            onFavoriteButtonClick={onFavoriteButtonClick}
+          />
+        </div>
       </section>
       <div className="cities__right-section">
         <section className="cities__map map">
@@ -93,7 +95,6 @@ OffersSection.propTypes = {
     }).isRequired,
   }),
   activeSort: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),

@@ -18,6 +18,7 @@ exports[`Render App for authorized user 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -275,7 +276,6 @@ exports[`Render App for authorized user 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
                     href="/offer/1010"
@@ -381,7 +381,6 @@ exports[`Render App for authorized user 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
                     href="/offer/2020"
@@ -439,6 +438,7 @@ exports[`Render App for not authorized user 1`] = `
         >
           <a
             className="header__logo-link"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -696,7 +696,6 @@ exports[`Render App for not authorized user 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
                     href="/offer/1010"
@@ -802,7 +801,6 @@ exports[`Render App for not authorized user 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
                     href="/offer/2020"
@@ -860,6 +858,7 @@ exports[`Render App with error 1`] = `
         >
           <a
             className="header__logo-link"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"

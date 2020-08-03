@@ -35,7 +35,7 @@ it(`Press card title in Main`, () => {
       </Router>
   );
 
-  const cardTitles = main.find(`h2.place-card__name`);
+  const cardTitles = main.find(`.place-card__name a`);
   cardTitles.forEach((it) => it.simulate(`click`));
 
   expect(onCardTitleClick).toHaveBeenCalledTimes(2);

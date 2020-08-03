@@ -5,6 +5,7 @@ import {Router} from "react-router-dom";
 import Card from "./card.jsx";
 import {offersAll} from "../mocks";
 import history from "../../history";
+import {CardClass} from "../../utils";
 
 configure({adapter: new Adapter()});
 
@@ -19,7 +20,7 @@ it(`Mouseover on offer card should pass active offer to the callback`, () => {
       >
         <Card
           key={offer.title + offer.id}
-          className={`cities__place-card`}
+          cardClass={CardClass.MAIN}
           isToggleChecked={offer.isFavorite}
           offer={offer}
           onCardTitleClick={() => {}}
@@ -43,7 +44,7 @@ it(`Click on offer card title should pass active offer to the callback`, () => {
       >
         <Card
           key={offer.title + offer.id}
-          className={`cities__place-card`}
+          cardClass={CardClass.PROPERTY}
           isToggleChecked={offer.isFavorite}
           offer={offer}
           onCardTitleClick={onCardTitleClick}
@@ -53,7 +54,7 @@ it(`Click on offer card title should pass active offer to the callback`, () => {
         />
       </Router>);
 
-  const cardTitle = card.find(`h2.place-card__name`);
+  const cardTitle = card.find(`.place-card__name a`);
   cardTitle.simulate(`click`);
 
   expect(onCardTitleClick).toHaveBeenCalledTimes(1);
@@ -70,7 +71,7 @@ it(`Click on favorite icon should pass status and id to the callback`, () => {
       >
         <Card
           key={offer.title + offer.id}
-          className={`cities__place-card`}
+          cardClass={CardClass.FAVORITE}
           isToggleChecked={offer.isFavorite}
           offer={offer}
           onCardTitleClick={() => {}}

@@ -6,7 +6,7 @@ import Header from "../header/header.jsx";
 import Map from "../map/map.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import ReviewForm from "../review-form/review-form.jsx";
-import {CardsListClass, getRatingPercentage, FavoriteStatus} from "../../utils";
+import {CardClass, getRatingPercentage, FavoriteStatus} from "../../utils";
 import {AuthorizationStatus} from "../../reducer/user/user";
 
 const MAX_PICTURES_COUNT = 6;
@@ -14,15 +14,18 @@ const MAX_OFFERS_NEAR_COUNT = 3;
 
 const Property = (props) => {
   const {
-    offer,
     authInfo,
     authorizationStatus,
     errorMessage,
     isToggleChecked,
+    offer,
+    offersNear,
+    reviews,
     onCardTitleClick,
-    onReviewSubmit,
     onFavoriteButtonClick,
+    onReviewSubmit,
     onToggleClick,
+    onUserNameClick,
   } = props;
 
   const {
@@ -41,8 +44,6 @@ const Property = (props) => {
     owner
   } = offer;
 
-  const reviews = [];
-  const offersNear = [];
   const picturesShown = pictures.length <= MAX_PICTURES_COUNT ? pictures : pictures.slice(0, MAX_PICTURES_COUNT);
   const offersNearShown = offersNear.length <= MAX_OFFERS_NEAR_COUNT ? offersNear : offersNear.slice(0, MAX_OFFERS_NEAR_COUNT);
   const toggleClass = isToggleChecked ? ` property__bookmark-button--active` : ``;
@@ -66,6 +67,7 @@ const Property = (props) => {
       <Header
         authInfo={authInfo}
         authorizationStatus={authorizationStatus}
+        onUserNameClick={onUserNameClick}
       />
 
       <main className="page__main page__main--property">
@@ -179,13 +181,15 @@ const Property = (props) => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardsList
-              className={CardsListClass.PROPERTY}
-              offers={offersNearShown}
-              onCardHover={() => {}}
-              onCardTitleClick={onCardTitleClick}
-              onFavoriteButtonClick={onFavoriteButtonClick}
-            />
+            <div className={`near-places__list places__list`}>
+              <CardsList
+                cardClass={CardClass.PROPERTY}
+                offers={offersNearShown}
+                onCardHover={() => {}}
+                onCardTitleClick={onCardTitleClick}
+                onFavoriteButtonClick={onFavoriteButtonClick}
+              />
+            </div>
           </section>
         </div>
       </main>
@@ -241,10 +245,57 @@ Property.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
+  offersNear: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
+    price: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    guests: PropTypes.number.isRequired,
+    features: PropTypes.array.isRequired,
+    preview: PropTypes.string.isRequired,
+    owner: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        long: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  })),
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    date: PropTypes.instanceOf(Date).isRequired,
+    rating: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  })),
   onCardTitleClick: PropTypes.func,
   onReviewSubmit: PropTypes.func,
   onFavoriteButtonClick: PropTypes.func,
   onToggleClick: PropTypes.func,
+  onUserNameClick: PropTypes.func,
 };
 
 export default React.memo(Property);

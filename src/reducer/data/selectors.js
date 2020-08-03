@@ -1,12 +1,8 @@
 import {createSelector} from "reselect";
 import NameSpace from "../name-space";
-import {SortType} from "../../utils";
+import {SortType, findOffersByCity} from "../../utils";
 
 const NAME_SPACE = NameSpace.DATA;
-
-export const getOffersAll = (state) => {
-  return state[NAME_SPACE].offersAll;
-};
 
 export const getActiveCity = (state) => {
   return state[NAME_SPACE].activeCity;
@@ -16,14 +12,26 @@ export const getActiveSort = (state) => {
   return state[NAME_SPACE].activeSort;
 };
 
+export const getFavoriteOffers = (state) => {
+  return state[NAME_SPACE].favoriteOffers;
+};
+
+export const getOffersAll = (state) => {
+  return state[NAME_SPACE].offersAll;
+};
+
+export const getOffersNearby = (state) => {
+  return state[NAME_SPACE].offersNearby;
+};
+
+export const getReviews = (state) => {
+  return state[NAME_SPACE].reviews;
+};
+
 const getOffersByCity = createSelector(
     getOffersAll,
     getActiveCity,
-    (offersAll, city) => {
-      return offersAll.filter((offer) => {
-        return offer.city.name === city.name;
-      });
-    }
+    (offersAll, city) => findOffersByCity(offersAll, city)
 );
 
 export const getSortedOffers = createSelector(

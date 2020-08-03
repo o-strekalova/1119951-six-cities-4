@@ -7,21 +7,20 @@ const MONTHS = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, 
 const Review = (props) => {
   const {review} = props;
   const {
-    avatar,
-    name,
-    rating,
+    text,
     date,
-    text
+    rating,
+    user,
   } = review;
 
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={user.avatar} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
-          {name}
+          {user.name}
         </span>
       </div>
       <div className="reviews__info">
@@ -42,14 +41,17 @@ const Review = (props) => {
 
 Review.propTypes = {
   review: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    avatar: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
+    rating: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
-  })
-  .isRequired,
+    user: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  }),
 };
 
 export default React.memo(Review);

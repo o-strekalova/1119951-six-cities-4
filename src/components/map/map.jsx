@@ -111,6 +111,40 @@ export default class Map extends PureComponent {
 }
 
 Map.propTypes = {
+  activePin: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
+    price: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    guests: PropTypes.number.isRequired,
+    features: PropTypes.array.isRequired,
+    preview: PropTypes.string.isRequired,
+    owner: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        long: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }),
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  }),
   centerLat: PropTypes.number.isRequired,
   centerLong: PropTypes.number.isRequired,
   zoom: PropTypes.number.isRequired,
@@ -148,38 +182,4 @@ Map.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
   })),
-  activePin: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }),
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  }),
 };

@@ -26,6 +26,7 @@ it(`Render Main with offers`, () => {
             onSortClick={() => {}}
             onAuthFormSubmit={() => {}}
             onFavoriteButtonClick={() => {}}
+            onUserNameClick={() => {}}
           />
         </Router>, {
           createNodeMock: () => {
@@ -56,6 +57,7 @@ it(`Render Main without offers`, () => {
             onSortClick={() => {}}
             onAuthFormSubmit={() => {}}
             onFavoriteButtonClick={() => {}}
+            onUserNameClick={() => {}}
           />
         </Router>, {
           createNodeMock: () => {
@@ -86,6 +88,7 @@ it(`Render Main for unauthorized user`, () => {
             onSortClick={() => {}}
             onAuthFormSubmit={() => {}}
             onFavoriteButtonClick={() => {}}
+            onUserNameClick={() => {}}
           />
         </Router>, {
           createNodeMock: () => {
@@ -116,6 +119,7 @@ it(`Render Main for with ErrorMessage`, () => {
             onSortClick={() => {}}
             onAuthFormSubmit={() => {}}
             onFavoriteButtonClick={() => {}}
+            onUserNameClick={() => {}}
           />
         </Router>, {
           createNodeMock: () => {

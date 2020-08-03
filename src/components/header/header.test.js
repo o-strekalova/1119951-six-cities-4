@@ -15,6 +15,7 @@ it(`Render Header for authorized user`, () => {
           <Header
             authInfo={authInfo}
             authorizationStatus={AuthorizationStatus.AUTH}
+            onUserNameClick={() => {}}
           />
         </Router>)
     .toJSON();
@@ -31,6 +32,7 @@ it(`Render Header for not authorized user`, () => {
           <Header
             authInfo={{}}
             authorizationStatus={AuthorizationStatus.NO_AUTH}
+            onUserNameClick={() => {}}
           />
         </Router>)
     .toJSON();

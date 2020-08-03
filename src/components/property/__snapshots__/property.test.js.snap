@@ -18,6 +18,7 @@ exports[`Render Property for authorized user 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -289,12 +290,73 @@ exports[`Render Property for authorized user 1`] = `
               <span
                 className="reviews__amount"
               >
-                0
+                1
               </span>
             </h2>
             <ul
               className="reviews__list"
-            />
+            >
+              <li
+                className="reviews__item"
+              >
+                <div
+                  className="reviews__user user"
+                >
+                  <div
+                    className="reviews__avatar-wrapper user__avatar-wrapper"
+                  >
+                    <img
+                      alt="Reviews avatar"
+                      className="reviews__avatar user__avatar"
+                      height="54"
+                      src="https://api.adorable.io/avatars/128"
+                      width="54"
+                    />
+                  </div>
+                  <span
+                    className="reviews__user-name"
+                  >
+                    Angelina
+                  </span>
+                </div>
+                <div
+                  className="reviews__info"
+                >
+                  <div
+                    className="reviews__rating rating"
+                  >
+                    <div
+                      className="reviews__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "80%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <p
+                    className="reviews__text"
+                  >
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </p>
+                  <time
+                    className="reviews__time"
+                    dateTime="2020-10-5"
+                  >
+                     
+                    November 2020
+                  </time>
+                </div>
+              </li>
+            </ul>
             <form
               action="#"
               className="reviews__form form"
@@ -494,7 +556,218 @@ exports[`Render Property for authorized user 1`] = `
         </h2>
         <div
           className="near-places__list places__list"
-        />
+        >
+          <article
+            className="near-places__card place-card"
+            onMouseOver={[Function]}
+          >
+            <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
+              className="near-places__image-wrapper place-card__image-wrapper"
+            >
+              <a
+                href="#"
+              >
+                <img
+                  alt="Wood and stone place"
+                  className="place-card__image"
+                  height="200"
+                  src="img/apartment-01.jpg"
+                  width="260"
+                />
+              </a>
+            </div>
+            <div
+              className="place-card__info"
+            >
+              <div
+                className="place-card__price-wrapper"
+              >
+                <div
+                  className="place-card__price"
+                >
+                  <b
+                    className="place-card__price-value"
+                  >
+                    €
+                    999
+                  </b>
+                  <span
+                    className="place-card__price-text"
+                  >
+                    / night
+                  </span>
+                </div>
+                <button
+                  className="place-card__bookmark-button button"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <svg
+                    className="place-card__bookmark-icon"
+                    height="19"
+                    width="18"
+                  >
+                    <use
+                      xlinkHref="#icon-bookmark"
+                    />
+                  </svg>
+                  <span
+                    className="visually-hidden"
+                  >
+                    To bookmarks
+                  </span>
+                </button>
+              </div>
+              <div
+                className="place-card__rating rating"
+              >
+                <div
+                  className="place-card__stars rating__stars"
+                >
+                  <span
+                    style={
+                      Object {
+                        "width": "80%",
+                      }
+                    }
+                  />
+                  <span
+                    className="visually-hidden"
+                  >
+                    Rating
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="place-card__name"
+              >
+                <a
+                  href="/offer/1010"
+                  onClick={[Function]}
+                >
+                  Wood and stone place
+                </a>
+              </h2>
+              <p
+                className="place-card__type"
+              >
+                Room
+              </p>
+            </div>
+          </article>
+          <article
+            className="near-places__card place-card"
+            onMouseOver={[Function]}
+          >
+            <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
+              className="near-places__image-wrapper place-card__image-wrapper"
+            >
+              <a
+                href="#"
+              >
+                <img
+                  alt="Wood and stone place"
+                  className="place-card__image"
+                  height="200"
+                  src="img/apartment-01.jpg"
+                  width="260"
+                />
+              </a>
+            </div>
+            <div
+              className="place-card__info"
+            >
+              <div
+                className="place-card__price-wrapper"
+              >
+                <div
+                  className="place-card__price"
+                >
+                  <b
+                    className="place-card__price-value"
+                  >
+                    €
+                    999
+                  </b>
+                  <span
+                    className="place-card__price-text"
+                  >
+                    / night
+                  </span>
+                </div>
+                <button
+                  className="place-card__bookmark-button button"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <svg
+                    className="place-card__bookmark-icon"
+                    height="19"
+                    width="18"
+                  >
+                    <use
+                      xlinkHref="#icon-bookmark"
+                    />
+                  </svg>
+                  <span
+                    className="visually-hidden"
+                  >
+                    To bookmarks
+                  </span>
+                </button>
+              </div>
+              <div
+                className="place-card__rating rating"
+              >
+                <div
+                  className="place-card__stars rating__stars"
+                >
+                  <span
+                    style={
+                      Object {
+                        "width": "80%",
+                      }
+                    }
+                  />
+                  <span
+                    className="visually-hidden"
+                  >
+                    Rating
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="place-card__name"
+              >
+                <a
+                  href="/offer/2020"
+                  onClick={[Function]}
+                >
+                  Wood and stone place
+                </a>
+              </h2>
+              <p
+                className="place-card__type"
+              >
+                Room
+              </p>
+            </div>
+          </article>
+        </div>
       </section>
     </div>
   </main>
@@ -519,6 +792,7 @@ exports[`Render Property for unauthorized user 1`] = `
         >
           <a
             className="header__logo-link"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -790,12 +1064,73 @@ exports[`Render Property for unauthorized user 1`] = `
               <span
                 className="reviews__amount"
               >
-                0
+                1
               </span>
             </h2>
             <ul
               className="reviews__list"
-            />
+            >
+              <li
+                className="reviews__item"
+              >
+                <div
+                  className="reviews__user user"
+                >
+                  <div
+                    className="reviews__avatar-wrapper user__avatar-wrapper"
+                  >
+                    <img
+                      alt="Reviews avatar"
+                      className="reviews__avatar user__avatar"
+                      height="54"
+                      src="https://api.adorable.io/avatars/128"
+                      width="54"
+                    />
+                  </div>
+                  <span
+                    className="reviews__user-name"
+                  >
+                    Angelina
+                  </span>
+                </div>
+                <div
+                  className="reviews__info"
+                >
+                  <div
+                    className="reviews__rating rating"
+                  >
+                    <div
+                      className="reviews__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "80%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <p
+                    className="reviews__text"
+                  >
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </p>
+                  <time
+                    className="reviews__time"
+                    dateTime="2020-10-5"
+                  >
+                     
+                    November 2020
+                  </time>
+                </div>
+              </li>
+            </ul>
           </section>
         </div>
       </div>
@@ -825,7 +1160,218 @@ exports[`Render Property for unauthorized user 1`] = `
         </h2>
         <div
           className="near-places__list places__list"
-        />
+        >
+          <article
+            className="near-places__card place-card"
+            onMouseOver={[Function]}
+          >
+            <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
+              className="near-places__image-wrapper place-card__image-wrapper"
+            >
+              <a
+                href="#"
+              >
+                <img
+                  alt="Wood and stone place"
+                  className="place-card__image"
+                  height="200"
+                  src="img/apartment-01.jpg"
+                  width="260"
+                />
+              </a>
+            </div>
+            <div
+              className="place-card__info"
+            >
+              <div
+                className="place-card__price-wrapper"
+              >
+                <div
+                  className="place-card__price"
+                >
+                  <b
+                    className="place-card__price-value"
+                  >
+                    €
+                    999
+                  </b>
+                  <span
+                    className="place-card__price-text"
+                  >
+                    / night
+                  </span>
+                </div>
+                <button
+                  className="place-card__bookmark-button button"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <svg
+                    className="place-card__bookmark-icon"
+                    height="19"
+                    width="18"
+                  >
+                    <use
+                      xlinkHref="#icon-bookmark"
+                    />
+                  </svg>
+                  <span
+                    className="visually-hidden"
+                  >
+                    To bookmarks
+                  </span>
+                </button>
+              </div>
+              <div
+                className="place-card__rating rating"
+              >
+                <div
+                  className="place-card__stars rating__stars"
+                >
+                  <span
+                    style={
+                      Object {
+                        "width": "80%",
+                      }
+                    }
+                  />
+                  <span
+                    className="visually-hidden"
+                  >
+                    Rating
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="place-card__name"
+              >
+                <a
+                  href="/offer/1010"
+                  onClick={[Function]}
+                >
+                  Wood and stone place
+                </a>
+              </h2>
+              <p
+                className="place-card__type"
+              >
+                Room
+              </p>
+            </div>
+          </article>
+          <article
+            className="near-places__card place-card"
+            onMouseOver={[Function]}
+          >
+            <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
+              className="near-places__image-wrapper place-card__image-wrapper"
+            >
+              <a
+                href="#"
+              >
+                <img
+                  alt="Wood and stone place"
+                  className="place-card__image"
+                  height="200"
+                  src="img/apartment-01.jpg"
+                  width="260"
+                />
+              </a>
+            </div>
+            <div
+              className="place-card__info"
+            >
+              <div
+                className="place-card__price-wrapper"
+              >
+                <div
+                  className="place-card__price"
+                >
+                  <b
+                    className="place-card__price-value"
+                  >
+                    €
+                    999
+                  </b>
+                  <span
+                    className="place-card__price-text"
+                  >
+                    / night
+                  </span>
+                </div>
+                <button
+                  className="place-card__bookmark-button button"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <svg
+                    className="place-card__bookmark-icon"
+                    height="19"
+                    width="18"
+                  >
+                    <use
+                      xlinkHref="#icon-bookmark"
+                    />
+                  </svg>
+                  <span
+                    className="visually-hidden"
+                  >
+                    To bookmarks
+                  </span>
+                </button>
+              </div>
+              <div
+                className="place-card__rating rating"
+              >
+                <div
+                  className="place-card__stars rating__stars"
+                >
+                  <span
+                    style={
+                      Object {
+                        "width": "80%",
+                      }
+                    }
+                  />
+                  <span
+                    className="visually-hidden"
+                  >
+                    Rating
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="place-card__name"
+              >
+                <a
+                  href="/offer/2020"
+                  onClick={[Function]}
+                >
+                  Wood and stone place
+                </a>
+              </h2>
+              <p
+                className="place-card__type"
+              >
+                Room
+              </p>
+            </div>
+          </article>
+        </div>
       </section>
     </div>
   </main>
@@ -850,6 +1396,7 @@ exports[`Render Property with ErrorMessage 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -1121,12 +1668,73 @@ exports[`Render Property with ErrorMessage 1`] = `
               <span
                 className="reviews__amount"
               >
-                0
+                1
               </span>
             </h2>
             <ul
               className="reviews__list"
-            />
+            >
+              <li
+                className="reviews__item"
+              >
+                <div
+                  className="reviews__user user"
+                >
+                  <div
+                    className="reviews__avatar-wrapper user__avatar-wrapper"
+                  >
+                    <img
+                      alt="Reviews avatar"
+                      className="reviews__avatar user__avatar"
+                      height="54"
+                      src="https://api.adorable.io/avatars/128"
+                      width="54"
+                    />
+                  </div>
+                  <span
+                    className="reviews__user-name"
+                  >
+                    Angelina
+                  </span>
+                </div>
+                <div
+                  className="reviews__info"
+                >
+                  <div
+                    className="reviews__rating rating"
+                  >
+                    <div
+                      className="reviews__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "80%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <p
+                    className="reviews__text"
+                  >
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </p>
+                  <time
+                    className="reviews__time"
+                    dateTime="2020-10-5"
+                  >
+                     
+                    November 2020
+                  </time>
+                </div>
+              </li>
+            </ul>
             <form
               action="#"
               className="reviews__form form"
@@ -1326,7 +1934,218 @@ exports[`Render Property with ErrorMessage 1`] = `
         </h2>
         <div
           className="near-places__list places__list"
-        />
+        >
+          <article
+            className="near-places__card place-card"
+            onMouseOver={[Function]}
+          >
+            <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
+              className="near-places__image-wrapper place-card__image-wrapper"
+            >
+              <a
+                href="#"
+              >
+                <img
+                  alt="Wood and stone place"
+                  className="place-card__image"
+                  height="200"
+                  src="img/apartment-01.jpg"
+                  width="260"
+                />
+              </a>
+            </div>
+            <div
+              className="place-card__info"
+            >
+              <div
+                className="place-card__price-wrapper"
+              >
+                <div
+                  className="place-card__price"
+                >
+                  <b
+                    className="place-card__price-value"
+                  >
+                    €
+                    999
+                  </b>
+                  <span
+                    className="place-card__price-text"
+                  >
+                    / night
+                  </span>
+                </div>
+                <button
+                  className="place-card__bookmark-button button"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <svg
+                    className="place-card__bookmark-icon"
+                    height="19"
+                    width="18"
+                  >
+                    <use
+                      xlinkHref="#icon-bookmark"
+                    />
+                  </svg>
+                  <span
+                    className="visually-hidden"
+                  >
+                    To bookmarks
+                  </span>
+                </button>
+              </div>
+              <div
+                className="place-card__rating rating"
+              >
+                <div
+                  className="place-card__stars rating__stars"
+                >
+                  <span
+                    style={
+                      Object {
+                        "width": "80%",
+                      }
+                    }
+                  />
+                  <span
+                    className="visually-hidden"
+                  >
+                    Rating
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="place-card__name"
+              >
+                <a
+                  href="/offer/1010"
+                  onClick={[Function]}
+                >
+                  Wood and stone place
+                </a>
+              </h2>
+              <p
+                className="place-card__type"
+              >
+                Room
+              </p>
+            </div>
+          </article>
+          <article
+            className="near-places__card place-card"
+            onMouseOver={[Function]}
+          >
+            <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
+              className="near-places__image-wrapper place-card__image-wrapper"
+            >
+              <a
+                href="#"
+              >
+                <img
+                  alt="Wood and stone place"
+                  className="place-card__image"
+                  height="200"
+                  src="img/apartment-01.jpg"
+                  width="260"
+                />
+              </a>
+            </div>
+            <div
+              className="place-card__info"
+            >
+              <div
+                className="place-card__price-wrapper"
+              >
+                <div
+                  className="place-card__price"
+                >
+                  <b
+                    className="place-card__price-value"
+                  >
+                    €
+                    999
+                  </b>
+                  <span
+                    className="place-card__price-text"
+                  >
+                    / night
+                  </span>
+                </div>
+                <button
+                  className="place-card__bookmark-button button"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <svg
+                    className="place-card__bookmark-icon"
+                    height="19"
+                    width="18"
+                  >
+                    <use
+                      xlinkHref="#icon-bookmark"
+                    />
+                  </svg>
+                  <span
+                    className="visually-hidden"
+                  >
+                    To bookmarks
+                  </span>
+                </button>
+              </div>
+              <div
+                className="place-card__rating rating"
+              >
+                <div
+                  className="place-card__stars rating__stars"
+                >
+                  <span
+                    style={
+                      Object {
+                        "width": "80%",
+                      }
+                    }
+                  />
+                  <span
+                    className="visually-hidden"
+                  >
+                    Rating
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="place-card__name"
+              >
+                <a
+                  href="/offer/2020"
+                  onClick={[Function]}
+                >
+                  Wood and stone place
+                </a>
+              </h2>
+              <p
+                className="place-card__type"
+              >
+                Room
+              </p>
+            </div>
+          </article>
+        </div>
       </section>
     </div>
   </main>

@@ -5,14 +5,28 @@ export const AppRoute = {
   MAIN: `/`,
 };
 
-export const CardsListClass = {
-  MAIN: `cities__places-list tabs__content`,
-  PROPERTY: `near-places__list`,
-};
-
 export const CardClass = {
-  MAIN: `cities__place-card`,
-  PROPERTY: `near-places__card`,
+  MAIN: {
+    articleClass: `cities__place-card`,
+    imageClass: `cities`,
+    infoClass: ``,
+    imageWidth: `260`,
+    imageHeight: `200`,
+  },
+  PROPERTY: {
+    articleClass: `near-places__card`,
+    imageClass: `near-places`,
+    infoClass: ``,
+    imageWidth: `260`,
+    imageHeight: `200`,
+  },
+  FAVORITE: {
+    articleClass: `favorites__card`,
+    imageClass: `favorites`,
+    infoClass: `favorites__card-info `,
+    imageWidth: `150`,
+    imageHeight: `110`,
+  },
 };
 
 export const FavoriteStatus = {
@@ -33,4 +47,22 @@ export const extend = (a, b) => {
 
 export const getRatingPercentage = (rating) => {
   return Math.round(rating) * 20;
+};
+
+export const getCitiesForList = (offersAll) => {
+  const allCities = offersAll.map((offer) => offer.city);
+  const allCitiesNames = allCities.map((city) => city.name);
+  const uniqueCitiesNames = [...new Set(allCitiesNames)];
+
+  const checkCitiesForList = (cityName) => {
+    return allCities.find((city) => city.name === cityName);
+  };
+
+  return uniqueCitiesNames.map(checkCitiesForList);
+};
+
+export const findOffersByCity = (offersAll, city) => {
+  return offersAll.filter((offer) => {
+    return offer.city.name === city.name;
+  });
 };

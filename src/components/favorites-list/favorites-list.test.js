@@ -1,22 +1,23 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
-import CardsList from "./cards-list.jsx";
-import {offersAll} from "../mocks";
+import FavoritesList from "./favorites-list.jsx";
+import {offersAll, authInfo} from "../mocks";
+import {AuthorizationStatus} from "../../reducer/user/user";
 import history from "../../history";
-import {CardClass} from "../../utils";
 
-it(`Render CardsList Main`, () => {
+it(`Render Favorites with offers`, () => {
   const tree = renderer
     .create(
         <Router
           history={history}
         >
-          <CardsList
-            cardClass={CardClass.MAIN}
+          <FavoritesList
+            authInfo={authInfo}
+            authorizationStatus={AuthorizationStatus.AUTH}
+            errorMessage={null}
             offers={offersAll}
             onCardTitleClick={() => {}}
-            onCardHover={() => {}}
             onFavoriteButtonClick={() => {}}
           />
         </Router>)
@@ -25,17 +26,18 @@ it(`Render CardsList Main`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-it(`Render CardsList Property`, () => {
+it(`Render Favorites without offers`, () => {
   const tree = renderer
     .create(
         <Router
           history={history}
         >
-          <CardsList
-            cardClass={CardClass.PROPERTY}
-            offers={offersAll}
+          <FavoritesList
+            authInfo={authInfo}
+            authorizationStatus={AuthorizationStatus.AUTH}
+            errorMessage={null}
+            offers={[]}
             onCardTitleClick={() => {}}
-            onCardHover={() => {}}
             onFavoriteButtonClick={() => {}}
           />
         </Router>)
@@ -44,17 +46,18 @@ it(`Render CardsList Property`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-it(`Render CardsList Favorites`, () => {
+it(`Render Favorites with ErrorMessage`, () => {
   const tree = renderer
     .create(
         <Router
           history={history}
         >
-          <CardsList
-            cardClass={CardClass.FAVORITE}
-            offers={offersAll}
+          <FavoritesList
+            authInfo={authInfo}
+            authorizationStatus={AuthorizationStatus.AUTH}
+            errorMessage={`Action failed`}
+            offers={[]}
             onCardTitleClick={() => {}}
-            onCardHover={() => {}}
             onFavoriteButtonClick={() => {}}
           />
         </Router>)

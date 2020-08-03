@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
-import {offersAll, authInfo} from "../mocks";
+import {offersAll, authInfo, reviews} from "../mocks";
 import {SortType} from "../../utils";
 import {AuthorizationStatus} from "../../reducer/user/user";
 
@@ -17,19 +17,24 @@ it(`Render App for authorized user`, () => {
   .create(
       <Provider store={store}>
         <App
-          authInfo={authInfo}
-          authorizationStatus={AuthorizationStatus.AUTH}
-          errorMessage={null}
           activeCity={offersAll[0].city}
           activeOffer={null}
           activeSort={SortType.POPULAR}
+          authInfo={authInfo}
+          authorizationStatus={AuthorizationStatus.AUTH}
+          errorMessage={null}
+          favoriteOffers={offersAll}
           offersAll={offersAll}
+          offersNearby={offersAll}
+          reviews={reviews}
           sortedOffers={offersAll}
+          onAuthFormSubmit={() => {}}
           onCardTitleClick={() => {}}
           onCityClick={() => {}}
-          onSortClick={() => {}}
-          onAuthFormSubmit={() => {}}
+          onFavoriteButtonClick={() => {}}
           onReviewSubmit={() => {}}
+          onSortClick={() => {}}
+          onUserNameClick={() => {}}
         />
       </Provider>, {
         createNodeMock: () => {
@@ -55,13 +60,18 @@ it(`Render App for not authorized user`, () => {
           activeCity={offersAll[0].city}
           activeOffer={null}
           activeSort={SortType.POPULAR}
+          favoriteOffers={offersAll}
           offersAll={offersAll}
+          offersNearby={offersAll}
+          reviews={reviews}
           sortedOffers={offersAll}
+          onAuthFormSubmit={() => {}}
           onCardTitleClick={() => {}}
           onCityClick={() => {}}
-          onSortClick={() => {}}
-          onAuthFormSubmit={() => {}}
+          onFavoriteButtonClick={() => {}}
           onReviewSubmit={() => {}}
+          onSortClick={() => {}}
+          onUserNameClick={() => {}}
         />
       </Provider>, {
         createNodeMock: () => {
@@ -88,13 +98,18 @@ it(`Render App with error`, () => {
           activeCity={{}}
           activeOffer={null}
           activeSort={SortType.POPULAR}
+          favoriteOffers={offersAll}
           offersAll={[]}
+          offersNearby={[]}
+          reviews={[]}
           sortedOffers={[]}
+          onAuthFormSubmit={() => {}}
           onCardTitleClick={() => {}}
           onCityClick={() => {}}
-          onSortClick={() => {}}
-          onAuthFormSubmit={() => {}}
+          onFavoriteButtonClick={() => {}}
           onReviewSubmit={() => {}}
+          onSortClick={() => {}}
+          onUserNameClick={() => {}}
         />
       </Provider>, {
         createNodeMock: () => {

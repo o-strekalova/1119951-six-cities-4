@@ -3,11 +3,13 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {AppRoute} from "../../utils";
+import history from "../../history";
 
 const Header = (props) => {
   const {
     authInfo,
     authorizationStatus,
+    onUserNameClick,
   } = props;
 
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
@@ -16,6 +18,7 @@ const Header = (props) => {
   const headerUserName = isAuthorized ?
     <Link
       className="header__user-name user__name"
+      onClick={onUserNameClick}
       to={AppRoute.FAVORITES}
     >
       {authInfo.email}
@@ -32,7 +35,10 @@ const Header = (props) => {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a className={`header__logo-link` + logoLinkClass}>
+            <a
+              className={`header__logo-link` + logoLinkClass}
+              onClick={() => history.push(AppRoute.MAIN)}
+            >
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </a>
           </div>
@@ -62,6 +68,7 @@ Header.propTypes = {
     isSuper: PropTypes.bool,
     name: PropTypes.string,
   }),
+  onUserNameClick: PropTypes.func,
 };
 
 export default React.memo(Header);

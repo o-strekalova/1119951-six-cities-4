@@ -5,9 +5,9 @@ import {getRatingPercentage, FavoriteStatus} from "../../utils";
 
 const Card = (props) => {
   const {
-    className,
-    offer,
+    cardClass,
     isToggleChecked,
+    offer,
     onCardTitleClick,
     onCardHover,
     onFavoriteButtonClick,
@@ -25,24 +25,32 @@ const Card = (props) => {
     rating
   } = offer;
 
+  const {
+    articleClass,
+    imageClass,
+    infoClass,
+    imageWidth,
+    imageHeight,
+  } = cardClass;
+
   const toggleClass = isToggleChecked ? ` place-card__bookmark-button--active` : ``;
   const newStatus = isFavorite ? FavoriteStatus.NOT_FAVORITE : FavoriteStatus.FAVORITE;
 
   return (
     <article
-      className={className + ` place-card`}
+      className={articleClass + ` place-card`}
       onMouseOver={() => onCardHover(offer)}
     >
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : ``}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={imageClass + `__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={preview} width="260" height="200" alt={title} />
+          <img className="place-card__image" src={preview} width={imageWidth} height={imageHeight} alt={title} />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={infoClass + `place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -68,11 +76,13 @@ const Card = (props) => {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2
-          className="place-card__name"
-          onClick={() => onCardTitleClick(offer)}
-        >
-          <Link to={`offer/${id}`}>{title}</Link>
+        <h2 className="place-card__name">
+          <Link
+            onClick={() => onCardTitleClick(offer)}
+            to={`offer/${id}`}
+          >
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type.charAt(0).toUpperCase() + type.slice(1)}</p>
       </div>
@@ -81,7 +91,13 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
-  className: PropTypes.string.isRequired,
+  cardClass: PropTypes.shape({
+    articleClass: PropTypes.string.isRequired,
+    imageClass: PropTypes.string.isRequired,
+    infoClass: PropTypes.string.isRequired,
+    imageWidth: PropTypes.string.isRequired,
+    imageHeight: PropTypes.string.isRequired,
+  }).isRequired,
   isToggleChecked: PropTypes.bool.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -116,8 +132,7 @@ Card.propTypes = {
       long: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired,
     }).isRequired,
-  })
-  .isRequired,
+  }).isRequired,
   onCardTitleClick: PropTypes.func,
   onCardHover: PropTypes.func,
   onFavoriteButtonClick: PropTypes.func,

@@ -16,7 +16,6 @@ it(`Render OffersSection`, () => {
             activeCity={offersAll[0].city}
             activeItem={offersAll[0]}
             activeSort={SortType.POPULAR}
-            className={`cities__places-list tabs__content`}
             offers={offersAll}
             onActiveItemChange={() => {}}
             onCardTitleClick={() => {}}

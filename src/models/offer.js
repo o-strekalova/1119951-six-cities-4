@@ -34,43 +34,6 @@ export default class Offer {
     this.type = data[`type`];
   }
 
-  toRAW() {
-    return {
-      "bedrooms": this.bedrooms,
-      "city": {
-        "location": {
-          "latitude": String(this.city.location.lat),
-          "longitude": String(this.city.location.long),
-          "zoom": String(this.city.location.zoom),
-        },
-        "name": this.city.name
-      },
-      "description": this.description,
-      "goods": this.features,
-      "host": {
-        "avatar_url": this.owner.avatar,
-        "id": this.owner.id,
-        "is_pro": String(this.owner.isSuper),
-        "name": this.owner.name,
-      },
-      "id": this.id,
-      "images": this.pictures,
-      "is_favorite": String(this.owner.isFavorite),
-      "is_premium": String(this.owner.isPremium),
-      "location": {
-        "latitude": String(this.location.lat),
-        "longitude": String(this.location.long),
-        "zoom": String(this.location.zoom),
-      },
-      "max_adults": this.guests,
-      "preview_image": this.preview,
-      "price": this.price,
-      "rating": 4.8,
-      "title": this.title,
-      "type": this.type,
-    };
-  }
-
   static parseOffer(data) {
     return new Offer(data);
   }
