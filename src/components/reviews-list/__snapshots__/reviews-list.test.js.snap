@@ -11,7 +11,7 @@ exports[`Render Reviews List 1`] = `
       className="reviews__user user"
     >
       <div
-        className="reviews__avatar-wrapper user__avatar-wrapper"
+        className="reviews__avatar-wrapper user__avatar-wrapper reviews__avatar-wrapper--pro"
       >
         <img
           alt="Reviews avatar"
