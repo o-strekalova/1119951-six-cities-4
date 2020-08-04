@@ -47,6 +47,7 @@ const Property = (props) => {
   const picturesShown = pictures.length <= MAX_PICTURES_COUNT ? pictures : pictures.slice(0, MAX_PICTURES_COUNT);
   const offersNearShown = offersNear.length <= MAX_OFFERS_NEAR_COUNT ? offersNear : offersNear.slice(0, MAX_OFFERS_NEAR_COUNT);
   const toggleClass = isToggleChecked ? ` property__bookmark-button--active` : ``;
+  const avatarClass = owner.isSuper ? ` property__avatar-wrapper--pro` : ``;
   const newStatus = isFavorite ? FavoriteStatus.NOT_FAVORITE : FavoriteStatus.FAVORITE;
 
   const renderReviewForm = () => {
@@ -143,10 +144,7 @@ const Property = (props) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={
-                    owner.isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` :
-                      `property__avatar-wrapper user__avatar-wrapper`
-                  }>
+                  <div className={`property__avatar-wrapper user__avatar-wrapper` + avatarClass}>
                     <img className="property__avatar user__avatar" src={owner.avatar} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
@@ -174,7 +172,7 @@ const Property = (props) => {
               centerLat={offer.location.lat}
               centerLong={offer.location.long}
               zoom={offer.location.zoom}
-              offers={[]}
+              offers={offersNearShown}
             />
           </section>
         </section>

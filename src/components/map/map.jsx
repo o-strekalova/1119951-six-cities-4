@@ -22,6 +22,7 @@ export default class Map extends PureComponent {
     this._activeMarker = {};
     this._centerLat = null;
     this._centerLong = null;
+    this._offers = [];
   }
 
   _renderMap() {
@@ -35,6 +36,7 @@ export default class Map extends PureComponent {
 
     this._centerLat = centerLat;
     this._centerLong = centerLong;
+    this._offers = offers;
 
     this._map = leaflet.map(this._mapRef.current, {
       center: [centerLat, centerLong],
@@ -56,7 +58,7 @@ export default class Map extends PureComponent {
         .marker([activePin.location.lat, activePin.location.long], {icon: ACTIVE_ICON})
         .addTo(this._map);
     } else {
-      offers.map((offer) => {
+      this._offers.map((offer) => {
         leaflet
           .marker([offer.location.lat, offer.location.long], {icon: ICON})
           .addTo(this._map);
@@ -73,6 +75,7 @@ export default class Map extends PureComponent {
       activePin,
       centerLat,
       centerLong,
+      offers,
     } = this.props;
 
     if (activePin !== this._activeOffer && activePin !== undefined) {
@@ -96,6 +99,16 @@ export default class Map extends PureComponent {
       this._activeMarker = {};
 
       this._renderMap();
+    }
+
+    if (offers !== this._offers) {
+      this._offers = offers;
+
+      this._offers .map((offer) => {
+        leaflet
+          .marker([offer.location.lat, offer.location.long], {icon: ICON})
+          .addTo(this._map);
+      });
     }
   }
 

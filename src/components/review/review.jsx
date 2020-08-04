@@ -13,10 +13,12 @@ const Review = (props) => {
     user,
   } = review;
 
+  const avatarClass = user.isSuper ? ` reviews__avatar-wrapper--pro` : ``;
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
-        <div className="reviews__avatar-wrapper user__avatar-wrapper">
+        <div className={`reviews__avatar-wrapper user__avatar-wrapper` + avatarClass}>
           <img className="reviews__avatar user__avatar" src={user.avatar} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
