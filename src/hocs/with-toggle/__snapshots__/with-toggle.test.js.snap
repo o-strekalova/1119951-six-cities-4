@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withToggle is rendered correctly for Card 1`] = `<div />`;
+
+exports[`withToggle is rendered correctly for Property 1`] = `<div />`;

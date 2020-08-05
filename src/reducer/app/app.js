@@ -1,4 +1,6 @@
-import {extend} from "../../utils";
+import {AppRoute, extend} from "../../utils";
+import {Operation as UserOperation} from "../user/user";
+import history from "../../history";
 
 const initialState = {
   activeOffer: null,
@@ -57,6 +59,27 @@ const Operation = {
       }, 5000);
       throw err;
     });
+  },
+
+  updateFavoriteStatus: (newStatus, id) => (dispatch, getState, api) => {
+    return dispatch(UserOperation.checkAuth())
+      .then(() => {
+        api.post(`/favorite/${id}/${newStatus}`, {
+          id,
+          newStatus,
+        });
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          history.push(AppRoute.LOGIN);
+        } else {
+          dispatch(ActionCreator.changeErrorMessage(`Failed to update favorite status. Try again later`));
+          setTimeout(() => {
+            dispatch(ActionCreator.changeErrorMessage(null));
+          }, 5000);
+        }
+        throw err;
+      });
   }
 };
 

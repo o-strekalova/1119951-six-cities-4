@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
-import {offersAll} from "../mocks";
+import {offersAll, authInfo} from "../mocks";
 import {SortType} from "../../utils";
 import {AuthorizationStatus} from "../../reducer/user/user";
 
@@ -17,7 +17,7 @@ it(`Render App for authorized user`, () => {
   .create(
       <Provider store={store}>
         <App
-          login={`mail@mail.ru`}
+          authInfo={authInfo}
           authorizationStatus={AuthorizationStatus.AUTH}
           errorMessage={null}
           activeCity={offersAll[0].city}
@@ -49,7 +49,7 @@ it(`Render App for not authorized user`, () => {
   .create(
       <Provider store={store}>
         <App
-          login={``}
+          authInfo={{}}
           authorizationStatus={AuthorizationStatus.NO_AUTH}
           errorMessage={null}
           activeCity={offersAll[0].city}
@@ -82,7 +82,7 @@ it(`Render App with error`, () => {
   .create(
       <Provider store={store}>
         <App
-          login={``}
+          authInfo={{}}
           authorizationStatus={AuthorizationStatus.NO_AUTH}
           errorMessage={`Failed to load offers`}
           activeCity={{}}

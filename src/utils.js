@@ -1,3 +1,10 @@
+export const AppRoute = {
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER: `/offer/:id`,
+  MAIN: `/`,
+};
+
 export const CardsListClass = {
   MAIN: `cities__places-list tabs__content`,
   PROPERTY: `near-places__list`,
@@ -6,6 +13,11 @@ export const CardsListClass = {
 export const CardClass = {
   MAIN: `cities__place-card`,
   PROPERTY: `near-places__card`,
+};
+
+export const FavoriteStatus = {
+  FAVORITE: `1`,
+  NOT_FAVORITE: `0`,
 };
 
 export const SortType = {

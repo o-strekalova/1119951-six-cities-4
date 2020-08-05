@@ -9,7 +9,3 @@ export const getAuthorizationStatus = (state) => {
 export const getAuthInfo = (state) => {
   return state[NAME_SPACE].authInfo;
 };
-
-export const getLogin = (state) => {
-  return state[NAME_SPACE].login;
-};

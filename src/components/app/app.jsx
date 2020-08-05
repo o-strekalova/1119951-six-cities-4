@@ -1,21 +1,27 @@
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
+import Login from "../login/login.jsx";
 import Main from "../main/main.jsx";
+import PrivateRoute from "../private-route/private-route.jsx";
 import Property from "../property/property.jsx";
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
 import {Operation as AppOperation, ActionCreator as AppActionCreator} from "../../reducer/app/app";
-import {SortType} from "../../utils";
 import {getActiveOffer, getErrorMessage} from "../../reducer/app/selectors";
 import {getOffersAll, getActiveCity, getActiveSort, getSortedOffers} from "../../reducer/data/selectors";
-import {getAuthorizationStatus, getLogin} from "../../reducer/user/selectors";
+import {getAuthorizationStatus, getAuthInfo} from "../../reducer/user/selectors";
 import {Operation as UserOperation} from "../../reducer/user/user";
+import withToggle from "../../hocs/with-toggle/with-toggle";
+import {AppRoute, SortType} from "../../utils";
+import history from "../../history";
+
+const PropertyWrapped = withToggle(Property);
 
 class App extends PureComponent {
   _renderApp() {
     const {
-      login,
+      authInfo,
       authorizationStatus,
       errorMessage,
       activeCity,
@@ -27,13 +33,15 @@ class App extends PureComponent {
       onCityClick,
       onSortClick,
       onAuthFormSubmit,
-      onReviewSubmit,
+      onFavoriteButtonClick,
     } = this.props;
 
     if (!activeOffer) {
+      history.push(AppRoute.MAIN);
+
       return (
         <Main
-          login={login}
+          authInfo={authInfo}
           authorizationStatus={authorizationStatus}
           errorMessage={errorMessage}
           offersAll={offersAll}
@@ -44,19 +52,7 @@ class App extends PureComponent {
           onCityClick={onCityClick}
           onSortClick={onSortClick}
           onAuthFormSubmit={onAuthFormSubmit}
-        />
-      );
-    }
-
-    if (activeOffer) {
-      return (
-        <Property
-          offer={activeOffer}
-          onCardTitleClick={onCardTitleClick}
-          login={login}
-          authorizationStatus={authorizationStatus}
-          errorMessage={errorMessage}
-          onReviewSubmit={onReviewSubmit}
+          onFavoriteButtonClick={onFavoriteButtonClick}
         />
       );
     }
@@ -66,40 +62,65 @@ class App extends PureComponent {
 
   render() {
     const {
-      login,
+      authInfo,
       authorizationStatus,
       activeOffer,
+      onAuthFormSubmit,
       onCardTitleClick,
       onReviewSubmit,
+      onFavoriteButtonClick,
     } = this.props;
 
     return (
-      <BrowserRouter>
+      <Router
+        history={history}
+      >
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.MAIN}>
             {this._renderApp()}
           </Route>
-          <Route exact path="/dev-property">
-            <Property
+          <Route exact path={AppRoute.OFFER}>
+            <PropertyWrapped
+              authInfo={authInfo}
+              authorizationStatus={authorizationStatus}
               offer={activeOffer}
               onCardTitleClick={onCardTitleClick}
-              login={login}
-              authorizationStatus={authorizationStatus}
+              onFavoriteButtonClick={onFavoriteButtonClick}
               onReviewSubmit={onReviewSubmit}
             />
           </Route>
+          <Route exact path={AppRoute.LOGIN}>
+            <Login
+              onSubmit={onAuthFormSubmit}
+            />
+          </Route>
+          <PrivateRoute
+            exact
+            path={AppRoute.FAVORITES}
+            render={() => {
+              return (
+                <div>FavoritesList</div>
+              );
+            }}
+          />
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  login: PropTypes.string,
+  authInfo: PropTypes.shape({
+    avatar: PropTypes.string,
+    email: PropTypes.string,
+    id: PropTypes.number,
+    isSuper: PropTypes.bool,
+    name: PropTypes.string,
+  }),
   errorMessage: PropTypes.string,
   offersAll: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
@@ -133,7 +154,7 @@ App.propTypes = {
     }).isRequired,
   })).isRequired,
   sortedOffers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
@@ -167,7 +188,7 @@ App.propTypes = {
     }).isRequired,
   })).isRequired,
   activeOffer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
@@ -209,15 +230,16 @@ App.propTypes = {
     name: PropTypes.string,
   }),
   activeSort: PropTypes.string.isRequired,
+  onAuthFormSubmit: PropTypes.func,
   onCardTitleClick: PropTypes.func,
   onCityClick: PropTypes.func,
-  onSortClick: PropTypes.func,
-  onAuthFormSubmit: PropTypes.func,
+  onFavoriteButtonClick: PropTypes.func,
   onReviewSubmit: PropTypes.func,
+  onSortClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  login: getLogin(state),
+  authInfo: getAuthInfo(state),
   authorizationStatus: getAuthorizationStatus(state),
   activeCity: getActiveCity(state),
   activeOffer: getActiveOffer(state),
@@ -231,9 +253,6 @@ const mapDispatchToProps = (dispatch) => ({
   onAuthFormSubmit(authData) {
     dispatch(UserOperation.login(authData));
   },
-  onReviewSubmit(reviewData, id) {
-    dispatch(AppOperation.postReview(reviewData, id));
-  },
   onCardTitleClick(offer) {
     dispatch(AppActionCreator.changeActiveOffer(offer));
   },
@@ -241,6 +260,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataActionCreator.changeActiveCity(city));
     dispatch(DataActionCreator.changeActiveSort(SortType.POPULAR));
     dispatch(getSortedOffers());
+  },
+  onFavoriteButtonClick(newStatus, id) {
+    dispatch(AppOperation.updateFavoriteStatus(newStatus, id));
+  },
+  onReviewSubmit(reviewData, id) {
+    dispatch(AppOperation.postReview(reviewData, id));
   },
   onSortClick(sort) {
     dispatch(DataActionCreator.changeActiveSort(sort));

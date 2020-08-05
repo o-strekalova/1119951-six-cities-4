@@ -9,19 +9,17 @@ const AuthorizationStatus = {
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   authInfo: {},
-  login: ``,
 };
 
 const ActionType = {
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
   CHANGE_AUTH_INFO: `CHANGE_AUTH_INFO`,
-  CHANGE_LOGIN: `CHANGE_LOGIN`,
 };
 
 const ActionCreator = {
   requireAuthorization: (status) => {
     return {
-      type: ActionType.REQUIRED_AUTHORIZATION,
+      type: ActionType.REQUIRE_AUTHORIZATION,
       payload: status,
     };
   },
@@ -32,18 +30,11 @@ const ActionCreator = {
       payload: authInfo,
     };
   },
-
-  changeLogin: (email) => {
-    return {
-      type: ActionType.CHANGE_LOGIN,
-      payload: email,
-    };
-  },
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.REQUIRED_AUTHORIZATION:
+    case ActionType.REQUIRE_AUTHORIZATION:
       return Object.assign({}, state, {
         authorizationStatus: action.payload,
       });
@@ -51,11 +42,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_AUTH_INFO:
       return Object.assign({}, state, {
         authInfo: action.payload,
-      });
-
-    case ActionType.CHANGE_LOGIN:
-      return Object.assign({}, state, {
-        login: action.payload,
       });
   }
 
@@ -71,9 +57,6 @@ const Operation = {
       .then((authInfo) => {
         dispatch(ActionCreator.changeAuthInfo(authInfo));
       })
-      .then((authInfo) => {
-        dispatch(ActionCreator.changeLogin(authInfo.email));
-      })
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
@@ -88,10 +71,7 @@ const Operation = {
       password: authData.password,
     })
     .then(() => {
-      dispatch(ActionCreator.changeLogin(authData.login));
-    })
-    .then(() => {
-      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(Operation.checkAuth());
     })
     .catch((err) => {
       dispatch(AppActionCreator.changeErrorMessage(`Failed to log in. Try again later`));

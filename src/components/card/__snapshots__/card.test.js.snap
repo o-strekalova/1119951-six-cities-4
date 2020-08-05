@@ -50,6 +50,7 @@ exports[`Render Card Main 1`] = `
       </div>
       <button
         className="place-card__bookmark-button button"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -93,7 +94,8 @@ exports[`Render Card Main 1`] = `
       onClick={[Function]}
     >
       <a
-        href="#"
+        href="/offer/1010"
+        onClick={[Function]}
       >
         Wood and stone place
       </a>
@@ -157,6 +159,7 @@ exports[`Render Card Property 1`] = `
       </div>
       <button
         className="place-card__bookmark-button button"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -200,7 +203,8 @@ exports[`Render Card Property 1`] = `
       onClick={[Function]}
     >
       <a
-        href="#"
+        href="/offer/1010"
+        onClick={[Function]}
       >
         Wood and stone place
       </a>

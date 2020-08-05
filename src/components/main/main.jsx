@@ -33,6 +33,7 @@ class Main extends PureComponent {
       activeSort,
       onSortClick,
       onCardTitleClick,
+      onFavoriteButtonClick,
     } = this.props;
 
     if (sortedOffers.length > 0) {
@@ -44,6 +45,7 @@ class Main extends PureComponent {
           offers={sortedOffers}
           onCardTitleClick={onCardTitleClick}
           onSortClick={onSortClick}
+          onFavoriteButtonClick={onFavoriteButtonClick}
         />
       );
     } else {
@@ -57,7 +59,7 @@ class Main extends PureComponent {
 
   render() {
     const {
-      login,
+      authInfo,
       authorizationStatus,
       errorMessage,
       activeCity,
@@ -65,14 +67,13 @@ class Main extends PureComponent {
       onCityClick,
     } = this.props;
 
-    const pageClass = ` page--main`;
     const cities = this._getCitiesForList();
     const isEmpty = sortedOffers.length === 0 ? ` page__main--index-empty` : ``;
 
     return (
-      <div className={`page page--gray` + pageClass}>
+      <div className={`page page--gray page--main`}>
         <Header
-          login={login}
+          authInfo={authInfo}
           authorizationStatus={authorizationStatus}
         />
         <main className={`page__main page__main--index` + isEmpty}>
@@ -100,10 +101,16 @@ class Main extends PureComponent {
 
 Main.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  login: PropTypes.string.isRequired,
+  authInfo: PropTypes.shape({
+    avatar: PropTypes.string,
+    email: PropTypes.string,
+    id: PropTypes.number,
+    isSuper: PropTypes.bool,
+    name: PropTypes.string,
+  }),
   errorMessage: PropTypes.string,
   offersAll: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
@@ -137,7 +144,7 @@ Main.propTypes = {
     }).isRequired,
   })).isRequired,
   sortedOffers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
@@ -179,10 +186,11 @@ Main.propTypes = {
     name: PropTypes.string,
   }),
   activeSort: PropTypes.string.isRequired,
+  onAuthFormSubmit: PropTypes.func,
   onCardTitleClick: PropTypes.func,
   onCityClick: PropTypes.func,
+  onFavoriteButtonClick: PropTypes.func,
   onSortClick: PropTypes.func,
-  onAuthFormSubmit: PropTypes.func,
 };
 
 export default Main;

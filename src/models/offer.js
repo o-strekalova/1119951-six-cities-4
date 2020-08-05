@@ -17,7 +17,7 @@ export default class Offer {
       isSuper: Boolean(data[`host`][`is_pro`]),
       name: data[`host`][`name`]
     };
-    this.id = data[`id`];
+    this.id = String(data[`id`]);
     this.pictures = data[`images`];
     this.isFavorite = Boolean(data[`is_favorite`]);
     this.isPremium = Boolean(data[`is_premium`]);

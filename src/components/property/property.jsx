@@ -6,7 +6,7 @@ import Header from "../header/header.jsx";
 import Map from "../map/map.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import ReviewForm from "../review-form/review-form.jsx";
-import {CardsListClass, getRatingPercentage} from "../../utils";
+import {CardsListClass, getRatingPercentage, FavoriteStatus} from "../../utils";
 import {AuthorizationStatus} from "../../reducer/user/user";
 
 const MAX_PICTURES_COUNT = 6;
@@ -15,11 +15,14 @@ const MAX_OFFERS_NEAR_COUNT = 3;
 const Property = (props) => {
   const {
     offer,
-    onCardTitleClick,
-    login,
+    authInfo,
     authorizationStatus,
     errorMessage,
+    isToggleChecked,
+    onCardTitleClick,
     onReviewSubmit,
+    onFavoriteButtonClick,
+    onToggleClick,
   } = props;
 
   const {
@@ -29,6 +32,7 @@ const Property = (props) => {
     type,
     price,
     isPremium,
+    isFavorite,
     rating,
     description,
     bedrooms,
@@ -41,6 +45,8 @@ const Property = (props) => {
   const offersNear = [];
   const picturesShown = pictures.length <= MAX_PICTURES_COUNT ? pictures : pictures.slice(0, MAX_PICTURES_COUNT);
   const offersNearShown = offersNear.length <= MAX_OFFERS_NEAR_COUNT ? offersNear : offersNear.slice(0, MAX_OFFERS_NEAR_COUNT);
+  const toggleClass = isToggleChecked ? ` property__bookmark-button--active` : ``;
+  const newStatus = isFavorite ? FavoriteStatus.NOT_FAVORITE : FavoriteStatus.FAVORITE;
 
   const renderReviewForm = () => {
     if (authorizationStatus === AuthorizationStatus.AUTH) {
@@ -58,7 +64,7 @@ const Property = (props) => {
   return (
     <div className="page">
       <Header
-        login={login}
+        authInfo={authInfo}
         authorizationStatus={authorizationStatus}
       />
 
@@ -84,7 +90,14 @@ const Property = (props) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  className={`property__bookmark-button button` + toggleClass}
+                  type="button"
+                  onClick={() => {
+                    onFavoriteButtonClick(newStatus, id);
+                    onToggleClick();
+                  }}
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -171,6 +184,7 @@ const Property = (props) => {
               offers={offersNearShown}
               onCardHover={() => {}}
               onCardTitleClick={onCardTitleClick}
+              onFavoriteButtonClick={onFavoriteButtonClick}
             />
           </section>
         </div>
@@ -184,10 +198,17 @@ const Property = (props) => {
 
 Property.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  login: PropTypes.string.isRequired,
+  authInfo: PropTypes.shape({
+    avatar: PropTypes.string,
+    email: PropTypes.string,
+    id: PropTypes.number,
+    isSuper: PropTypes.bool,
+    name: PropTypes.string,
+  }),
   errorMessage: PropTypes.string,
+  isToggleChecked: PropTypes.bool.isRequired,
   offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
@@ -222,6 +243,8 @@ Property.propTypes = {
   }).isRequired,
   onCardTitleClick: PropTypes.func,
   onReviewSubmit: PropTypes.func,
+  onFavoriteButtonClick: PropTypes.func,
+  onToggleClick: PropTypes.func,
 };
 
 export default React.memo(Property);

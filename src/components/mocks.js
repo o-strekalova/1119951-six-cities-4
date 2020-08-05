@@ -1,5 +1,5 @@
 export const offersAll = [{
-  id: 1010,
+  id: `1010`,
   city: {
     location: {
       lat: 52.3909553943508,
@@ -32,7 +32,7 @@ export const offersAll = [{
     id: 111,
   },
 }, {
-  id: 2020,
+  id: `2020`,
   city: {
     location: {
       lat: 52.3909553943508,
@@ -142,3 +142,11 @@ export const reviews = [{
   date: new Date(2020, 10, 5, 10),
   text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
 }];
+
+export const authInfo = {
+  avatar: `https://api.adorable.io/avatars/128`,
+  email: `mail@mail.ru`,
+  id: 1,
+  isSuper: true,
+  name: `Angelina`,
+};

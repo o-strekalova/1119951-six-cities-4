@@ -2,6 +2,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import Card from "../card/card.jsx";
 import {CardsListClass, CardClass} from "../../utils";
+import withToggle from "../../hocs/with-toggle/with-toggle";
+
+const CardWrapped = withToggle(Card);
 
 const CardsList = (props) => {
   const {
@@ -9,6 +12,7 @@ const CardsList = (props) => {
     offers,
     onCardHover,
     onCardTitleClick,
+    onFavoriteButtonClick,
   } = props;
 
   const cardClassName = className === CardsListClass.MAIN ? CardClass.MAIN : CardClass.PROPERTY;
@@ -16,12 +20,13 @@ const CardsList = (props) => {
   return (
     <div className={className + ` places__list`}>
       {offers.map((offer) => {
-        return <Card
+        return <CardWrapped
           key={offer.title + offer.id}
           className={cardClassName}
           offer={offer}
           onCardTitleClick={onCardTitleClick}
           onCardHover={onCardHover}
+          onFavoriteButtonClick={onFavoriteButtonClick}
         />;
       })}
     </div>
@@ -31,7 +36,7 @@ const CardsList = (props) => {
 CardsList.propTypes = {
   className: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
@@ -66,6 +71,7 @@ CardsList.propTypes = {
   })).isRequired,
   onCardHover: PropTypes.func,
   onCardTitleClick: PropTypes.func,
+  onFavoriteButtonClick: PropTypes.func,
 };
 
 export default React.memo(CardsList);

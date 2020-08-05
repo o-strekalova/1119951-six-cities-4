@@ -1,23 +1,32 @@
 import PropTypes from "prop-types";
 import React from "react";
-import {getRatingPercentage} from "../../utils";
+import {Link} from "react-router-dom";
+import {getRatingPercentage, FavoriteStatus} from "../../utils";
 
 const Card = (props) => {
   const {
     className,
     offer,
+    isToggleChecked,
     onCardTitleClick,
-    onCardHover
+    onCardHover,
+    onFavoriteButtonClick,
+    onToggleClick,
   } = props;
 
   const {
+    id,
     preview,
     title,
     type,
     price,
+    isFavorite,
     isPremium,
     rating
   } = offer;
+
+  const toggleClass = isToggleChecked ? ` place-card__bookmark-button--active` : ``;
+  const newStatus = isFavorite ? FavoriteStatus.NOT_FAVORITE : FavoriteStatus.FAVORITE;
 
   return (
     <article
@@ -39,7 +48,14 @@ const Card = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button
+            className={`place-card__bookmark-button button` + toggleClass}
+            type="button"
+            onClick={() => {
+              onFavoriteButtonClick(newStatus, id);
+              onToggleClick();
+            }}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -56,7 +72,7 @@ const Card = (props) => {
           className="place-card__name"
           onClick={() => onCardTitleClick(offer)}
         >
-          <a href="#">{title}</a>
+          <Link to={`offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type.charAt(0).toUpperCase() + type.slice(1)}</p>
       </div>
@@ -66,8 +82,9 @@ const Card = (props) => {
 
 Card.propTypes = {
   className: PropTypes.string.isRequired,
+  isToggleChecked: PropTypes.bool.isRequired,
   offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
     type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
@@ -103,6 +120,8 @@ Card.propTypes = {
   .isRequired,
   onCardTitleClick: PropTypes.func,
   onCardHover: PropTypes.func,
+  onFavoriteButtonClick: PropTypes.func,
+  onToggleClick: PropTypes.func,
 };
 
 export default React.memo(Card);
