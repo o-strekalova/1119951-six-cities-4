@@ -1,12 +1,6 @@
 import AuthInfo from "../../models/auth-info";
 import {ActionCreator as AppActionCreator} from "../app/app";
-import {AppRoute} from "../../utils";
-import history from "../../history";
-
-const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
+import {AuthorizationStatus} from "../../utils";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -58,7 +52,6 @@ const Operation = {
       })
       .then((authInfo) => {
         dispatch(ActionCreator.changeAuthInfo(authInfo));
-        history.push(AppRoute.MAIN);
       })
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));

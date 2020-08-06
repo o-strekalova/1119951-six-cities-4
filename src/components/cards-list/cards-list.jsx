@@ -7,6 +7,7 @@ const CardWrapped = withToggle(Card);
 
 const CardsList = (props) => {
   const {
+    authorizationStatus,
     cardClass,
     offers,
     onCardHover,
@@ -18,8 +19,10 @@ const CardsList = (props) => {
     <React.Fragment>
       {offers.map((offer) => {
         return <CardWrapped
+          authorizationStatus={authorizationStatus}
           key={offer.title + offer.id}
           cardClass={cardClass}
+          isToggleChecked={offer.isFavorite}
           offer={offer}
           onCardTitleClick={onCardTitleClick}
           onCardHover={onCardHover}
@@ -31,6 +34,7 @@ const CardsList = (props) => {
 };
 
 CardsList.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   cardClass: PropTypes.shape({
     articleClass: PropTypes.string.isRequired,
     imageClass: PropTypes.string.isRequired,

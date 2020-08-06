@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import OffersSection from "./offers-section.jsx";
 import {offersAll} from "../mocks";
-import {SortType} from "../../utils";
+import {SortType, AuthorizationStatus} from "../../utils";
 import history from "../../history";
 
 it(`Render OffersSection`, () => {
@@ -13,6 +13,7 @@ it(`Render OffersSection`, () => {
           history={history}
         >
           <OffersSection
+            authorizationStatus={AuthorizationStatus.AUTH}
             activeCity={offersAll[0].city}
             activeItem={offersAll[0]}
             activeSort={SortType.POPULAR}

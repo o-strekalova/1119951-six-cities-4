@@ -3,8 +3,7 @@ import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import Main from "./main.jsx";
 import {offersAll, authInfo} from "../mocks";
-import {SortType} from "../../utils";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {SortType, AuthorizationStatus} from "../../utils";
 import history from "../../history";
 
 it(`Render Main with offers`, () => {

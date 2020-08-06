@@ -5,10 +5,10 @@ class CitiesList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._handleCityClick = this._handleCityClick.bind(this);
+    this.handleCityClick = this.handleCityClick.bind(this);
   }
 
-  _handleCityClick(city) {
+  handleCityClick(city) {
     this.props.onActiveItemChange(city);
     this.props.onCityClick(city);
   }
@@ -28,7 +28,7 @@ class CitiesList extends PureComponent {
             <li
               key={city.name}
               className="locations__item"
-              onClick={() => this._handleCityClick(city)}>
+              onClick={() => this.handleCityClick(city)}>
               <a className={`locations__item-link tabs__item` + className} href="#">
                 <span>{city.name}</span>
               </a>

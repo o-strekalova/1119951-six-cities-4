@@ -1,5 +1,6 @@
-import {reducer, ActionCreator, ActionType, AuthorizationStatus} from "./user";
+import {reducer, ActionCreator, ActionType} from "./user";
 import {authInfo} from "../../components/mocks";
+import {AuthorizationStatus} from "../../utils";
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({

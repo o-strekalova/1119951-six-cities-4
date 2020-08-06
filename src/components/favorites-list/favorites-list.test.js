@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import FavoritesList from "./favorites-list.jsx";
 import {offersAll, authInfo} from "../mocks";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {AuthorizationStatus} from "../../utils";
 import history from "../../history";
 
 it(`Render Favorites with offers`, () => {

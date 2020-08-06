@@ -4,8 +4,7 @@ import Enzyme, {mount} from "enzyme";
 import {Router} from "react-router-dom";
 import Main from "./main.jsx";
 import {offersAll, authInfo} from "../mocks";
-import {SortType} from "../../utils";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {SortType, AuthorizationStatus} from "../../utils";
 import history from "../../history";
 
 Enzyme.configure({
@@ -68,35 +67,6 @@ it(`Press city`, () => {
   cities.forEach((it) => it.simulate(`click`));
 
   expect(onCityClick).toHaveBeenCalledTimes(2);
-});
-
-it(`Press sorting option`, () => {
-  const onSortClick = jest.fn();
-
-  const main = mount(
-      <Router
-        history={history}
-      >
-        <Main
-          authInfo={authInfo}
-          authorizationStatus={AuthorizationStatus.AUTH}
-          offersAll={offersAll}
-          activeCity={offersAll[0].city}
-          sortedOffers={offersAll}
-          activeSort={SortType.POPULAR}
-          onCardTitleClick={() => {}}
-          onCityClick={() => {}}
-          onSortClick={onSortClick}
-          onAuthFormSubmit={() => {}}
-          onFavoriteButtonClick={() => {}}
-        />
-      </Router>
-  );
-
-  const sortingOptions = main.find(`li.places__option`);
-  sortingOptions.forEach((it) => it.simulate(`click`));
-
-  expect(onSortClick).toHaveBeenCalledTimes(4);
 });
 
 it(`Press favorite button`, () => {

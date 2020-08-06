@@ -1,6 +1,6 @@
 import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {AuthorizationStatus} from "../../utils";
 import Header from "../header/header.jsx";
 
 class Login extends PureComponent {

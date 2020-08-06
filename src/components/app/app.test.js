@@ -4,8 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
 import {offersAll, authInfo, reviews} from "../mocks";
-import {SortType} from "../../utils";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {SortType, AuthorizationStatus} from "../../utils";
 
 const mockStore = configureStore([]);
 

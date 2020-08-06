@@ -5,6 +5,11 @@ export const AppRoute = {
   MAIN: `/`,
 };
 
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 export const CardClass = {
   MAIN: {
     articleClass: `cities__place-card`,

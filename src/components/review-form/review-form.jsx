@@ -7,35 +7,35 @@ class ReviewForm extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._formRef = createRef();
-    this._commentRef = createRef();
-    this._submitButtonRef = createRef();
-    this._rating = null;
+    this.formRef = createRef();
+    this.commentRef = createRef();
+    this.submitButtonRef = createRef();
+    this.rating = null;
 
-    this._handleSubmit = this._handleSubmit.bind(this);
-    this._validateForm = this._validateForm.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
-  _handleSubmit(evt) {
+  handleSubmit(evt) {
     const {onSubmit, id} = this.props;
 
     evt.preventDefault();
 
     onSubmit({
-      comment: this._commentRef.current.value,
-      rating: this._rating,
+      comment: this.commentRef.current.value,
+      rating: this.rating,
     }, id);
 
-    this._formRef.current.reset();
-    this._submitButtonRef.current.setAttribute(`disabled`, `disabled`);
+    this.formRef.current.reset();
+    this.submitButtonRef.current.setAttribute(`disabled`, `disabled`);
   }
 
-  _validateForm() {
+  validateForm() {
     if (
-      this._rating !== null &&
-      this._formRef.current.checkValidity()
+      this.rating !== null &&
+      this.formRef.current.checkValidity()
     ) {
-      this._submitButtonRef.current.removeAttribute(`disabled`);
+      this.submitButtonRef.current.removeAttribute(`disabled`);
     }
   }
 
@@ -45,9 +45,9 @@ class ReviewForm extends PureComponent {
         className="reviews__form form"
         action="#"
         method="post"
-        ref={this._formRef}
-        onChange={this._validateForm}
-        onSubmit={this._handleSubmit}
+        ref={this.formRef}
+        onChange={this.validateForm}
+        onSubmit={this.handleSubmit}
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
@@ -59,7 +59,7 @@ class ReviewForm extends PureComponent {
                 <input className="form__rating-input visually-hidden" name="rating" value={count} id={count + `-stars`} type="radio" />
                 <label htmlFor={count + `-stars`} className="reviews__rating-label form__rating-label" title={starTitle}
                   onClick={() => {
-                    this._rating = count;
+                    this.rating = count;
                   }}
                 >
                   <svg className="form__star-image" width="37" height="33">
@@ -73,7 +73,7 @@ class ReviewForm extends PureComponent {
         <textarea className="reviews__textarea form__textarea" id="review" name="review"
           placeholder="Tell how was your stay, what you like and what can be improved"
           minLength="50" maxLength="300" required
-          ref={this._commentRef}
+          ref={this.commentRef}
         >
         </textarea>
         <div className="reviews__button-wrapper">
@@ -81,7 +81,7 @@ class ReviewForm extends PureComponent {
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
           <button className="reviews__submit form__submit button" type="submit" disabled
-            ref={this._submitButtonRef}
+            ref={this.submitButtonRef}
           >Submit</button>
         </div>
       </form>

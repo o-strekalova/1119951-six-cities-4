@@ -12,7 +12,9 @@ it(`Click on sorting option should pass active sorting type to the callback`, ()
   const list = mount(
       <SortingList
         activeSort={SortType.POPULAR}
+        isToggleChecked={true}
         onSortClick={onSortClick}
+        onToggleClick={() => {}}
       />);
 
   const sortingOptions = list.find(`li.places__option`);

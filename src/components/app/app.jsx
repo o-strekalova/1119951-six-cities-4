@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, {PureComponent} from "react";
+import React from "react";
 import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
 import FavoritesList from "../favorites-list/favorites-list.jsx";
@@ -14,95 +14,105 @@ import {getActiveOffer, getErrorMessage} from "../../reducer/app/selectors";
 import {Operation as UserOperation} from "../../reducer/user/user";
 import {getAuthorizationStatus, getAuthInfo} from "../../reducer/user/selectors";
 import withToggle from "../../hocs/with-toggle/with-toggle";
-import {AppRoute, SortType} from "../../utils";
+import {AppRoute, SortType, AuthorizationStatus} from "../../utils";
 import history from "../../history";
 
 const PropertyWrapped = withToggle(Property);
+const getToggleValue = (offer) => offer === null ? false : offer.isFavorite;
 
-class App extends PureComponent {
-  render() {
-    const {
-      activeCity,
-      activeOffer,
-      activeSort,
-      authInfo,
-      authorizationStatus,
-      errorMessage,
-      favoriteOffers,
-      offersAll,
-      offersNearby,
-      reviews,
-      sortedOffers,
-      onAuthFormSubmit,
-      onCardTitleClick,
-      onCityClick,
-      onFavoriteButtonClick,
-      onReviewSubmit,
-      onSortClick,
-      onUserNameClick,
-    } = this.props;
+const App = (props) => {
+  const {
+    activeCity,
+    activeOffer,
+    activeSort,
+    authInfo,
+    authorizationStatus,
+    errorMessage,
+    favoriteOffers,
+    offersAll,
+    offersNearby,
+    reviews,
+    sortedOffers,
+    onAuthFormSubmit,
+    onCardTitleClick,
+    onCityClick,
+    onFavoriteButtonClick,
+    onReviewSubmit,
+    onSortClick,
+    onUserNameClick,
+  } = props;
 
-    return (
-      <Router
-        history={history}
-      >
-        <Switch>
-          <Route exact path={AppRoute.MAIN}>
-            <Main
-              authInfo={authInfo}
-              authorizationStatus={authorizationStatus}
-              activeCity={activeCity}
-              activeSort={activeSort}
-              errorMessage={errorMessage}
-              offersAll={offersAll}
-              sortedOffers={sortedOffers}
-              onAuthFormSubmit={onAuthFormSubmit}
-              onCardTitleClick={onCardTitleClick}
-              onCityClick={onCityClick}
-              onFavoriteButtonClick={onFavoriteButtonClick}
-              onSortClick={onSortClick}
-              onUserNameClick={onUserNameClick}
-            />
-          </Route>
-          <Route exact path={AppRoute.OFFER}>
-            <PropertyWrapped
-              authInfo={authInfo}
-              authorizationStatus={authorizationStatus}
-              offer={activeOffer}
-              offersNear={offersNearby}
-              reviews={reviews}
-              onCardTitleClick={onCardTitleClick}
-              onFavoriteButtonClick={onFavoriteButtonClick}
-              onReviewSubmit={onReviewSubmit}
-              onUserNameClick={onUserNameClick}
-            />
-          </Route>
-          <Route exact path={AppRoute.LOGIN}>
-            <Login
-              onSubmit={onAuthFormSubmit}
-            />
-          </Route>
-          <PrivateRoute
-            exact
-            path={AppRoute.FAVORITES}
-            render={() => {
+  return (
+    <Router
+      history={history}
+    >
+      <Switch>
+        <Route exact path={AppRoute.MAIN}>
+          <Main
+            authInfo={authInfo}
+            authorizationStatus={authorizationStatus}
+            activeCity={activeCity}
+            activeSort={activeSort}
+            errorMessage={errorMessage}
+            offersAll={offersAll}
+            sortedOffers={sortedOffers}
+            onAuthFormSubmit={onAuthFormSubmit}
+            onCardTitleClick={onCardTitleClick}
+            onCityClick={onCityClick}
+            onFavoriteButtonClick={onFavoriteButtonClick}
+            onSortClick={onSortClick}
+            onUserNameClick={onUserNameClick}
+          />
+        </Route>
+        <Route exact path={AppRoute.OFFER}>
+          <PropertyWrapped
+            authInfo={authInfo}
+            authorizationStatus={authorizationStatus}
+            isToggleChecked={getToggleValue(activeOffer)}
+            offer={activeOffer}
+            offersNear={offersNearby}
+            reviews={reviews}
+            onCardTitleClick={onCardTitleClick}
+            onFavoriteButtonClick={onFavoriteButtonClick}
+            onReviewSubmit={onReviewSubmit}
+            onUserNameClick={onUserNameClick}
+          />
+        </Route>
+        <Route
+          exact
+          path={AppRoute.LOGIN}
+          render={() => {
+            if (authorizationStatus === AuthorizationStatus.AUTH) {
+              return history.push(AppRoute.MAIN);
+            } else {
               return (
-                <FavoritesList
-                  authInfo={authInfo}
-                  authorizationStatus={authorizationStatus}
-                  errorMessage={errorMessage}
-                  offers={favoriteOffers}
-                  onCardTitleClick={onCardTitleClick}
-                  onFavoriteButtonClick={onFavoriteButtonClick}
+                <Login
+                  onSubmit={onAuthFormSubmit}
                 />
               );
-            }}
-          />
-        </Switch>
-      </Router>
-    );
-  }
-}
+            }
+          }}>
+        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.FAVORITES}
+          render={() => {
+            return (
+              <FavoritesList
+                authInfo={authInfo}
+                authorizationStatus={authorizationStatus}
+                errorMessage={errorMessage}
+                offers={favoriteOffers}
+                onCardTitleClick={onCardTitleClick}
+                onFavoriteButtonClick={onFavoriteButtonClick}
+              />
+            );
+          }}
+        />
+      </Switch>
+    </Router>
+  );
+};
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
@@ -340,7 +350,6 @@ const mapDispatchToProps = (dispatch) => ({
   onCityClick(city) {
     dispatch(DataActionCreator.changeActiveCity(city));
     dispatch(DataActionCreator.changeActiveSort(SortType.POPULAR));
-    dispatch(getSortedOffers());
   },
   onFavoriteButtonClick(newStatus, id) {
     dispatch(AppOperation.updateFavoriteStatus(newStatus, id));
@@ -350,7 +359,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSortClick(sort) {
     dispatch(DataActionCreator.changeActiveSort(sort));
-    dispatch(getSortedOffers());
   },
   onUserNameClick() {
     dispatch(DataOperation.loadFavoriteOffers());

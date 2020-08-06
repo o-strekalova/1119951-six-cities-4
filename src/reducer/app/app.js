@@ -1,5 +1,4 @@
-import {AppRoute, extend} from "../../utils";
-import history from "../../history";
+import {extend} from "../../utils";
 
 const initialState = {
   activeOffer: null,
@@ -48,14 +47,10 @@ const Operation = {
       newStatus,
     })
     .catch((err) => {
-      if (err.response.status === 401) {
-        history.push(AppRoute.LOGIN);
-      } else {
-        dispatch(ActionCreator.changeErrorMessage(`Failed to update favorite status. Try again later`));
-        setTimeout(() => {
-          dispatch(ActionCreator.changeErrorMessage(null));
-        }, 5000);
-      }
+      dispatch(ActionCreator.changeErrorMessage(`Failed to update favorite status. Try again later`));
+      setTimeout(() => {
+        dispatch(ActionCreator.changeErrorMessage(null));
+      }, 5000);
       throw err;
     });
   }

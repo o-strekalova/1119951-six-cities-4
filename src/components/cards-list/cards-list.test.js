@@ -4,7 +4,7 @@ import {Router} from "react-router-dom";
 import CardsList from "./cards-list.jsx";
 import {offersAll} from "../mocks";
 import history from "../../history";
-import {CardClass} from "../../utils";
+import {CardClass, AuthorizationStatus} from "../../utils";
 
 it(`Render CardsList Main`, () => {
   const tree = renderer
@@ -13,6 +13,7 @@ it(`Render CardsList Main`, () => {
           history={history}
         >
           <CardsList
+            authorizationStatus={AuthorizationStatus.AUTH}
             cardClass={CardClass.MAIN}
             offers={offersAll}
             onCardTitleClick={() => {}}
@@ -32,6 +33,7 @@ it(`Render CardsList Property`, () => {
           history={history}
         >
           <CardsList
+            authorizationStatus={AuthorizationStatus.AUTH}
             cardClass={CardClass.PROPERTY}
             offers={offersAll}
             onCardTitleClick={() => {}}
@@ -51,6 +53,7 @@ it(`Render CardsList Favorites`, () => {
           history={history}
         >
           <CardsList
+            authorizationStatus={AuthorizationStatus.AUTH}
             cardClass={CardClass.FAVORITE}
             offers={offersAll}
             onCardTitleClick={() => {}}

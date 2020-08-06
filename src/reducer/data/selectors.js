@@ -1,6 +1,6 @@
 import {createSelector} from "reselect";
 import NameSpace from "../name-space";
-import {SortType, findOffersByCity} from "../../utils";
+import {findOffersByCity, SortType} from "../../utils";
 
 const NAME_SPACE = NameSpace.DATA;
 

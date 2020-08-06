@@ -16,58 +16,17 @@ export default class Map extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._mapRef = createRef();
-    this._map = null;
-    this._activeOffer = null;
-    this._activeMarker = {};
-    this._centerLat = null;
-    this._centerLong = null;
-    this._offers = [];
-  }
-
-  _renderMap() {
-    const {
-      activePin,
-      centerLat,
-      centerLong,
-      zoom,
-      offers,
-    } = this.props;
-
-    this._centerLat = centerLat;
-    this._centerLong = centerLong;
-    this._offers = offers;
-
-    this._map = leaflet.map(this._mapRef.current, {
-      center: [centerLat, centerLong],
-      zoom,
-      zoomControl: false,
-      marker: true
-    });
-
-    this._map.setView([centerLat, centerLong], zoom);
-
-    leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(this._map);
-
-    if (this._activeOffer) {
-      leaflet
-        .marker([activePin.location.lat, activePin.location.long], {icon: ACTIVE_ICON})
-        .addTo(this._map);
-    } else {
-      this._offers.map((offer) => {
-        leaflet
-          .marker([offer.location.lat, offer.location.long], {icon: ICON})
-          .addTo(this._map);
-      });
-    }
+    this.mapRef = createRef();
+    this.map = null;
+    this.activeOffer = null;
+    this.activeMarker = {};
+    this.centerLat = null;
+    this.centerLong = null;
+    this.offers = [];
   }
 
   componentDidMount() {
-    this._renderMap();
+    this.renderMap();
   }
 
   componentDidUpdate() {
@@ -78,36 +37,77 @@ export default class Map extends PureComponent {
       offers,
     } = this.props;
 
-    if (activePin !== this._activeOffer && activePin !== undefined) {
+    if (activePin !== this.activeOffer && activePin !== undefined) {
 
-      if (this._activeOffer !== null) {
-        this._activeMarker.remove();
+      if (this.activeOffer !== null) {
+        this.activeMarker.remove();
       }
 
-      this._activeOffer = activePin;
+      this.activeOffer = activePin;
 
-      this._activeMarker = leaflet
-        .marker([this._activeOffer.location.lat, this._activeOffer.location.long], {icon: ACTIVE_ICON})
-        .addTo(this._map);
+      this.activeMarker = leaflet
+        .marker([this.activeOffer.location.lat, this.activeOffer.location.long], {icon: ACTIVE_ICON})
+        .addTo(this.map);
     }
 
-    if (this._centerLat !== centerLat && this._centerLong !== centerLong) {
-      this._map.off();
-      this._map.remove();
+    if (this.centerLat !== centerLat && this.centerLong !== centerLong) {
+      this.map.off();
+      this.map.remove();
 
-      this._activeOffer = null;
-      this._activeMarker = {};
+      this.activeOffer = null;
+      this.activeMarker = {};
 
-      this._renderMap();
+      this.renderMap();
     }
 
-    if (offers !== this._offers) {
-      this._offers = offers;
+    if (offers !== this.offers) {
+      this.offers = offers;
 
-      this._offers .map((offer) => {
+      this.offers.map((offer) => {
         leaflet
           .marker([offer.location.lat, offer.location.long], {icon: ICON})
-          .addTo(this._map);
+          .addTo(this.map);
+      });
+    }
+  }
+
+  renderMap() {
+    const {
+      activePin,
+      centerLat,
+      centerLong,
+      zoom,
+      offers,
+    } = this.props;
+
+    this.centerLat = centerLat;
+    this.centerLong = centerLong;
+    this.offers = offers;
+
+    this.map = leaflet.map(this.mapRef.current, {
+      center: [centerLat, centerLong],
+      zoom,
+      zoomControl: false,
+      marker: true
+    });
+
+    this.map.setView([centerLat, centerLong], zoom);
+
+    leaflet
+      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+      })
+      .addTo(this.map);
+
+    if (this.activeOffer) {
+      leaflet
+        .marker([activePin.location.lat, activePin.location.long], {icon: ACTIVE_ICON})
+        .addTo(this.map);
+    } else {
+      this.offers.map((offer) => {
+        leaflet
+          .marker([offer.location.lat, offer.location.long], {icon: ICON})
+          .addTo(this.map);
       });
     }
   }
@@ -116,7 +116,7 @@ export default class Map extends PureComponent {
     return (
       <div
         id="map"
-        ref={this._mapRef}
+        ref={this.mapRef}
         style={{height: 100 + `%`}}
       />
     );

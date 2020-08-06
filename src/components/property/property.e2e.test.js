@@ -4,7 +4,7 @@ import React from "react";
 import {Router} from "react-router-dom";
 import Property from "./property.jsx";
 import {offersAll, authInfo, reviews} from "../mocks";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {AuthorizationStatus} from "../../utils";
 import history from "../../history";
 
 Enzyme.configure({

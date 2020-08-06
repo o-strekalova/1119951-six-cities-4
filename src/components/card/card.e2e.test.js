@@ -5,7 +5,7 @@ import {Router} from "react-router-dom";
 import Card from "./card.jsx";
 import {offersAll} from "../mocks";
 import history from "../../history";
-import {CardClass} from "../../utils";
+import {CardClass, AuthorizationStatus} from "../../utils";
 
 configure({adapter: new Adapter()});
 
@@ -19,6 +19,7 @@ it(`Mouseover on offer card should pass active offer to the callback`, () => {
         history={history}
       >
         <Card
+          authorizationStatus={AuthorizationStatus.NO_AUTH}
           key={offer.title + offer.id}
           cardClass={CardClass.MAIN}
           isToggleChecked={offer.isFavorite}
@@ -43,6 +44,7 @@ it(`Click on offer card title should pass active offer to the callback`, () => {
         history={history}
       >
         <Card
+          authorizationStatus={AuthorizationStatus.NO_AUTH}
           key={offer.title + offer.id}
           cardClass={CardClass.PROPERTY}
           isToggleChecked={offer.isFavorite}
@@ -70,6 +72,7 @@ it(`Click on favorite icon should pass status and id to the callback`, () => {
         history={history}
       >
         <Card
+          authorizationStatus={AuthorizationStatus.AUTH}
           key={offer.title + offer.id}
           cardClass={CardClass.FAVORITE}
           isToggleChecked={offer.isFavorite}

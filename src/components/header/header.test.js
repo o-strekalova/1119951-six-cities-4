@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import Header from "./header.jsx";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {AuthorizationStatus} from "../../utils";
 import {authInfo} from "../mocks";
 import history from "../../history";
 

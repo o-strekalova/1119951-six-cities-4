@@ -12,10 +12,11 @@ const OffersSectionWrapped = withActiveItem(OffersSection);
 const CitiesListWrapped = withActiveItem(CitiesList);
 
 class Main extends PureComponent {
-  _renderOffersSection() {
+  renderOffersSection() {
     const {
       activeCity,
       activeSort,
+      authorizationStatus,
       sortedOffers,
       onSortClick,
       onCardTitleClick,
@@ -27,6 +28,7 @@ class Main extends PureComponent {
         <OffersSectionWrapped
           activeCity={activeCity}
           activeSort={activeSort}
+          authorizationStatus={authorizationStatus}
           offers={sortedOffers}
           onCardTitleClick={onCardTitleClick}
           onFavoriteButtonClick={onFavoriteButtonClick}
@@ -76,7 +78,7 @@ class Main extends PureComponent {
             </section>
           </div>
           <div className="cities">
-            {this._renderOffersSection()}
+            {this.renderOffersSection()}
           </div>
         </main>
         <ErrorMessage

@@ -3,10 +3,10 @@ import React, {PureComponent} from "react";
 import ErrorMessage from "../error-message/error-message.jsx";
 import Header from "../header/header.jsx";
 import CardsList from "../cards-list/cards-list.jsx";
-import {CardClass, getCitiesForList, findOffersByCity} from "../../utils";
+import {CardClass, getCitiesForList, findOffersByCity, AuthorizationStatus} from "../../utils";
 
 class FavoritesList extends PureComponent {
-  _renderOffersSection() {
+  renderOffersSection() {
     const {
       offers,
       onCardTitleClick,
@@ -33,6 +33,7 @@ class FavoritesList extends PureComponent {
 
                   <div className="favorites__places">
                     <CardsList
+                      authorizationStatus={AuthorizationStatus.AUTH}
                       cardClass={CardClass.FAVORITE}
                       offers={findOffersByCity(offers, city)}
                       onCardHover={() => {}}
@@ -79,7 +80,7 @@ class FavoritesList extends PureComponent {
 
         <main className={`page__main page__main--favorites` + mainClass}>
           <div className="page__favorites-container container">
-            {this._renderOffersSection()}
+            {this.renderOffersSection()}
           </div>
         </main>
         <footer className="footer container">

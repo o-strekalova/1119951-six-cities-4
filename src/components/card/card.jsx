@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import React from "react";
 import {Link} from "react-router-dom";
-import {getRatingPercentage, FavoriteStatus} from "../../utils";
+import {getRatingPercentage, FavoriteStatus, AppRoute, AuthorizationStatus} from "../../utils";
+import history from "../../history";
 
 const Card = (props) => {
   const {
+    authorizationStatus,
     cardClass,
     isToggleChecked,
     offer,
@@ -60,8 +62,12 @@ const Card = (props) => {
             className={`place-card__bookmark-button button` + toggleClass}
             type="button"
             onClick={() => {
-              onFavoriteButtonClick(newStatus, id);
-              onToggleClick();
+              if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+                history.push(AppRoute.LOGIN);
+              } else {
+                onFavoriteButtonClick(newStatus, id);
+                onToggleClick();
+              }
             }}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -79,7 +85,7 @@ const Card = (props) => {
         <h2 className="place-card__name">
           <Link
             onClick={() => onCardTitleClick(offer)}
-            to={`offer/${id}`}
+            to={`../../offer/${id}`}
           >
             {title}
           </Link>
@@ -91,6 +97,7 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   cardClass: PropTypes.shape({
     articleClass: PropTypes.string.isRequired,
     imageClass: PropTypes.string.isRequired,

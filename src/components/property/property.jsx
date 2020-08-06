@@ -6,8 +6,8 @@ import Header from "../header/header.jsx";
 import Map from "../map/map.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import ReviewForm from "../review-form/review-form.jsx";
-import {CardClass, getRatingPercentage, FavoriteStatus} from "../../utils";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {CardClass, getRatingPercentage, FavoriteStatus, AppRoute, AuthorizationStatus} from "../../utils";
+import history from "../../history";
 
 const MAX_PICTURES_COUNT = 6;
 const MAX_OFFERS_NEAR_COUNT = 3;
@@ -86,9 +86,9 @@ const Property = (props) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {isPremium ? <div className="property__mark">
+              {isPremium && <div className="property__mark">
                 <span>Premium</span>
-              </div> : ``}
+              </div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -97,8 +97,12 @@ const Property = (props) => {
                   className={`property__bookmark-button button` + toggleClass}
                   type="button"
                   onClick={() => {
-                    onFavoriteButtonClick(newStatus, id);
-                    onToggleClick();
+                    if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+                      history.push(AppRoute.LOGIN);
+                    } else {
+                      onFavoriteButtonClick(newStatus, id);
+                      onToggleClick();
+                    }
                   }}
                 >
                   <svg className="property__bookmark-icon" width="31" height="33">
@@ -181,6 +185,7 @@ const Property = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className={`near-places__list places__list`}>
               <CardsList
+                authorizationStatus={authorizationStatus}
                 cardClass={CardClass.PROPERTY}
                 offers={offersNearShown}
                 onCardHover={() => {}}

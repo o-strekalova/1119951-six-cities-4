@@ -3,13 +3,17 @@ import React from "react";
 import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
 import SortingList from "../sorting-list/sorting-list.jsx";
+import withToggle from "../../hocs/with-toggle/with-toggle";
 import {CardClass} from "../../utils";
+
+const SortingListWrapped = withToggle(SortingList);
 
 const OffersSection = (props) => {
   const {
     activeCity,
     activeItem,
     activeSort,
+    authorizationStatus,
     offers,
     onActiveItemChange,
     onCardTitleClick,
@@ -22,12 +26,14 @@ const OffersSection = (props) => {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{offers.length} places to stay in {activeCity.name}</b>
-        <SortingList
+        <SortingListWrapped
           activeSort={activeSort}
           onSortClick={onSortClick}
+          isToggleChecked={false}
         />
         <div className={`cities__places-list tabs__content places__list`}>
           <CardsList
+            authorizationStatus={authorizationStatus}
             offers={offers}
             cardClass={CardClass.MAIN}
             onCardHover={onActiveItemChange}
@@ -52,6 +58,7 @@ const OffersSection = (props) => {
 };
 
 OffersSection.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   activeCity: PropTypes.shape({
     location: PropTypes.shape({
       lat: PropTypes.number.isRequired,
