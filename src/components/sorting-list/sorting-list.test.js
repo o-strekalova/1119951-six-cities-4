@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import SortingList from "./sorting-list.jsx";
-import {SortType} from "../../utils";
+import {SortType, noop} from "../../utils";
 
 it(`Render Sorting List open`, () => {
   const tree = renderer
@@ -9,8 +9,8 @@ it(`Render Sorting List open`, () => {
         <SortingList
           activeSort={SortType.POPULAR}
           isToggleChecked={true}
-          onSortClick={() => {}}
-          onToggleClick={() => {}}
+          onSortClick={noop}
+          onToggleClick={noop}
         />)
     .toJSON();
 
@@ -23,8 +23,8 @@ it(`Render Sorting List closed`, () => {
         <SortingList
           activeSort={SortType.POPULAR}
           isToggleChecked={false}
-          onSortClick={() => {}}
-          onToggleClick={() => {}}
+          onSortClick={noop}
+          onToggleClick={noop}
         />)
     .toJSON();
 

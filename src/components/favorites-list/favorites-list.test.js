@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import FavoritesList from "./favorites-list.jsx";
 import {offersAll, authInfo} from "../mocks";
-import {AuthorizationStatus} from "../../utils";
+import {AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";
 
 it(`Render Favorites with offers`, () => {
@@ -17,8 +17,8 @@ it(`Render Favorites with offers`, () => {
             authorizationStatus={AuthorizationStatus.AUTH}
             errorMessage={null}
             offers={offersAll}
-            onCardTitleClick={() => {}}
-            onFavoriteButtonClick={() => {}}
+            onCardTitleClick={noop}
+            onFavoriteButtonClick={noop}
           />
         </Router>)
     .toJSON();
@@ -37,8 +37,8 @@ it(`Render Favorites without offers`, () => {
             authorizationStatus={AuthorizationStatus.AUTH}
             errorMessage={null}
             offers={[]}
-            onCardTitleClick={() => {}}
-            onFavoriteButtonClick={() => {}}
+            onCardTitleClick={noop}
+            onFavoriteButtonClick={noop}
           />
         </Router>)
     .toJSON();
@@ -57,8 +57,8 @@ it(`Render Favorites with ErrorMessage`, () => {
             authorizationStatus={AuthorizationStatus.AUTH}
             errorMessage={`Action failed`}
             offers={[]}
-            onCardTitleClick={() => {}}
-            onFavoriteButtonClick={() => {}}
+            onCardTitleClick={noop}
+            onFavoriteButtonClick={noop}
           />
         </Router>)
     .toJSON();

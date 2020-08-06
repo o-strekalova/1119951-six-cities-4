@@ -6,7 +6,7 @@ import Header from "../header/header.jsx";
 import Map from "../map/map.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import ReviewForm from "../review-form/review-form.jsx";
-import {CardClass, getRatingPercentage, FavoriteStatus, AppRoute, AuthorizationStatus} from "../../utils";
+import {CardClass, getRatingPercentage, FavoriteStatus, AppRoute, AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";
 
 const MAX_PICTURES_COUNT = 6;
@@ -23,6 +23,7 @@ const Property = (props) => {
     reviews,
     onCardTitleClick,
     onFavoriteButtonClick,
+    onLogoClick,
     onReviewSubmit,
     onToggleClick,
     onUserNameClick,
@@ -69,6 +70,7 @@ const Property = (props) => {
         authInfo={authInfo}
         authorizationStatus={authorizationStatus}
         onUserNameClick={onUserNameClick}
+        onLogoClick={onLogoClick}
       />
 
       <main className="page__main page__main--property">
@@ -102,6 +104,7 @@ const Property = (props) => {
                     } else {
                       onFavoriteButtonClick(newStatus, id);
                       onToggleClick();
+                      offer.isFavorite = !offer.isFavorite;
                     }
                   }}
                 >
@@ -188,7 +191,7 @@ const Property = (props) => {
                 authorizationStatus={authorizationStatus}
                 cardClass={CardClass.PROPERTY}
                 offers={offersNearShown}
-                onCardHover={() => {}}
+                onCardHover={noop}
                 onCardTitleClick={onCardTitleClick}
                 onFavoriteButtonClick={onFavoriteButtonClick}
               />
@@ -297,6 +300,7 @@ Property.propTypes = {
   onCardTitleClick: PropTypes.func,
   onReviewSubmit: PropTypes.func,
   onFavoriteButtonClick: PropTypes.func,
+  onLogoClick: PropTypes.func,
   onToggleClick: PropTypes.func,
   onUserNameClick: PropTypes.func,
 };

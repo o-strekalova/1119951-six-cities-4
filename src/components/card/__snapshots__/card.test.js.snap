@@ -93,7 +93,7 @@ exports[`Render Card Favorites 1`] = `
       className="place-card__name"
     >
       <a
-        href="/offer/1010"
+        href="/offer/1010/#header"
         onClick={[Function]}
       >
         Wood and stone place
@@ -201,7 +201,7 @@ exports[`Render Card Main 1`] = `
       className="place-card__name"
     >
       <a
-        href="/offer/1010"
+        href="/offer/1010/#header"
         onClick={[Function]}
       >
         Wood and stone place
@@ -309,7 +309,7 @@ exports[`Render Card Property 1`] = `
       className="place-card__name"
     >
       <a
-        href="/offer/1010"
+        href="/offer/1010/#header"
         onClick={[Function]}
       >
         Wood and stone place

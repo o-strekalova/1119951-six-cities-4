@@ -4,7 +4,7 @@ import Enzyme, {mount} from "enzyme";
 import {Router} from "react-router-dom";
 import Main from "./main.jsx";
 import {offersAll, authInfo} from "../mocks";
-import {SortType, AuthorizationStatus} from "../../utils";
+import {SortType, AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";
 
 Enzyme.configure({
@@ -26,10 +26,11 @@ it(`Press card title in Main`, () => {
           sortedOffers={offersAll}
           activeSort={SortType.POPULAR}
           onCardTitleClick={onCardTitleClick}
-          onCityClick={() => {}}
-          onSortClick={() => {}}
-          onAuthFormSubmit={() => {}}
-          onFavoriteButtonClick={() => {}}
+          onCityClick={noop}
+          onSortClick={noop}
+          onAuthFormSubmit={noop}
+          onFavoriteButtonClick={noop}
+          onLogoClick={noop}
         />
       </Router>
   );
@@ -54,11 +55,12 @@ it(`Press city`, () => {
           activeCity={offersAll[0].city}
           sortedOffers={offersAll}
           activeSort={SortType.POPULAR}
-          onCardTitleClick={() => {}}
+          onCardTitleClick={noop}
           onCityClick={onCityClick}
-          onSortClick={() => {}}
-          onAuthFormSubmit={() => {}}
-          onFavoriteButtonClick={() => {}}
+          onSortClick={noop}
+          onAuthFormSubmit={noop}
+          onFavoriteButtonClick={noop}
+          onLogoClick={noop}
         />
       </Router>
   );
@@ -83,11 +85,12 @@ it(`Press favorite button`, () => {
           activeCity={offersAll[0].city}
           sortedOffers={offersAll}
           activeSort={SortType.POPULAR}
-          onCardTitleClick={() => {}}
-          onCityClick={() => {}}
-          onSortClick={() => {}}
-          onAuthFormSubmit={() => {}}
+          onCardTitleClick={noop}
+          onCityClick={noop}
+          onSortClick={noop}
+          onAuthFormSubmit={noop}
           onFavoriteButtonClick={onFavoriteButtonClick}
+          onLogoClick={noop}
         />
       </Router>
   );

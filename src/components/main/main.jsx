@@ -53,6 +53,7 @@ class Main extends PureComponent {
       offersAll,
       sortedOffers,
       onCityClick,
+      onLogoClick,
       onUserNameClick,
     } = this.props;
 
@@ -65,6 +66,7 @@ class Main extends PureComponent {
           authInfo={authInfo}
           authorizationStatus={authorizationStatus}
           onUserNameClick={onUserNameClick}
+          onLogoClick={onLogoClick}
         />
         <main className={`page__main page__main--index` + isEmpty}>
           <h1 className="visually-hidden">Cities</h1>
@@ -180,6 +182,7 @@ Main.propTypes = {
   onCardTitleClick: PropTypes.func,
   onCityClick: PropTypes.func,
   onFavoriteButtonClick: PropTypes.func,
+  onLogoClick: PropTypes.func,
   onSortClick: PropTypes.func,
   onUserNameClick: PropTypes.func,
 };

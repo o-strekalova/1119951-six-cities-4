@@ -94,7 +94,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="/offer/1010"
+          href="/offer/1010/#header"
           onClick={[Function]}
         >
           Wood and stone place
@@ -199,7 +199,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="/offer/2020"
+          href="/offer/2020/#header"
           onClick={[Function]}
         >
           Wood and stone place
@@ -309,7 +309,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="/offer/1010"
+          href="/offer/1010/#header"
           onClick={[Function]}
         >
           Wood and stone place
@@ -414,7 +414,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="/offer/2020"
+          href="/offer/2020/#header"
           onClick={[Function]}
         >
           Wood and stone place
@@ -524,7 +524,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="/offer/1010"
+          href="/offer/1010/#header"
           onClick={[Function]}
         >
           Wood and stone place
@@ -629,7 +629,7 @@ Array [
         className="place-card__name"
       >
         <a
-          href="/offer/2020"
+          href="/offer/2020/#header"
           onClick={[Function]}
         >
           Wood and stone place

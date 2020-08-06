@@ -4,7 +4,7 @@ import {Router} from "react-router-dom";
 import Card from "./card.jsx";
 import {offersAll} from "../mocks";
 import history from "../../history";
-import {CardClass, AuthorizationStatus} from "../../utils";
+import {CardClass, AuthorizationStatus, noop} from "../../utils";
 
 const offer = offersAll[0];
 
@@ -20,10 +20,10 @@ it(`Render Card Main`, () => {
             cardClass={CardClass.MAIN}
             isToggleChecked={offer.isFavorite}
             offer={offer}
-            onCardTitleClick={() => {}}
-            onCardHover={() => {}}
-            onFavoriteButtonClick={() => {}}
-            onToggleClick={() => {}}
+            onCardTitleClick={noop}
+            onCardHover={noop}
+            onFavoriteButtonClick={noop}
+            onToggleClick={noop}
           />
         </Router>)
     .toJSON();
@@ -43,10 +43,10 @@ it(`Render Card Property`, () => {
             cardClass={CardClass.PROPERTY}
             isToggleChecked={offer.isFavorite}
             offer={offer}
-            onCardTitleClick={() => {}}
-            onCardHover={() => {}}
-            onFavoriteButtonClick={() => {}}
-            onToggleClick={() => {}}
+            onCardTitleClick={noop}
+            onCardHover={noop}
+            onFavoriteButtonClick={noop}
+            onToggleClick={noop}
           />
         </Router>)
     .toJSON();
@@ -66,10 +66,10 @@ it(`Render Card Favorites`, () => {
             cardClass={CardClass.FAVORITE}
             isToggleChecked={offer.isFavorite}
             offer={offer}
-            onCardTitleClick={() => {}}
-            onCardHover={() => {}}
-            onFavoriteButtonClick={() => {}}
-            onToggleClick={() => {}}
+            onCardTitleClick={noop}
+            onCardHover={noop}
+            onFavoriteButtonClick={noop}
+            onToggleClick={noop}
           />
         </Router>)
     .toJSON();

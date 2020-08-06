@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import Property from "./property.jsx";
 import {Router} from "react-router-dom";
 import {offersAll, authInfo, reviews} from "../mocks";
-import {AuthorizationStatus} from "../../utils";
+import {AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";
 
 it(`Render Property for authorized user`, () => {
@@ -20,11 +20,12 @@ it(`Render Property for authorized user`, () => {
             offer={offersAll[0]}
             offersNear={offersAll}
             reviews={reviews}
-            onCardTitleClick={() => {}}
-            onFavoriteButtonClick={() => {}}
-            onReviewSubmit={() => {}}
-            onToggleClick={() => {}}
-            onUserNameClick={() => {}}
+            onCardTitleClick={noop}
+            onFavoriteButtonClick={noop}
+            onLogoClick={noop}
+            onReviewSubmit={noop}
+            onToggleClick={noop}
+            onUserNameClick={noop}
           />
         </Router>, {
           createNodeMock: () => {
@@ -50,11 +51,12 @@ it(`Render Property for unauthorized user`, () => {
             offer={offersAll[0]}
             offersNear={offersAll}
             reviews={reviews}
-            onCardTitleClick={() => {}}
-            onFavoriteButtonClick={() => {}}
-            onReviewSubmit={() => {}}
-            onToggleClick={() => {}}
-            onUserNameClick={() => {}}
+            onCardTitleClick={noop}
+            onFavoriteButtonClick={noop}
+            onLogoClick={noop}
+            onReviewSubmit={noop}
+            onToggleClick={noop}
+            onUserNameClick={noop}
           />
         </Router>, {
           createNodeMock: () => {
@@ -80,11 +82,12 @@ it(`Render Property with ErrorMessage`, () => {
             offer={offersAll[0]}
             offersNear={offersAll}
             reviews={reviews}
-            onCardTitleClick={() => {}}
-            onFavoriteButtonClick={() => {}}
-            onReviewSubmit={() => {}}
-            onToggleClick={() => {}}
-            onUserNameClick={() => {}}
+            onCardTitleClick={noop}
+            onFavoriteButtonClick={noop}
+            onLogoClick={noop}
+            onReviewSubmit={noop}
+            onToggleClick={noop}
+            onUserNameClick={noop}
           />
         </Router>, {
           createNodeMock: () => {

@@ -4,7 +4,7 @@ import React from "react";
 import {Router} from "react-router-dom";
 import Property from "./property.jsx";
 import {offersAll, authInfo, reviews} from "../mocks";
-import {AuthorizationStatus} from "../../utils";
+import {AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";
 
 Enzyme.configure({
@@ -27,10 +27,11 @@ it(`Press card title in Property`, () => {
           offersNear={offersAll}
           reviews={reviews}
           onCardTitleClick={onCardTitleClick}
-          onFavoriteButtonClick={() => {}}
-          onReviewSubmit={() => {}}
-          onToggleClick={() => {}}
-          onUserNameClick={() => {}}
+          onFavoriteButtonClick={noop}
+          onLogoClick={noop}
+          onReviewSubmit={noop}
+          onToggleClick={noop}
+          onUserNameClick={noop}
         />
       </Router>
   );
@@ -56,11 +57,12 @@ it(`Submit review form`, () => {
           offer={offersAll[0]}
           offersNear={offersAll}
           reviews={reviews}
-          onCardTitleClick={() => {}}
-          onFavoriteButtonClick={() => {}}
+          onCardTitleClick={noop}
+          onFavoriteButtonClick={noop}
           onReviewSubmit={onReviewSubmit}
-          onToggleClick={() => {}}
-          onUserNameClick={() => {}}
+          onLogoClick={noop}
+          onToggleClick={noop}
+          onUserNameClick={noop}
         />
       </Router>
   );
@@ -87,11 +89,12 @@ it(`Press favorite button in Property`, () => {
           offer={offersAll[0]}
           offersNear={offersAll}
           reviews={reviews}
-          onCardTitleClick={() => {}}
+          onCardTitleClick={noop}
           onFavoriteButtonClick={onFavoriteButtonClick}
-          onReviewSubmit={() => {}}
+          onLogoClick={noop}
+          onReviewSubmit={noop}
           onToggleClick={onToggleClick}
-          onUserNameClick={() => {}}
+          onUserNameClick={noop}
         />
       </Router>
   );

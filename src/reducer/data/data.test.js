@@ -2,9 +2,9 @@ import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api";
 import {reducer, ActionType, Operation, ActionCreator} from "./data";
 import {offersAll, offersRaw, reviews} from "../../components/mocks";
-import {SortType} from "../../utils";
+import {SortType, noop} from "../../utils";
 
-const api = createAPI(() => {});
+const api = createAPI(noop);
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
@@ -106,7 +106,7 @@ describe(`Operation work correctly`, () => {
       .onGet(`/hotels`)
       .reply(200, offersRaw);
 
-    return offersLoader(dispatch, () => {}, api)
+    return offersLoader(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {

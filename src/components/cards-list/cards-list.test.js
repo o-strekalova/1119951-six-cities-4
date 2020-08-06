@@ -4,7 +4,7 @@ import {Router} from "react-router-dom";
 import CardsList from "./cards-list.jsx";
 import {offersAll} from "../mocks";
 import history from "../../history";
-import {CardClass, AuthorizationStatus} from "../../utils";
+import {CardClass, AuthorizationStatus, noop} from "../../utils";
 
 it(`Render CardsList Main`, () => {
   const tree = renderer
@@ -16,9 +16,9 @@ it(`Render CardsList Main`, () => {
             authorizationStatus={AuthorizationStatus.AUTH}
             cardClass={CardClass.MAIN}
             offers={offersAll}
-            onCardTitleClick={() => {}}
-            onCardHover={() => {}}
-            onFavoriteButtonClick={() => {}}
+            onCardTitleClick={noop}
+            onCardHover={noop}
+            onFavoriteButtonClick={noop}
           />
         </Router>)
     .toJSON();
@@ -36,9 +36,9 @@ it(`Render CardsList Property`, () => {
             authorizationStatus={AuthorizationStatus.AUTH}
             cardClass={CardClass.PROPERTY}
             offers={offersAll}
-            onCardTitleClick={() => {}}
-            onCardHover={() => {}}
-            onFavoriteButtonClick={() => {}}
+            onCardTitleClick={noop}
+            onCardHover={noop}
+            onFavoriteButtonClick={noop}
           />
         </Router>)
     .toJSON();
@@ -56,9 +56,9 @@ it(`Render CardsList Favorites`, () => {
             authorizationStatus={AuthorizationStatus.AUTH}
             cardClass={CardClass.FAVORITE}
             offers={offersAll}
-            onCardTitleClick={() => {}}
-            onCardHover={() => {}}
-            onFavoriteButtonClick={() => {}}
+            onCardTitleClick={noop}
+            onCardHover={noop}
+            onFavoriteButtonClick={noop}
           />
         </Router>)
     .toJSON();

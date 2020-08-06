@@ -37,6 +37,7 @@ const App = (props) => {
     onCardTitleClick,
     onCityClick,
     onFavoriteButtonClick,
+    onLogoClick,
     onReviewSubmit,
     onSortClick,
     onUserNameClick,
@@ -60,6 +61,7 @@ const App = (props) => {
             onCardTitleClick={onCardTitleClick}
             onCityClick={onCityClick}
             onFavoriteButtonClick={onFavoriteButtonClick}
+            onLogoClick={onLogoClick}
             onSortClick={onSortClick}
             onUserNameClick={onUserNameClick}
           />
@@ -74,6 +76,7 @@ const App = (props) => {
             reviews={reviews}
             onCardTitleClick={onCardTitleClick}
             onFavoriteButtonClick={onFavoriteButtonClick}
+            onLogoClick={onLogoClick}
             onReviewSubmit={onReviewSubmit}
             onUserNameClick={onUserNameClick}
           />
@@ -82,15 +85,14 @@ const App = (props) => {
           exact
           path={AppRoute.LOGIN}
           render={() => {
-            if (authorizationStatus === AuthorizationStatus.AUTH) {
-              return history.push(AppRoute.MAIN);
-            } else {
-              return (
-                <Login
+            return (
+              authorizationStatus === AuthorizationStatus.NO_AUTH
+                ? <Login
+                  onLogoClick={onLogoClick}
                   onSubmit={onAuthFormSubmit}
                 />
-              );
-            }
+                : history.push(AppRoute.MAIN)
+            );
           }}>
         </Route>
         <PrivateRoute
@@ -103,6 +105,7 @@ const App = (props) => {
                 authorizationStatus={authorizationStatus}
                 errorMessage={errorMessage}
                 offers={favoriteOffers}
+                onLogoClick={onLogoClick}
                 onCardTitleClick={onCardTitleClick}
                 onFavoriteButtonClick={onFavoriteButtonClick}
               />
@@ -319,6 +322,7 @@ App.propTypes = {
   onCardTitleClick: PropTypes.func,
   onCityClick: PropTypes.func,
   onFavoriteButtonClick: PropTypes.func,
+  onLogoClick: PropTypes.func,
   onReviewSubmit: PropTypes.func,
   onSortClick: PropTypes.func,
   onUserNameClick: PropTypes.func,
@@ -353,6 +357,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onFavoriteButtonClick(newStatus, id) {
     dispatch(AppOperation.updateFavoriteStatus(newStatus, id));
+  },
+  onLogoClick() {
+    dispatch(DataOperation.loadOffers());
   },
   onReviewSubmit(reviewData, id) {
     dispatch(AppOperation.postReview(reviewData, id));

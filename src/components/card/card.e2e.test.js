@@ -5,7 +5,7 @@ import {Router} from "react-router-dom";
 import Card from "./card.jsx";
 import {offersAll} from "../mocks";
 import history from "../../history";
-import {CardClass, AuthorizationStatus} from "../../utils";
+import {CardClass, AuthorizationStatus, noop} from "../../utils";
 
 configure({adapter: new Adapter()});
 
@@ -24,10 +24,10 @@ it(`Mouseover on offer card should pass active offer to the callback`, () => {
           cardClass={CardClass.MAIN}
           isToggleChecked={offer.isFavorite}
           offer={offer}
-          onCardTitleClick={() => {}}
+          onCardTitleClick={noop}
           onCardHover={onCardHover}
-          onFavoriteButtonClick={() => {}}
-          onToggleClick={() => {}}
+          onFavoriteButtonClick={noop}
+          onToggleClick={noop}
         />
       </Router>);
 
@@ -50,9 +50,9 @@ it(`Click on offer card title should pass active offer to the callback`, () => {
           isToggleChecked={offer.isFavorite}
           offer={offer}
           onCardTitleClick={onCardTitleClick}
-          onCardHover={() => {}}
-          onFavoriteButtonClick={() => {}}
-          onToggleClick={() => {}}
+          onCardHover={noop}
+          onFavoriteButtonClick={noop}
+          onToggleClick={noop}
         />
       </Router>);
 
@@ -77,8 +77,8 @@ it(`Click on favorite icon should pass status and id to the callback`, () => {
           cardClass={CardClass.FAVORITE}
           isToggleChecked={offer.isFavorite}
           offer={offer}
-          onCardTitleClick={() => {}}
-          onCardHover={() => {}}
+          onCardTitleClick={noop}
+          onCardHover={noop}
           onFavoriteButtonClick={onFavoriteButtonClick}
           onToggleClick={onToggleClick}
         />

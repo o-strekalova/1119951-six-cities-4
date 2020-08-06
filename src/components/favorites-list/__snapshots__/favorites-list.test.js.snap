@@ -6,6 +6,7 @@ exports[`Render Favorites with ErrorMessage 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -18,6 +19,7 @@ exports[`Render Favorites with ErrorMessage 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            href="/"
             onClick={[Function]}
           >
             <img
@@ -132,6 +134,7 @@ exports[`Render Favorites with offers 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -144,6 +147,7 @@ exports[`Render Favorites with offers 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            href="/"
             onClick={[Function]}
           >
             <img
@@ -315,7 +319,7 @@ exports[`Render Favorites with offers 1`] = `
                     className="place-card__name"
                   >
                     <a
-                      href="/offer/1010"
+                      href="/offer/1010/#header"
                       onClick={[Function]}
                     >
                       Wood and stone place
@@ -444,7 +448,7 @@ exports[`Render Favorites with offers 1`] = `
                     className="place-card__name"
                   >
                     <a
-                      href="/offer/2020"
+                      href="/offer/2020/#header"
                       onClick={[Function]}
                     >
                       Wood and stone place
@@ -488,6 +492,7 @@ exports[`Render Favorites without offers 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -500,6 +505,7 @@ exports[`Render Favorites without offers 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            href="/"
             onClick={[Function]}
           >
             <img

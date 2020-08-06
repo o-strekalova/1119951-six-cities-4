@@ -2,7 +2,7 @@ import React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import SortingList from "./sorting-list.jsx";
-import {SortType} from "../../utils";
+import {SortType, noop} from "../../utils";
 
 configure({adapter: new Adapter()});
 
@@ -14,7 +14,7 @@ it(`Click on sorting option should pass active sorting type to the callback`, ()
         activeSort={SortType.POPULAR}
         isToggleChecked={true}
         onSortClick={onSortClick}
-        onToggleClick={() => {}}
+        onToggleClick={noop}
       />);
 
   const sortingOptions = list.find(`li.places__option`);

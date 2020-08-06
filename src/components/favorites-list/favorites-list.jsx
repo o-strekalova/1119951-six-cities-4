@@ -3,7 +3,7 @@ import React, {PureComponent} from "react";
 import ErrorMessage from "../error-message/error-message.jsx";
 import Header from "../header/header.jsx";
 import CardsList from "../cards-list/cards-list.jsx";
-import {CardClass, getCitiesForList, findOffersByCity, AuthorizationStatus} from "../../utils";
+import {CardClass, getCitiesForList, findOffersByCity, AuthorizationStatus, noop} from "../../utils";
 
 class FavoritesList extends PureComponent {
   renderOffersSection() {
@@ -36,7 +36,7 @@ class FavoritesList extends PureComponent {
                       authorizationStatus={AuthorizationStatus.AUTH}
                       cardClass={CardClass.FAVORITE}
                       offers={findOffersByCity(offers, city)}
-                      onCardHover={() => {}}
+                      onCardHover={noop}
                       onCardTitleClick={onCardTitleClick}
                       onFavoriteButtonClick={onFavoriteButtonClick}
                     />
@@ -65,6 +65,7 @@ class FavoritesList extends PureComponent {
       authorizationStatus,
       errorMessage,
       offers,
+      onLogoClick,
     } = this.props;
 
     const isEmpty = offers.length === 0;
@@ -76,6 +77,7 @@ class FavoritesList extends PureComponent {
         <Header
           authInfo={authInfo}
           authorizationStatus={authorizationStatus}
+          onLogoClick={onLogoClick}
         />
 
         <main className={`page__main page__main--favorites` + mainClass}>
@@ -142,6 +144,7 @@ FavoritesList.propTypes = {
   })).isRequired,
   onCardTitleClick: PropTypes.func,
   onFavoriteButtonClick: PropTypes.func,
+  onLogoClick: PropTypes.func,
 };
 
 export default FavoritesList;

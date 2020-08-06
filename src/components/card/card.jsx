@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import {Link} from "react-router-dom";
+import {HashLink as Link} from "react-router-hash-link";
 import {getRatingPercentage, FavoriteStatus, AppRoute, AuthorizationStatus} from "../../utils";
 import history from "../../history";
 
@@ -67,6 +67,7 @@ const Card = (props) => {
               } else {
                 onFavoriteButtonClick(newStatus, id);
                 onToggleClick();
+                offer.isFavorite = !offer.isFavorite;
               }
             }}
           >
@@ -85,7 +86,7 @@ const Card = (props) => {
         <h2 className="place-card__name">
           <Link
             onClick={() => onCardTitleClick(offer)}
-            to={`../../offer/${id}`}
+            to={`../../offer/${id}/#header`}
           >
             {title}
           </Link>

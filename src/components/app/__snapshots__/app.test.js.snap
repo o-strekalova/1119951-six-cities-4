@@ -6,6 +6,7 @@ exports[`Render App for authorized user 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -18,6 +19,7 @@ exports[`Render App for authorized user 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            href="/"
             onClick={[Function]}
           >
             <img
@@ -247,7 +249,7 @@ exports[`Render App for authorized user 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/offer/1010"
+                    href="/offer/1010/#header"
                     onClick={[Function]}
                   >
                     Wood and stone place
@@ -352,7 +354,7 @@ exports[`Render App for authorized user 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/offer/2020"
+                    href="/offer/2020/#header"
                     onClick={[Function]}
                   >
                     Wood and stone place
@@ -395,6 +397,7 @@ exports[`Render App for not authorized user 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -407,6 +410,7 @@ exports[`Render App for not authorized user 1`] = `
         >
           <a
             className="header__logo-link"
+            href="/"
             onClick={[Function]}
           >
             <img
@@ -636,7 +640,7 @@ exports[`Render App for not authorized user 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/offer/1010"
+                    href="/offer/1010/#header"
                     onClick={[Function]}
                   >
                     Wood and stone place
@@ -741,7 +745,7 @@ exports[`Render App for not authorized user 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/offer/2020"
+                    href="/offer/2020/#header"
                     onClick={[Function]}
                   >
                     Wood and stone place
@@ -784,6 +788,7 @@ exports[`Render App with error 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -796,6 +801,7 @@ exports[`Render App with error 1`] = `
         >
           <a
             className="header__logo-link"
+            href="/"
             onClick={[Function]}
           >
             <img

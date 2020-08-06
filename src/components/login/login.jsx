@@ -30,6 +30,7 @@ class Login extends PureComponent {
         <Header
           login={``}
           authorizationStatus={AuthorizationStatus.NO_AUTH}
+          onLogoClick={this.props.onLogoClick}
         />
         <main className="page__main page__main--login">
           <div className="page__login-container container">
@@ -71,6 +72,7 @@ class Login extends PureComponent {
 }
 
 Login.propTypes = {
+  onLogoClick: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
 };
 

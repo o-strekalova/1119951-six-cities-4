@@ -71,3 +71,5 @@ export const findOffersByCity = (offersAll, city) => {
     return offer.city.name === city.name;
   });
 };
+
+export const noop = () => {};

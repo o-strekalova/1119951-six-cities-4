@@ -6,6 +6,7 @@ exports[`Render Property for authorized user 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -18,6 +19,7 @@ exports[`Render Property for authorized user 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            href="/"
             onClick={[Function]}
           >
             <img
@@ -649,7 +651,7 @@ exports[`Render Property for authorized user 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/offer/1010"
+                  href="/offer/1010/#header"
                   onClick={[Function]}
                 >
                   Wood and stone place
@@ -754,7 +756,7 @@ exports[`Render Property for authorized user 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/offer/2020"
+                  href="/offer/2020/#header"
                   onClick={[Function]}
                 >
                   Wood and stone place
@@ -780,6 +782,7 @@ exports[`Render Property for unauthorized user 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -792,6 +795,7 @@ exports[`Render Property for unauthorized user 1`] = `
         >
           <a
             className="header__logo-link"
+            href="/"
             onClick={[Function]}
           >
             <img
@@ -1253,7 +1257,7 @@ exports[`Render Property for unauthorized user 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/offer/1010"
+                  href="/offer/1010/#header"
                   onClick={[Function]}
                 >
                   Wood and stone place
@@ -1358,7 +1362,7 @@ exports[`Render Property for unauthorized user 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/offer/2020"
+                  href="/offer/2020/#header"
                   onClick={[Function]}
                 >
                   Wood and stone place
@@ -1384,6 +1388,7 @@ exports[`Render Property with ErrorMessage 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -1396,6 +1401,7 @@ exports[`Render Property with ErrorMessage 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            href="/"
             onClick={[Function]}
           >
             <img
@@ -2027,7 +2033,7 @@ exports[`Render Property with ErrorMessage 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/offer/1010"
+                  href="/offer/1010/#header"
                   onClick={[Function]}
                 >
                   Wood and stone place
@@ -2132,7 +2138,7 @@ exports[`Render Property with ErrorMessage 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/offer/2020"
+                  href="/offer/2020/#header"
                   onClick={[Function]}
                 >
                   Wood and stone place

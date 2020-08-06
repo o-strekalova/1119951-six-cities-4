@@ -4,7 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
 import {offersAll, authInfo, reviews} from "../mocks";
-import {SortType, AuthorizationStatus} from "../../utils";
+import {SortType, AuthorizationStatus, noop} from "../../utils";
 
 const mockStore = configureStore([]);
 
@@ -27,13 +27,14 @@ it(`Render App for authorized user`, () => {
           offersNearby={offersAll}
           reviews={reviews}
           sortedOffers={offersAll}
-          onAuthFormSubmit={() => {}}
-          onCardTitleClick={() => {}}
-          onCityClick={() => {}}
-          onFavoriteButtonClick={() => {}}
-          onReviewSubmit={() => {}}
-          onSortClick={() => {}}
-          onUserNameClick={() => {}}
+          onAuthFormSubmit={noop}
+          onCardTitleClick={noop}
+          onCityClick={noop}
+          onFavoriteButtonClick={noop}
+          onLogoClick={noop}
+          onReviewSubmit={noop}
+          onSortClick={noop}
+          onUserNameClick={noop}
         />
       </Provider>, {
         createNodeMock: () => {
@@ -64,13 +65,14 @@ it(`Render App for not authorized user`, () => {
           offersNearby={offersAll}
           reviews={reviews}
           sortedOffers={offersAll}
-          onAuthFormSubmit={() => {}}
-          onCardTitleClick={() => {}}
-          onCityClick={() => {}}
-          onFavoriteButtonClick={() => {}}
-          onReviewSubmit={() => {}}
-          onSortClick={() => {}}
-          onUserNameClick={() => {}}
+          onAuthFormSubmit={noop}
+          onCardTitleClick={noop}
+          onCityClick={noop}
+          onFavoriteButtonClick={noop}
+          onLogoClick={noop}
+          onReviewSubmit={noop}
+          onSortClick={noop}
+          onUserNameClick={noop}
         />
       </Provider>, {
         createNodeMock: () => {
@@ -102,13 +104,14 @@ it(`Render App with error`, () => {
           offersNearby={[]}
           reviews={[]}
           sortedOffers={[]}
-          onAuthFormSubmit={() => {}}
-          onCardTitleClick={() => {}}
-          onCityClick={() => {}}
-          onFavoriteButtonClick={() => {}}
-          onReviewSubmit={() => {}}
-          onSortClick={() => {}}
-          onUserNameClick={() => {}}
+          onAuthFormSubmit={noop}
+          onCardTitleClick={noop}
+          onCityClick={noop}
+          onFavoriteButtonClick={noop}
+          onLogoClick={noop}
+          onReviewSubmit={noop}
+          onSortClick={noop}
+          onUserNameClick={noop}
         />
       </Provider>, {
         createNodeMock: () => {

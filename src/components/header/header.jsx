@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import {Link} from "react-router-dom";
 import {AppRoute, AuthorizationStatus} from "../../utils";
-import history from "../../history";
 
 const Header = (props) => {
   const {
     authInfo,
     authorizationStatus,
+    onLogoClick,
     onUserNameClick,
   } = props;
 
@@ -30,16 +30,17 @@ const Header = (props) => {
     </Link>;
 
   return (
-    <header className="header">
+    <header className="header" id="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a
+            <Link
               className={`header__logo-link` + logoLinkClass}
-              onClick={() => history.push(AppRoute.MAIN)}
+              onClick={onLogoClick}
+              to={AppRoute.MAIN}
             >
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-            </a>
+            </Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
@@ -68,6 +69,7 @@ Header.propTypes = {
     name: PropTypes.string,
   }),
   onUserNameClick: PropTypes.func,
+  onLogoClick: PropTypes.func,
 };
 
 export default React.memo(Header);

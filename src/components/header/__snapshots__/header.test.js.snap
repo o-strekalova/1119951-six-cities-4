@@ -3,6 +3,7 @@
 exports[`Render Header for authorized user 1`] = `
 <header
   className="header"
+  id="header"
 >
   <div
     className="container"
@@ -15,6 +16,7 @@ exports[`Render Header for authorized user 1`] = `
       >
         <a
           className="header__logo-linkheader__logo-link--active"
+          href="/"
           onClick={[Function]}
         >
           <img
@@ -60,6 +62,7 @@ exports[`Render Header for authorized user 1`] = `
 exports[`Render Header for not authorized user 1`] = `
 <header
   className="header"
+  id="header"
 >
   <div
     className="container"
@@ -72,6 +75,7 @@ exports[`Render Header for not authorized user 1`] = `
       >
         <a
           className="header__logo-link"
+          href="/"
           onClick={[Function]}
         >
           <img
