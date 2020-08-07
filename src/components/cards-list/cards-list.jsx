@@ -1,40 +1,47 @@
 import PropTypes from "prop-types";
 import React from "react";
 import Card from "../card/card.jsx";
-import {CardsListClass, CardClass} from "../../utils";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 
 const CardWrapped = withToggle(Card);
 
 const CardsList = (props) => {
   const {
-    className,
+    authorizationStatus,
+    cardClass,
     offers,
     onCardHover,
     onCardTitleClick,
     onFavoriteButtonClick,
   } = props;
 
-  const cardClassName = className === CardsListClass.MAIN ? CardClass.MAIN : CardClass.PROPERTY;
-
   return (
-    <div className={className + ` places__list`}>
+    <React.Fragment>
       {offers.map((offer) => {
         return <CardWrapped
+          authorizationStatus={authorizationStatus}
           key={offer.title + offer.id}
-          className={cardClassName}
+          cardClass={cardClass}
+          isToggleChecked={offer.isFavorite}
           offer={offer}
           onCardTitleClick={onCardTitleClick}
           onCardHover={onCardHover}
           onFavoriteButtonClick={onFavoriteButtonClick}
         />;
       })}
-    </div>
+    </React.Fragment>
   );
 };
 
 CardsList.propTypes = {
-  className: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  cardClass: PropTypes.shape({
+    articleClass: PropTypes.string.isRequired,
+    imageClass: PropTypes.string.isRequired,
+    infoClass: PropTypes.string.isRequired,
+    imageWidth: PropTypes.string.isRequired,
+    imageHeight: PropTypes.string.isRequired,
+  }).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     pictures: PropTypes.arrayOf(PropTypes.string.isRequired),

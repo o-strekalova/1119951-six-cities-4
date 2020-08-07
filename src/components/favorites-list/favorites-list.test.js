@@ -1,29 +1,24 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
-import Card from "./card.jsx";
-import {offersAll} from "../mocks";
+import FavoritesList from "./favorites-list.jsx";
+import {offersAll, authInfo} from "../mocks";
+import {AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";
-import {CardClass, AuthorizationStatus, noop} from "../../utils";
 
-const offer = offersAll[0];
-
-it(`Render Card Main`, () => {
+it(`Render Favorites with offers`, () => {
   const tree = renderer
     .create(
         <Router
           history={history}
         >
-          <Card
+          <FavoritesList
+            authInfo={authInfo}
             authorizationStatus={AuthorizationStatus.AUTH}
-            key={offer.title + offer.id}
-            cardClass={CardClass.MAIN}
-            isToggleChecked={offer.isFavorite}
-            offer={offer}
+            errorMessage={null}
+            offers={offersAll}
             onCardTitleClick={noop}
-            onCardHover={noop}
             onFavoriteButtonClick={noop}
-            onToggleClick={noop}
           />
         </Router>)
     .toJSON();
@@ -31,22 +26,19 @@ it(`Render Card Main`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-it(`Render Card Property`, () => {
+it(`Render Favorites without offers`, () => {
   const tree = renderer
     .create(
         <Router
           history={history}
         >
-          <Card
+          <FavoritesList
+            authInfo={authInfo}
             authorizationStatus={AuthorizationStatus.AUTH}
-            key={offer.title + offer.id}
-            cardClass={CardClass.PROPERTY}
-            isToggleChecked={offer.isFavorite}
-            offer={offer}
+            errorMessage={null}
+            offers={[]}
             onCardTitleClick={noop}
-            onCardHover={noop}
             onFavoriteButtonClick={noop}
-            onToggleClick={noop}
           />
         </Router>)
     .toJSON();
@@ -54,22 +46,19 @@ it(`Render Card Property`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-it(`Render Card Favorites`, () => {
+it(`Render Favorites with ErrorMessage`, () => {
   const tree = renderer
     .create(
         <Router
           history={history}
         >
-          <Card
+          <FavoritesList
+            authInfo={authInfo}
             authorizationStatus={AuthorizationStatus.AUTH}
-            key={offer.title + offer.id}
-            cardClass={CardClass.FAVORITE}
-            isToggleChecked={offer.isFavorite}
-            offer={offer}
+            errorMessage={`Action failed`}
+            offers={[]}
             onCardTitleClick={noop}
-            onCardHover={noop}
             onFavoriteButtonClick={noop}
-            onToggleClick={noop}
           />
         </Router>)
     .toJSON();

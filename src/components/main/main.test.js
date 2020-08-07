@@ -3,8 +3,7 @@ import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import Main from "./main.jsx";
 import {offersAll, authInfo} from "../mocks";
-import {SortType} from "../../utils";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {SortType, AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";
 
 it(`Render Main with offers`, () => {
@@ -21,11 +20,13 @@ it(`Render Main with offers`, () => {
             activeCity={offersAll[0].city}
             sortedOffers={offersAll}
             activeSort={SortType.POPULAR}
-            onCardTitleClick={() => {}}
-            onCityClick={() => {}}
-            onSortClick={() => {}}
-            onAuthFormSubmit={() => {}}
-            onFavoriteButtonClick={() => {}}
+            onCardTitleClick={noop}
+            onCityClick={noop}
+            onSortClick={noop}
+            onAuthFormSubmit={noop}
+            onFavoriteButtonClick={noop}
+            onLogoClick={noop}
+            onUserNameClick={noop}
           />
         </Router>, {
           createNodeMock: () => {
@@ -51,11 +52,13 @@ it(`Render Main without offers`, () => {
             activeCity={offersAll[0].city}
             sortedOffers={[]}
             activeSort={SortType.POPULAR}
-            onCardTitleClick={() => {}}
-            onCityClick={() => {}}
-            onSortClick={() => {}}
-            onAuthFormSubmit={() => {}}
-            onFavoriteButtonClick={() => {}}
+            onCardTitleClick={noop}
+            onCityClick={noop}
+            onSortClick={noop}
+            onAuthFormSubmit={noop}
+            onFavoriteButtonClick={noop}
+            onLogoClick={noop}
+            onUserNameClick={noop}
           />
         </Router>, {
           createNodeMock: () => {
@@ -81,11 +84,13 @@ it(`Render Main for unauthorized user`, () => {
             activeCity={offersAll[0].city}
             sortedOffers={[]}
             activeSort={SortType.POPULAR}
-            onCardTitleClick={() => {}}
-            onCityClick={() => {}}
-            onSortClick={() => {}}
-            onAuthFormSubmit={() => {}}
-            onFavoriteButtonClick={() => {}}
+            onCardTitleClick={noop}
+            onCityClick={noop}
+            onSortClick={noop}
+            onAuthFormSubmit={noop}
+            onFavoriteButtonClick={noop}
+            onLogoClick={noop}
+            onUserNameClick={noop}
           />
         </Router>, {
           createNodeMock: () => {
@@ -111,11 +116,13 @@ it(`Render Main for with ErrorMessage`, () => {
             activeCity={offersAll[0].city}
             sortedOffers={[]}
             activeSort={SortType.POPULAR}
-            onCardTitleClick={() => {}}
-            onCityClick={() => {}}
-            onSortClick={() => {}}
-            onAuthFormSubmit={() => {}}
-            onFavoriteButtonClick={() => {}}
+            onCardTitleClick={noop}
+            onCityClick={noop}
+            onSortClick={noop}
+            onAuthFormSubmit={noop}
+            onFavoriteButtonClick={noop}
+            onLogoClick={noop}
+            onUserNameClick={noop}
           />
         </Router>, {
           createNodeMock: () => {

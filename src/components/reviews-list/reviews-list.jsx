@@ -25,14 +25,17 @@ const ReviewsList = (props) => {
 
 ReviewsList.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    avatar: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
+    rating: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
-  }))
-  .isRequired,
+    user: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  })),
 };
 
 export default React.memo(ReviewsList);

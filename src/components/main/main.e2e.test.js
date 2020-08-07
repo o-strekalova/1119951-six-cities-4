@@ -4,8 +4,7 @@ import Enzyme, {mount} from "enzyme";
 import {Router} from "react-router-dom";
 import Main from "./main.jsx";
 import {offersAll, authInfo} from "../mocks";
-import {SortType} from "../../utils";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {SortType, AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";
 
 Enzyme.configure({
@@ -27,15 +26,16 @@ it(`Press card title in Main`, () => {
           sortedOffers={offersAll}
           activeSort={SortType.POPULAR}
           onCardTitleClick={onCardTitleClick}
-          onCityClick={() => {}}
-          onSortClick={() => {}}
-          onAuthFormSubmit={() => {}}
-          onFavoriteButtonClick={() => {}}
+          onCityClick={noop}
+          onSortClick={noop}
+          onAuthFormSubmit={noop}
+          onFavoriteButtonClick={noop}
+          onLogoClick={noop}
         />
       </Router>
   );
 
-  const cardTitles = main.find(`h2.place-card__name`);
+  const cardTitles = main.find(`.place-card__name a`);
   cardTitles.forEach((it) => it.simulate(`click`));
 
   expect(onCardTitleClick).toHaveBeenCalledTimes(2);
@@ -55,11 +55,12 @@ it(`Press city`, () => {
           activeCity={offersAll[0].city}
           sortedOffers={offersAll}
           activeSort={SortType.POPULAR}
-          onCardTitleClick={() => {}}
+          onCardTitleClick={noop}
           onCityClick={onCityClick}
-          onSortClick={() => {}}
-          onAuthFormSubmit={() => {}}
-          onFavoriteButtonClick={() => {}}
+          onSortClick={noop}
+          onAuthFormSubmit={noop}
+          onFavoriteButtonClick={noop}
+          onLogoClick={noop}
         />
       </Router>
   );
@@ -68,35 +69,6 @@ it(`Press city`, () => {
   cities.forEach((it) => it.simulate(`click`));
 
   expect(onCityClick).toHaveBeenCalledTimes(2);
-});
-
-it(`Press sorting option`, () => {
-  const onSortClick = jest.fn();
-
-  const main = mount(
-      <Router
-        history={history}
-      >
-        <Main
-          authInfo={authInfo}
-          authorizationStatus={AuthorizationStatus.AUTH}
-          offersAll={offersAll}
-          activeCity={offersAll[0].city}
-          sortedOffers={offersAll}
-          activeSort={SortType.POPULAR}
-          onCardTitleClick={() => {}}
-          onCityClick={() => {}}
-          onSortClick={onSortClick}
-          onAuthFormSubmit={() => {}}
-          onFavoriteButtonClick={() => {}}
-        />
-      </Router>
-  );
-
-  const sortingOptions = main.find(`li.places__option`);
-  sortingOptions.forEach((it) => it.simulate(`click`));
-
-  expect(onSortClick).toHaveBeenCalledTimes(4);
 });
 
 it(`Press favorite button`, () => {
@@ -113,11 +85,12 @@ it(`Press favorite button`, () => {
           activeCity={offersAll[0].city}
           sortedOffers={offersAll}
           activeSort={SortType.POPULAR}
-          onCardTitleClick={() => {}}
-          onCityClick={() => {}}
-          onSortClick={() => {}}
-          onAuthFormSubmit={() => {}}
+          onCardTitleClick={noop}
+          onCityClick={noop}
+          onSortClick={noop}
+          onAuthFormSubmit={noop}
           onFavoriteButtonClick={onFavoriteButtonClick}
+          onLogoClick={noop}
         />
       </Router>
   );

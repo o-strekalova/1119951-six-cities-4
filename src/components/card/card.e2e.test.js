@@ -5,6 +5,7 @@ import {Router} from "react-router-dom";
 import Card from "./card.jsx";
 import {offersAll} from "../mocks";
 import history from "../../history";
+import {CardClass, AuthorizationStatus, noop} from "../../utils";
 
 configure({adapter: new Adapter()});
 
@@ -18,14 +19,15 @@ it(`Mouseover on offer card should pass active offer to the callback`, () => {
         history={history}
       >
         <Card
+          authorizationStatus={AuthorizationStatus.NO_AUTH}
           key={offer.title + offer.id}
-          className={`cities__place-card`}
+          cardClass={CardClass.MAIN}
           isToggleChecked={offer.isFavorite}
           offer={offer}
-          onCardTitleClick={() => {}}
+          onCardTitleClick={noop}
           onCardHover={onCardHover}
-          onFavoriteButtonClick={() => {}}
-          onToggleClick={() => {}}
+          onFavoriteButtonClick={noop}
+          onToggleClick={noop}
         />
       </Router>);
 
@@ -42,18 +44,19 @@ it(`Click on offer card title should pass active offer to the callback`, () => {
         history={history}
       >
         <Card
+          authorizationStatus={AuthorizationStatus.NO_AUTH}
           key={offer.title + offer.id}
-          className={`cities__place-card`}
+          cardClass={CardClass.PROPERTY}
           isToggleChecked={offer.isFavorite}
           offer={offer}
           onCardTitleClick={onCardTitleClick}
-          onCardHover={() => {}}
-          onFavoriteButtonClick={() => {}}
-          onToggleClick={() => {}}
+          onCardHover={noop}
+          onFavoriteButtonClick={noop}
+          onToggleClick={noop}
         />
       </Router>);
 
-  const cardTitle = card.find(`h2.place-card__name`);
+  const cardTitle = card.find(`.place-card__name a`);
   cardTitle.simulate(`click`);
 
   expect(onCardTitleClick).toHaveBeenCalledTimes(1);
@@ -69,12 +72,13 @@ it(`Click on favorite icon should pass status and id to the callback`, () => {
         history={history}
       >
         <Card
+          authorizationStatus={AuthorizationStatus.AUTH}
           key={offer.title + offer.id}
-          className={`cities__place-card`}
+          cardClass={CardClass.FAVORITE}
           isToggleChecked={offer.isFavorite}
           offer={offer}
-          onCardTitleClick={() => {}}
-          onCardHover={() => {}}
+          onCardTitleClick={noop}
+          onCardHover={noop}
           onFavoriteButtonClick={onFavoriteButtonClick}
           onToggleClick={onToggleClick}
         />

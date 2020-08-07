@@ -6,31 +6,18 @@ import Header from "../header/header.jsx";
 import MainEmpty from "../main-empty/main-empty.jsx";
 import OffersSection from "../offers-section/offers-section.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
-import {CardsListClass} from "../../utils";
+import {getCitiesForList} from "../../utils";
 
 const OffersSectionWrapped = withActiveItem(OffersSection);
 const CitiesListWrapped = withActiveItem(CitiesList);
 
 class Main extends PureComponent {
-  _getCitiesForList() {
-    const {offersAll} = this.props;
-
-    const allCities = offersAll.map((offer) => offer.city);
-    const allCitiesNames = allCities.map((city) => city.name);
-    const uniqueCitiesNames = [...new Set(allCitiesNames)];
-
-    const checkCitiesForList = (cityName) => {
-      return allCities.find((city) => city.name === cityName);
-    };
-
-    return uniqueCitiesNames.map(checkCitiesForList);
-  }
-
-  _renderOffersSection() {
+  renderOffersSection() {
     const {
       activeCity,
-      sortedOffers,
       activeSort,
+      authorizationStatus,
+      sortedOffers,
       onSortClick,
       onCardTitleClick,
       onFavoriteButtonClick,
@@ -41,11 +28,11 @@ class Main extends PureComponent {
         <OffersSectionWrapped
           activeCity={activeCity}
           activeSort={activeSort}
-          className={CardsListClass.MAIN}
+          authorizationStatus={authorizationStatus}
           offers={sortedOffers}
           onCardTitleClick={onCardTitleClick}
-          onSortClick={onSortClick}
           onFavoriteButtonClick={onFavoriteButtonClick}
+          onSortClick={onSortClick}
         />
       );
     } else {
@@ -59,15 +46,18 @@ class Main extends PureComponent {
 
   render() {
     const {
+      activeCity,
       authInfo,
       authorizationStatus,
       errorMessage,
-      activeCity,
+      offersAll,
       sortedOffers,
       onCityClick,
+      onLogoClick,
+      onUserNameClick,
     } = this.props;
 
-    const cities = this._getCitiesForList();
+    const cities = getCitiesForList(offersAll);
     const isEmpty = sortedOffers.length === 0 ? ` page__main--index-empty` : ``;
 
     return (
@@ -75,6 +65,8 @@ class Main extends PureComponent {
         <Header
           authInfo={authInfo}
           authorizationStatus={authorizationStatus}
+          onUserNameClick={onUserNameClick}
+          onLogoClick={onLogoClick}
         />
         <main className={`page__main page__main--index` + isEmpty}>
           <h1 className="visually-hidden">Cities</h1>
@@ -88,7 +80,7 @@ class Main extends PureComponent {
             </section>
           </div>
           <div className="cities">
-            {this._renderOffersSection()}
+            {this.renderOffersSection()}
           </div>
         </main>
         <ErrorMessage
@@ -100,6 +92,15 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
+  activeCity: PropTypes.shape({
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }),
+    name: PropTypes.string,
+  }),
+  activeSort: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   authInfo: PropTypes.shape({
     avatar: PropTypes.string,
@@ -177,20 +178,13 @@ Main.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
   })).isRequired,
-  activeCity: PropTypes.shape({
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }),
-    name: PropTypes.string,
-  }),
-  activeSort: PropTypes.string.isRequired,
   onAuthFormSubmit: PropTypes.func,
   onCardTitleClick: PropTypes.func,
   onCityClick: PropTypes.func,
   onFavoriteButtonClick: PropTypes.func,
+  onLogoClick: PropTypes.func,
   onSortClick: PropTypes.func,
+  onUserNameClick: PropTypes.func,
 };
 
 export default Main;

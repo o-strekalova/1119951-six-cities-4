@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
 import React from "react";
 import {Link} from "react-router-dom";
-import {AuthorizationStatus} from "../../reducer/user/user";
-import {AppRoute} from "../../utils";
+import {AppRoute, AuthorizationStatus} from "../../utils";
 
 const Header = (props) => {
   const {
     authInfo,
     authorizationStatus,
+    onLogoClick,
+    onUserNameClick,
   } = props;
 
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
@@ -16,6 +17,7 @@ const Header = (props) => {
   const headerUserName = isAuthorized ?
     <Link
       className="header__user-name user__name"
+      onClick={onUserNameClick}
       to={AppRoute.FAVORITES}
     >
       {authInfo.email}
@@ -28,13 +30,17 @@ const Header = (props) => {
     </Link>;
 
   return (
-    <header className="header">
+    <header className="header" id="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a className={`header__logo-link` + logoLinkClass}>
+            <Link
+              className={`header__logo-link` + logoLinkClass}
+              onClick={onLogoClick}
+              to={AppRoute.MAIN}
+            >
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-            </a>
+            </Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
@@ -62,6 +68,8 @@ Header.propTypes = {
     isSuper: PropTypes.bool,
     name: PropTypes.string,
   }),
+  onUserNameClick: PropTypes.func,
+  onLogoClick: PropTypes.func,
 };
 
 export default React.memo(Header);

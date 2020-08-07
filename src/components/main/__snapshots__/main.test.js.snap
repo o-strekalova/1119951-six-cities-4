@@ -6,6 +6,7 @@ exports[`Render Main for unauthorized user 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -18,6 +19,8 @@ exports[`Render Main for unauthorized user 1`] = `
         >
           <a
             className="header__logo-link"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -116,6 +119,7 @@ exports[`Render Main for with ErrorMessage 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -128,6 +132,8 @@ exports[`Render Main for with ErrorMessage 1`] = `
         >
           <a
             className="header__logo-link"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -244,6 +250,7 @@ exports[`Render Main with offers 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -256,6 +263,8 @@ exports[`Render Main with offers 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -374,6 +383,7 @@ exports[`Render Main with offers 1`] = `
             </span>
             <span
               className="places__sorting-type"
+              onClick={[Function]}
               tabIndex="0"
             >
               Popular
@@ -387,38 +397,6 @@ exports[`Render Main with offers 1`] = `
                 />
               </svg>
             </span>
-            <ul
-              className="places__options places__options--custom places__options--opened"
-            >
-              <li
-                className="places__option places__option--active"
-                onClick={[Function]}
-                tabIndex="0"
-              >
-                Popular
-              </li>
-              <li
-                className="places__option"
-                onClick={[Function]}
-                tabIndex="0"
-              >
-                Price: low to high
-              </li>
-              <li
-                className="places__option"
-                onClick={[Function]}
-                tabIndex="0"
-              >
-                Price: high to low
-              </li>
-              <li
-                className="places__option"
-                onClick={[Function]}
-                tabIndex="0"
-              >
-                Top rated first
-              </li>
-            </ul>
           </form>
           <div
             className="cities__places-list tabs__content places__list"
@@ -513,10 +491,9 @@ exports[`Render Main with offers 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
-                    href="/offer/1010"
+                    href="/offer/1010/#header"
                     onClick={[Function]}
                   >
                     Wood and stone place
@@ -619,10 +596,9 @@ exports[`Render Main with offers 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[Function]}
                 >
                   <a
-                    href="/offer/2020"
+                    href="/offer/2020/#header"
                     onClick={[Function]}
                   >
                     Wood and stone place
@@ -665,6 +641,7 @@ exports[`Render Main without offers 1`] = `
 >
   <header
     className="header"
+    id="header"
   >
     <div
       className="container"
@@ -677,6 +654,8 @@ exports[`Render Main without offers 1`] = `
         >
           <a
             className="header__logo-linkheader__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"

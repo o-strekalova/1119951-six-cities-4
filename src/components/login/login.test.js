@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import Login from "./login.jsx";
 import history from "../../history";
+import {noop} from "../../utils";
 
 it(`Login component render correctly`, () => {
   const tree = renderer.create(
@@ -10,7 +11,8 @@ it(`Login component render correctly`, () => {
         history={history}
       >
         <Login
-          onSubmit={() => {}}
+          onLogoClick={noop}
+          onSubmit={noop}
         />
       </Router>
   ).toJSON();

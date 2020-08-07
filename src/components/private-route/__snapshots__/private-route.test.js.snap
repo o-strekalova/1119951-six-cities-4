@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render PrivateRoute for authorized user 1`] = `null`;
+
+exports[`Render PrivateRoute for unauthorized user 1`] = `null`;

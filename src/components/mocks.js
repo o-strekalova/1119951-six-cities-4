@@ -135,12 +135,16 @@ export const offersRaw = [{
 }];
 
 export const reviews = [{
-  id: 1110,
-  avatar: `https://api.adorable.io/avatars/128`,
-  name: `Angelina`,
-  rating: 4.4,
-  date: new Date(2020, 10, 5, 10),
+  id: `1110`,
   text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+  date: new Date(2020, 10, 5, 10),
+  rating: 4.4,
+  user: {
+    avatar: `https://api.adorable.io/avatars/128`,
+    name: `Angelina`,
+    id: 5,
+    isSuper: true,
+  }
 }];
 
 export const authInfo = {

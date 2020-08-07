@@ -6,23 +6,27 @@ import Header from "../header/header.jsx";
 import Map from "../map/map.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import ReviewForm from "../review-form/review-form.jsx";
-import {CardsListClass, getRatingPercentage, FavoriteStatus} from "../../utils";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {CardClass, getRatingPercentage, FavoriteStatus, AppRoute, AuthorizationStatus, noop} from "../../utils";
+import history from "../../history";
 
 const MAX_PICTURES_COUNT = 6;
 const MAX_OFFERS_NEAR_COUNT = 3;
 
 const Property = (props) => {
   const {
-    offer,
     authInfo,
     authorizationStatus,
     errorMessage,
     isToggleChecked,
+    offer,
+    offersNear,
+    reviews,
     onCardTitleClick,
-    onReviewSubmit,
     onFavoriteButtonClick,
+    onLogoClick,
+    onReviewSubmit,
     onToggleClick,
+    onUserNameClick,
   } = props;
 
   const {
@@ -41,11 +45,10 @@ const Property = (props) => {
     owner
   } = offer;
 
-  const reviews = [];
-  const offersNear = [];
   const picturesShown = pictures.length <= MAX_PICTURES_COUNT ? pictures : pictures.slice(0, MAX_PICTURES_COUNT);
   const offersNearShown = offersNear.length <= MAX_OFFERS_NEAR_COUNT ? offersNear : offersNear.slice(0, MAX_OFFERS_NEAR_COUNT);
   const toggleClass = isToggleChecked ? ` property__bookmark-button--active` : ``;
+  const avatarClass = owner.isSuper ? ` property__avatar-wrapper--pro` : ``;
   const newStatus = isFavorite ? FavoriteStatus.NOT_FAVORITE : FavoriteStatus.FAVORITE;
 
   const renderReviewForm = () => {
@@ -66,6 +69,8 @@ const Property = (props) => {
       <Header
         authInfo={authInfo}
         authorizationStatus={authorizationStatus}
+        onUserNameClick={onUserNameClick}
+        onLogoClick={onLogoClick}
       />
 
       <main className="page__main page__main--property">
@@ -83,9 +88,9 @@ const Property = (props) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {isPremium ? <div className="property__mark">
+              {isPremium && <div className="property__mark">
                 <span>Premium</span>
-              </div> : ``}
+              </div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -94,8 +99,13 @@ const Property = (props) => {
                   className={`property__bookmark-button button` + toggleClass}
                   type="button"
                   onClick={() => {
-                    onFavoriteButtonClick(newStatus, id);
-                    onToggleClick();
+                    if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+                      history.push(AppRoute.LOGIN);
+                    } else {
+                      onFavoriteButtonClick(newStatus, id);
+                      onToggleClick();
+                      offer.isFavorite = !offer.isFavorite;
+                    }
                   }}
                 >
                   <svg className="property__bookmark-icon" width="31" height="33">
@@ -141,10 +151,7 @@ const Property = (props) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={
-                    owner.isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` :
-                      `property__avatar-wrapper user__avatar-wrapper`
-                  }>
+                  <div className={`property__avatar-wrapper user__avatar-wrapper` + avatarClass}>
                     <img className="property__avatar user__avatar" src={owner.avatar} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
@@ -172,20 +179,23 @@ const Property = (props) => {
               centerLat={offer.location.lat}
               centerLong={offer.location.long}
               zoom={offer.location.zoom}
-              offers={[]}
+              offers={offersNearShown}
             />
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <CardsList
-              className={CardsListClass.PROPERTY}
-              offers={offersNearShown}
-              onCardHover={() => {}}
-              onCardTitleClick={onCardTitleClick}
-              onFavoriteButtonClick={onFavoriteButtonClick}
-            />
+            <div className={`near-places__list places__list`}>
+              <CardsList
+                authorizationStatus={authorizationStatus}
+                cardClass={CardClass.PROPERTY}
+                offers={offersNearShown}
+                onCardHover={noop}
+                onCardTitleClick={onCardTitleClick}
+                onFavoriteButtonClick={onFavoriteButtonClick}
+              />
+            </div>
           </section>
         </div>
       </main>
@@ -241,10 +251,58 @@ Property.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
+  offersNear: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
+    price: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    guests: PropTypes.number.isRequired,
+    features: PropTypes.array.isRequired,
+    preview: PropTypes.string.isRequired,
+    owner: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        long: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      long: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  })),
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    date: PropTypes.instanceOf(Date).isRequired,
+    rating: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isSuper: PropTypes.bool.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  })),
   onCardTitleClick: PropTypes.func,
   onReviewSubmit: PropTypes.func,
   onFavoriteButtonClick: PropTypes.func,
+  onLogoClick: PropTypes.func,
   onToggleClick: PropTypes.func,
+  onUserNameClick: PropTypes.func,
 };
 
 export default React.memo(Property);

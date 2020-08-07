@@ -3,15 +3,13 @@ import Enzyme, {mount} from "enzyme";
 import React from "react";
 import {Router} from "react-router-dom";
 import Property from "./property.jsx";
-import {offersAll, authInfo} from "../mocks";
-import {AuthorizationStatus} from "../../reducer/user/user";
+import {offersAll, authInfo, reviews} from "../mocks";
+import {AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
-
-/* будет работать, когда будет подключена загрузка предложений рядом
 
 it(`Press card title in Property`, () => {
   const onCardTitleClick = jest.fn();
@@ -21,24 +19,28 @@ it(`Press card title in Property`, () => {
         history={history}
       >
         <Property
-          offer={offersAll[0]}
           authInfo={authInfo}
           authorizationStatus={AuthorizationStatus.AUTH}
           errorMessage={null}
           isToggleChecked={offersAll[0].isFavorite}
+          offer={offersAll[0]}
+          offersNear={offersAll}
+          reviews={reviews}
           onCardTitleClick={onCardTitleClick}
-          onReviewSubmit={() => {}}
-          onFavoriteButtonClick={() => {}}
-          onToggleClick={() => {}}
+          onFavoriteButtonClick={noop}
+          onLogoClick={noop}
+          onReviewSubmit={noop}
+          onToggleClick={noop}
+          onUserNameClick={noop}
         />
       </Router>
   );
 
-  const cardTitle = property.find(`h2.place-card__name`);
-  cardTitle.simulate(`click`);
+  const cardTitles = property.find(`.place-card__name a`);
+  cardTitles.forEach((it) => it.simulate(`click`));
 
-  expect(onCardTitleClick).toHaveBeenCalledTimes(1);
-}); */
+  expect(onCardTitleClick).toHaveBeenCalledTimes(2);
+});
 
 it(`Submit review form`, () => {
   const onReviewSubmit = jest.fn();
@@ -48,15 +50,19 @@ it(`Submit review form`, () => {
         history={history}
       >
         <Property
-          offer={offersAll[0]}
           authInfo={authInfo}
           authorizationStatus={AuthorizationStatus.AUTH}
           errorMessage={null}
           isToggleChecked={offersAll[0].isFavorite}
-          onCardTitleClick={() => {}}
+          offer={offersAll[0]}
+          offersNear={offersAll}
+          reviews={reviews}
+          onCardTitleClick={noop}
+          onFavoriteButtonClick={noop}
           onReviewSubmit={onReviewSubmit}
-          onFavoriteButtonClick={() => {}}
-          onToggleClick={() => {}}
+          onLogoClick={noop}
+          onToggleClick={noop}
+          onUserNameClick={noop}
         />
       </Router>
   );
@@ -76,15 +82,19 @@ it(`Press favorite button in Property`, () => {
         history={history}
       >
         <Property
-          offer={offersAll[0]}
           authInfo={authInfo}
           authorizationStatus={AuthorizationStatus.AUTH}
           errorMessage={null}
           isToggleChecked={offersAll[0].isFavorite}
-          onCardTitleClick={() => {}}
-          onReviewSubmit={() => {}}
+          offer={offersAll[0]}
+          offersNear={offersAll}
+          reviews={reviews}
+          onCardTitleClick={noop}
           onFavoriteButtonClick={onFavoriteButtonClick}
+          onLogoClick={noop}
+          onReviewSubmit={noop}
           onToggleClick={onToggleClick}
+          onUserNameClick={noop}
         />
       </Router>
   );

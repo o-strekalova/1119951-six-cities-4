@@ -1,10 +1,6 @@
 import AuthInfo from "../../models/auth-info";
 import {ActionCreator as AppActionCreator} from "../app/app";
-
-const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
+import {AuthorizationStatus} from "../../utils";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
