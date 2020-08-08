@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import MainEmpty from "./main-empty.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import MainEmpty from "./main-empty";
 import {offersAll} from "../mocks";
 
 it(`Render MainEmpty`, () => {

@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import ErrorMessage from "./error-message.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import ErrorMessage from "./error-message";
 
 it(`Render with ErrorMessage`, () => {
   const tree = renderer

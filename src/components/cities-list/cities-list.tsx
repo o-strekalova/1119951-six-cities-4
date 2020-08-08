@@ -1,7 +1,14 @@
-import PropTypes from "prop-types";
-import React, {PureComponent} from "react";
+import * as React from "react";
+import {City} from "../../types";
 
-class CitiesList extends PureComponent {
+interface Props {
+  activeItem: City,
+  cities: Array<City>,
+  onActiveItemChange: (city: City) => void,
+  onCityClick: (city: City) => void,
+}
+
+class CitiesList extends React.PureComponent<Props> {
   constructor(props) {
     super(props);
 
@@ -39,26 +46,5 @@ class CitiesList extends PureComponent {
     );
   }
 }
-
-CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.shape({
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }),
-    name: PropTypes.string.isRequired,
-  })),
-  activeItem: PropTypes.shape({
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }),
-    name: PropTypes.string,
-  }),
-  onActiveItemChange: PropTypes.func,
-  onCityClick: PropTypes.func,
-};
 
 export default CitiesList;

@@ -1,12 +1,11 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from "react";
 import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
-import FavoritesList from "../favorites-list/favorites-list.jsx";
-import Login from "../login/login.jsx";
-import Main from "../main/main.jsx";
-import PrivateRoute from "../private-route/private-route.jsx";
-import Property from "../property/property.jsx";
+import FavoritesList from "../favorites-list/favorites-list";
+import Login from "../login/login";
+import Main from "../main/main";
+import PrivateRoute from "../private-route/private-route";
+import Property from "../property/property";
 import {ActionCreator as DataActionCreator, Operation as DataOperation} from "../../reducer/data/data";
 import {getOffersAll, getActiveCity, getActiveSort, getSortedOffers, getFavoriteOffers, getOffersNearby, getReviews} from "../../reducer/data/selectors";
 import {Operation as AppOperation, ActionCreator as AppActionCreator} from "../../reducer/app/app";
@@ -16,11 +15,34 @@ import {getAuthorizationStatus, getAuthInfo} from "../../reducer/user/selectors"
 import withToggle from "../../hocs/with-toggle/with-toggle";
 import {AppRoute, SortType, AuthorizationStatus} from "../../utils";
 import history from "../../history";
+import {Offer, Review, AuthInfo, City} from "../../types";
+
+interface Props {
+  activeCity: City | null,
+  activeOffer: Offer | null,
+  activeSort: string,
+  authInfo: AuthInfo | null,
+  authorizationStatus: string,
+  errorMessage: string | null,
+  favoriteOffers: Array<Offer> | [],
+  offersAll: Array<Offer> | [],
+  offersNearby: Array<Offer> | [],
+  reviews: Array<Review> | [],
+  sortedOffers: Array<Offer> | [],
+  onAuthFormSubmit: ({login, password}: {login: string; password: string}) => void,
+  onCardTitleClick: (offer: Offer) => void,
+  onCityClick: (city: City) => void,
+  onFavoriteButtonClick: (newStatus: string, id: string) => void,
+  onLogoClick: () => void,
+  onReviewSubmit: ({comment, rating}: {comment: string; rating: string}, id: string) => void,
+  onSortClick: (sort: string) => void,
+  onUserNameClick: () => void,
+}
 
 const PropertyWrapped = withToggle(Property);
 const getToggleValue = (offer) => offer === null ? false : offer.isFavorite;
 
-const App = (props) => {
+const App: React.FunctionComponent<Props> = (props: Props) => {
   const {
     activeCity,
     activeOffer,
@@ -115,217 +137,6 @@ const App = (props) => {
       </Switch>
     </Router>
   );
-};
-
-App.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  authInfo: PropTypes.shape({
-    avatar: PropTypes.string,
-    email: PropTypes.string,
-    id: PropTypes.number,
-    isSuper: PropTypes.bool,
-    name: PropTypes.string,
-  }),
-  activeCity: PropTypes.shape({
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }),
-    name: PropTypes.string,
-  }),
-  activeOffer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  }),
-  activeSort: PropTypes.string.isRequired,
-  errorMessage: PropTypes.string,
-  favoriteOffers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }),
-  })),
-  offersAll: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  })).isRequired,
-  offersNearby: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  })),
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date).isRequired,
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  })),
-  sortedOffers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  })).isRequired,
-  onAuthFormSubmit: PropTypes.func,
-  onCardTitleClick: PropTypes.func,
-  onCityClick: PropTypes.func,
-  onFavoriteButtonClick: PropTypes.func,
-  onLogoClick: PropTypes.func,
-  onReviewSubmit: PropTypes.func,
-  onSortClick: PropTypes.func,
-  onUserNameClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,13 +1,17 @@
-import PropTypes from "prop-types";
-import React from "react";
-import Review from "../review/review.js";
+import * as React from "react";
+import Review from "../review/review";
+import {Review as ReviewType} from "../../types";
+
+interface Props {
+  reviews: Array<ReviewType>,
+}
 
 const MAX_REVIEWS_COUNT = 10;
 
-const ReviewsList = (props) => {
+const ReviewsList: React.FC<Props> = (props: Props) => {
   const {reviews} = props;
   const reviewsSorted = reviews.slice().sort((a, b) => {
-    return b.date - a.date;
+    return b.date.valueOf() - a.date.valueOf();
   });
   const reviewsShown = reviewsSorted.length <= MAX_REVIEWS_COUNT ? reviewsSorted : reviewsSorted.slice(0, MAX_REVIEWS_COUNT);
 
@@ -21,21 +25,6 @@ const ReviewsList = (props) => {
       })}
     </ul>
   );
-};
-
-ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date).isRequired,
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  })),
 };
 
 export default React.memo(ReviewsList);

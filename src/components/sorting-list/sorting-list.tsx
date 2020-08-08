@@ -1,12 +1,18 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from "react";
 import {SortType} from "../../utils";
 
-const SortingList = (props) => {
+interface Props {
+  activeSort: string,
+  isToggleChecked: boolean,
+  onSortClick: (sort: string) => void,
+  onToggleClick: () => void,
+}
+
+const SortingList: React.FC<Props> = (props: Props) => {
   const {
     activeSort,
-    onSortClick,
     isToggleChecked,
+    onSortClick,
     onToggleClick,
   } = props;
 
@@ -15,7 +21,7 @@ const SortingList = (props) => {
       <span className="places__sorting-caption">Sort by</span>
       <span
         className="places__sorting-type"
-        tabIndex="0"
+        tabIndex={0}
         onClick={onToggleClick}
       >
         {activeSort}
@@ -24,14 +30,14 @@ const SortingList = (props) => {
         </svg>
       </span>
       {isToggleChecked && <ul className="places__options places__options--custom places__options--opened">
-        {Object.values(SortType).map((sort) => {
+        {Object.values(SortType).map((sort: string) => {
           const sortClassName = sort === activeSort ? ` places__option--active` : ``;
 
           return (
             <li
               key={sort}
               className={`places__option` + sortClassName}
-              tabIndex="0"
+              tabIndex={0}
               onClick={() => onSortClick(sort)}>
               {sort}
             </li>
@@ -40,13 +46,6 @@ const SortingList = (props) => {
       </ul>}
     </form>
   );
-};
-
-SortingList.propTypes = {
-  activeSort: PropTypes.string.isRequired,
-  isToggleChecked: PropTypes.bool.isRequired,
-  onSortClick: PropTypes.func,
-  onToggleClick: PropTypes.func,
 };
 
 export default React.memo(SortingList);

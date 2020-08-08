@@ -4,7 +4,7 @@ import Review from "../../models/review";
 import {ActionCreator as AppActionCreator} from "../app/app";
 
 const initialState = {
-  activeCity: {},
+  activeCity: null,
   activeSort: SortType.POPULAR,
   favoriteOffers: [],
   offersAll: [],

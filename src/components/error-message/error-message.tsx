@@ -1,7 +1,10 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from "react";
 
-const errorMessageStyle = {
+interface Props {
+  errorMessage: string | null,
+}
+
+const errorMessageStyle: React.CSSProperties = {
   position: `fixed`,
   top: 0,
   right: 0,
@@ -14,7 +17,7 @@ const errorMessageStyle = {
   color: `white`,
 };
 
-const ErrorMessage = (props) => {
+const ErrorMessage: React.FC<Props> = (props: Props) => {
   const {
     errorMessage,
   } = props;
@@ -28,10 +31,6 @@ const ErrorMessage = (props) => {
   } else {
     return null;
   }
-};
-
-ErrorMessage.propTypes = {
-  errorMessage: PropTypes.string,
 };
 
 export default React.memo(ErrorMessage);

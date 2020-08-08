@@ -1,10 +1,14 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from "react";
 import {getRatingPercentage} from "../../utils";
+import {Review} from "../../types";
+
+interface Props {
+  review: Review,
+}
 
 const MONTHS = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
 
-const Review = (props) => {
+const Review: React.FC<Props> = (props: Props) => {
   const {review} = props;
   const {
     text,
@@ -39,21 +43,6 @@ const Review = (props) => {
       </div>
     </li>
   );
-};
-
-Review.propTypes = {
-  review: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date).isRequired,
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  }),
 };
 
 export default React.memo(Review);

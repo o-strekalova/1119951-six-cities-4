@@ -4,7 +4,7 @@ import {AuthorizationStatus} from "../../utils";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  authInfo: {},
+  authInfo: null,
 };
 
 const ActionType = {

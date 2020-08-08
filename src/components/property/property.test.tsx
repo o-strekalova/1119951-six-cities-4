@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Property from "./property.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import Property from "./property";
 import {Router} from "react-router-dom";
 import {offersAll, authInfo, reviews} from "../mocks";
 import {AuthorizationStatus, noop} from "../../utils";

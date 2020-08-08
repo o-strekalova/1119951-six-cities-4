@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme, {mount} from "enzyme";
 import {Router} from "react-router-dom";
-import Main from "./main.js";
+import Main from "./main";
 import {offersAll, authInfo} from "../mocks";
 import {SortType, AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";

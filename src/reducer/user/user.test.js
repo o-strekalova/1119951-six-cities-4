@@ -5,7 +5,7 @@ import {AuthorizationStatus} from "../../utils";
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
-    authInfo: {},
+    authInfo: null,
   });
 });
 
@@ -49,7 +49,7 @@ it(`Reducer should change authorizationStatus by a given value`, () => {
 
 it(`Reducer should change authInfo by a given value`, () => {
   expect(reducer({
-    authInfo: {},
+    authInfo: null,
   }, {
     type: ActionType.CHANGE_AUTH_INFO,
     payload: authInfo,

@@ -1,7 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
-import Card from "./card.js";
+import Card from "./card";
 import {offersAll} from "../mocks";
 import history from "../../history";
 import {CardClass, AuthorizationStatus, noop} from "../../utils";

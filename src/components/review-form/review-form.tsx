@@ -1,15 +1,27 @@
-import React, {PureComponent, createRef} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+
+const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 300;
+
+interface Props {
+  id: string,
+  onSubmit: ({comment, rating}: {comment: string; rating: string}, id: string) => void,
+}
 
 const STARS_REVIEWS = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 
-class ReviewForm extends PureComponent {
+class ReviewForm extends React.PureComponent<Props> {
+  private formRef: React.RefObject<HTMLFormElement>;
+  private commentRef: React.RefObject<HTMLTextAreaElement>;
+  private submitButtonRef: React.RefObject<HTMLButtonElement>;
+  private rating: string | null;
+
   constructor(props) {
     super(props);
 
-    this.formRef = createRef();
-    this.commentRef = createRef();
-    this.submitButtonRef = createRef();
+    this.formRef = React.createRef();
+    this.commentRef = React.createRef();
+    this.submitButtonRef = React.createRef();
     this.rating = null;
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,7 +71,7 @@ class ReviewForm extends PureComponent {
                 <input className="form__rating-input visually-hidden" name="rating" value={count} id={count + `-stars`} type="radio" />
                 <label htmlFor={count + `-stars`} className="reviews__rating-label form__rating-label" title={starTitle}
                   onClick={() => {
-                    this.rating = count;
+                    this.rating = String(count);
                   }}
                 >
                   <svg className="form__star-image" width="37" height="33">
@@ -72,7 +84,7 @@ class ReviewForm extends PureComponent {
         </div>
         <textarea className="reviews__textarea form__textarea" id="review" name="review"
           placeholder="Tell how was your stay, what you like and what can be improved"
-          minLength="50" maxLength="300" required
+          minLength={MIN_COMMENT_LENGTH } maxLength={MAX_COMMENT_LENGTH } required
           ref={this.commentRef}
         >
         </textarea>
@@ -88,10 +100,5 @@ class ReviewForm extends PureComponent {
     );
   }
 }
-
-ReviewForm.propTypes = {
-  id: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
 
 export default ReviewForm;

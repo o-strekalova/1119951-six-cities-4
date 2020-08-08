@@ -1,6 +1,14 @@
-import PropTypes from "prop-types";
-import React, {PureComponent, createRef} from "react";
-import leaflet from "leaflet";
+import * as React from "react";
+import * as leaflet from "leaflet";
+import {Offer} from "../../types";
+
+interface Props {
+  activePin: Offer,
+  centerLat: number,
+  centerLong: number,
+  zoom: number,
+  offers: Array<Offer>,
+}
 
 const ICON = leaflet.icon({
   iconUrl: `img/pin.svg`,
@@ -12,14 +20,22 @@ const ACTIVE_ICON = leaflet.icon({
   iconSize: [27, 39]
 });
 
-export default class Map extends PureComponent {
+export default class MineMap extends React.PureComponent<Props> {
+  private mapRef: React.RefObject<HTMLDivElement>;
+  private map: leaflet.Map | null;
+  private activeOffer: Offer | null;
+  private activeMarker: leaflet.Marker | null;
+  private centerLat: number | null;
+  private centerLong: number | null;
+  private offers: Array<Offer> | [];
+
   constructor(props) {
     super(props);
 
-    this.mapRef = createRef();
+    this.mapRef = React.createRef();
     this.map = null;
     this.activeOffer = null;
-    this.activeMarker = {};
+    this.activeMarker = null;
     this.centerLat = null;
     this.centerLong = null;
     this.offers = [];
@@ -55,7 +71,7 @@ export default class Map extends PureComponent {
       this.map.remove();
 
       this.activeOffer = null;
-      this.activeMarker = {};
+      this.activeMarker = null;
 
       this.renderMap();
     }
@@ -88,7 +104,6 @@ export default class Map extends PureComponent {
       center: [centerLat, centerLong],
       zoom,
       zoomControl: false,
-      marker: true
     });
 
     this.map.setView([centerLat, centerLong], zoom);
@@ -122,77 +137,3 @@ export default class Map extends PureComponent {
     );
   }
 }
-
-Map.propTypes = {
-  activePin: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }),
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  }),
-  centerLat: PropTypes.number.isRequired,
-  centerLong: PropTypes.number.isRequired,
-  zoom: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  })),
-};

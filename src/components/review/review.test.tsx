@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Review from "./review.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import Review from "./review";
 import {reviews} from "../mocks";
 
 it(`Render Review`, () => {

@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import ReviewForm from "./review-form.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import ReviewForm from "./review-form";
 import {noop} from "../../utils";
 
 it(`Render Review`, () => {

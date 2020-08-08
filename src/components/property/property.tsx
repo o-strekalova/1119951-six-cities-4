@@ -1,18 +1,34 @@
-import PropTypes from "prop-types";
-import React from "react";
-import CardsList from "../cards-list/cards-list.js";
-import ErrorMessage from "../error-message/error-message.js";
-import Header from "../header/header.js";
-import Map from "../map/map.js";
-import ReviewsList from "../reviews-list/reviews-list.jsx";
-import ReviewForm from "../review-form/review-form.jsx";
+import * as React from "react";
+import CardsList from "../cards-list/cards-list";
+import ErrorMessage from "../error-message/error-message";
+import Header from "../header/header";
+import Map from "../map/map";
+import ReviewsList from "../reviews-list/reviews-list";
+import ReviewForm from "../review-form/review-form";
 import {CardClass, getRatingPercentage, FavoriteStatus, AppRoute, AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";
+import {Offer, Review, AuthInfo} from "../../types";
+
+interface Props {
+  authInfo: AuthInfo | null,
+  authorizationStatus: string,
+  errorMessage: string | null | null,
+  isToggleChecked: boolean,
+  offer: Offer,
+  offersNear: Array<Offer>,
+  reviews: Array<Review>,
+  onCardTitleClick: (offer: Offer) => void,
+  onFavoriteButtonClick: (newStatus: string, id: string) => void,
+  onLogoClick: () => void,
+  onReviewSubmit: ({comment, rating}: {comment: string; rating: string}, id: string) => void,
+  onToggleClick: () => void,
+  onUserNameClick: () => void,
+}
 
 const MAX_PICTURES_COUNT = 6;
 const MAX_OFFERS_NEAR_COUNT = 3;
 
-const Property = (props) => {
+const Property: React.FC<Props> = (props: Props) => {
   const {
     authInfo,
     authorizationStatus,
@@ -204,105 +220,6 @@ const Property = (props) => {
       />
     </div>
   );
-};
-
-Property.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  authInfo: PropTypes.shape({
-    avatar: PropTypes.string,
-    email: PropTypes.string,
-    id: PropTypes.number,
-    isSuper: PropTypes.bool,
-    name: PropTypes.string,
-  }),
-  errorMessage: PropTypes.string,
-  isToggleChecked: PropTypes.bool.isRequired,
-  offer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  }).isRequired,
-  offersNear: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  })),
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date).isRequired,
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  })),
-  onCardTitleClick: PropTypes.func,
-  onReviewSubmit: PropTypes.func,
-  onFavoriteButtonClick: PropTypes.func,
-  onLogoClick: PropTypes.func,
-  onToggleClick: PropTypes.func,
-  onUserNameClick: PropTypes.func,
 };
 
 export default React.memo(Property);

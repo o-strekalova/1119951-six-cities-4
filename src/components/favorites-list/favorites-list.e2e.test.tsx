@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme, {mount} from "enzyme";
 import {Router} from "react-router-dom";
-import FavoritesList from "./favorites-list.js";
+import FavoritesList from "./favorites-list";
 import {offersAll, authInfo} from "../mocks";
 import {AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";

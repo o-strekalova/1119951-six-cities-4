@@ -1,14 +1,21 @@
-import React, {PureComponent, createRef} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {AuthorizationStatus} from "../../utils";
-import Header from "../header/header.js";
+import Header from "../header/header";
 
-class Login extends PureComponent {
+interface Props {
+  onLogoClick: () => void,
+  onSubmit: ({login, password}: {login: string; password: string}) => void,
+}
+
+class Login extends React.PureComponent<Props> {
+  private loginRef: React.RefObject<HTMLInputElement>;
+  private passwordRef: React.RefObject<HTMLInputElement>;
+
   constructor(props) {
     super(props);
 
-    this.loginRef = createRef();
-    this.passwordRef = createRef();
+    this.loginRef = React.createRef();
+    this.passwordRef = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -28,7 +35,6 @@ class Login extends PureComponent {
     return (
       <div className="page page--gray page--login">
         <Header
-          login={``}
           authorizationStatus={AuthorizationStatus.NO_AUTH}
           onLogoClick={this.props.onLogoClick}
         />
@@ -44,13 +50,13 @@ class Login extends PureComponent {
               >
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
-                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required=""
+                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required
                     ref={this.loginRef}
                   />
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
-                  <input className="login__input form__input" type="password" name="password" placeholder="Password" required=""
+                  <input className="login__input form__input" type="password" name="password" placeholder="Password" required
                     ref={this.passwordRef}
                   />
                 </div>
@@ -70,10 +76,5 @@ class Login extends PureComponent {
     );
   }
 }
-
-Login.propTypes = {
-  onLogoClick: PropTypes.func,
-  onSubmit: PropTypes.func.isRequired,
-};
 
 export default React.memo(Login);

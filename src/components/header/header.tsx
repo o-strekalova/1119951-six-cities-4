@@ -1,9 +1,16 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from "react";
 import {Link} from "react-router-dom";
 import {AppRoute, AuthorizationStatus} from "../../utils";
+import {AuthInfo} from "../../types";
 
-const Header = (props) => {
+interface Props {
+  authInfo?: AuthInfo | null,
+  authorizationStatus: string,
+  onLogoClick: () => void,
+  onUserNameClick?: () => void,
+}
+
+const Header: React.FC<Props> = (props: Props) => {
   const {
     authInfo,
     authorizationStatus,
@@ -57,19 +64,6 @@ const Header = (props) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  authInfo: PropTypes.shape({
-    avatar: PropTypes.string,
-    email: PropTypes.string,
-    id: PropTypes.number,
-    isSuper: PropTypes.bool,
-    name: PropTypes.string,
-  }),
-  onUserNameClick: PropTypes.func,
-  onLogoClick: PropTypes.func,
 };
 
 export default React.memo(Header);

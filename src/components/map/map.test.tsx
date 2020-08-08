@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Map from "./map.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import Map from "./map";
 import {offersAll} from "../mocks";
 
 it(`Render Map`, () => {

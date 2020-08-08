@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import ReviewsList from "./reviews-list.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import ReviewsList from "./reviews-list";
 import {reviews} from "../mocks";
 
 it(`Render Reviews List`, () => {

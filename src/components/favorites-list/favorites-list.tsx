@@ -1,11 +1,21 @@
-import PropTypes from "prop-types";
-import React, {PureComponent} from "react";
-import ErrorMessage from "../error-message/error-message.js";
-import Header from "../header/header.jsx";
-import CardsList from "../cards-list/cards-list.js";
+import * as React from "react";
+import ErrorMessage from "../error-message/error-message";
+import Header from "../header/header";
+import CardsList from "../cards-list/cards-list";
 import {CardClass, getCitiesForList, findOffersByCity, AuthorizationStatus, noop} from "../../utils";
+import {Offer, AuthInfo} from "../../types";
 
-class FavoritesList extends PureComponent {
+interface Props {
+  authInfo: AuthInfo | null,
+  authorizationStatus: string,
+  errorMessage: string | null,
+  offers: Array<Offer> |[],
+  onCardTitleClick: (offer: Offer) => void,
+  onFavoriteButtonClick: (newStatus: string, id: string) => void,
+  onLogoClick: () => void,
+}
+
+class FavoritesList extends React.PureComponent<Props> {
   renderOffersSection() {
     const {
       offers,
@@ -78,6 +88,7 @@ class FavoritesList extends PureComponent {
           authInfo={authInfo}
           authorizationStatus={authorizationStatus}
           onLogoClick={onLogoClick}
+          onUserNameClick={noop}
         />
 
         <main className={`page__main page__main--favorites` + mainClass}>
@@ -97,54 +108,5 @@ class FavoritesList extends PureComponent {
     );
   }
 }
-
-FavoritesList.propTypes = {
-  authInfo: PropTypes.shape({
-    avatar: PropTypes.string,
-    email: PropTypes.string,
-    id: PropTypes.number,
-    isSuper: PropTypes.bool,
-    name: PropTypes.string,
-  }),
-  authorizationStatus: PropTypes.string.isRequired,
-  errorMessage: PropTypes.string,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  })).isRequired,
-  onCardTitleClick: PropTypes.func,
-  onFavoriteButtonClick: PropTypes.func,
-  onLogoClick: PropTypes.func,
-};
 
 export default FavoritesList;

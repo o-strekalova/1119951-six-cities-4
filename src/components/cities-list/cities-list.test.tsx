@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import CitiesList from "./cities-list.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import CitiesList from "./cities-list";
 import {offersAll} from "../mocks";
 import {noop} from "../../utils";
 

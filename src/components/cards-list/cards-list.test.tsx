@@ -1,7 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
-import CardsList from "./cards-list.js";
+import CardsList from "./cards-list";
 import {offersAll} from "../mocks";
 import history from "../../history";
 import {CardClass, AuthorizationStatus, noop} from "../../utils";

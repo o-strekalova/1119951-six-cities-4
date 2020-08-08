@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import CitiesList from "./cities-list.js";
+import CitiesList from "./cities-list";
 import {offersAll} from "../mocks";
 
 configure({adapter: new Adapter()});

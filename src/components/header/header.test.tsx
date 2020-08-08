@@ -1,7 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
-import Header from "./header.js";
+import Header from "./header";
 import {AuthorizationStatus, noop} from "../../utils";
 import {authInfo} from "../mocks";
 import history from "../../history";

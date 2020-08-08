@@ -1,6 +1,6 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import SortingList from "./sorting-list.js";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+import SortingList from "./sorting-list";
 import {SortType, noop} from "../../utils";
 
 it(`Render Sorting List open`, () => {

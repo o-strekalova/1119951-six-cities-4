@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {Router} from "react-router-dom";
-import Card from "./card.js";
+import Card from "./card";
 import {offersAll} from "../mocks";
 import history from "../../history";
 import {CardClass, AuthorizationStatus, noop} from "../../utils";

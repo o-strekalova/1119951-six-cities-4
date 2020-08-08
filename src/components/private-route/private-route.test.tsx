@@ -1,10 +1,10 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {Router} from "react-router-dom";
-import FavoritesList from "../favorites-list/favorites-list.js";
-import PrivateRoute from "./private-route.js";
+import FavoritesList from "../favorites-list/favorites-list";
+import PrivateRoute from "./private-route";
 import {offersAll, authInfo} from "../mocks";
 import {AppRoute, AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";

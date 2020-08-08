@@ -1,7 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
-import OffersSection from "./offers-section.js";
+import OffersSection from "./offers-section";
 import {offersAll} from "../mocks";
 import {SortType, AuthorizationStatus, noop} from "../../utils";
 import history from "../../history";

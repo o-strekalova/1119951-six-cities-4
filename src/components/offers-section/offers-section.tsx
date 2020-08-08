@@ -1,14 +1,26 @@
-import PropTypes from "prop-types";
-import React from "react";
-import CardsList from "../cards-list/cards-list.js";
-import Map from "../map/map.js";
-import SortingList from "../sorting-list/sorting-list.jsx";
+import * as React from "react";
+import CardsList from "../cards-list/cards-list";
+import Map from "../map/map";
+import SortingList from "../sorting-list/sorting-list";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 import {CardClass} from "../../utils";
+import {Offer, City} from "../../types";
+
+interface Props {
+  activeCity: City | null,
+  activeItem: Offer,
+  activeSort: string,
+  authorizationStatus: string,
+  offers: Array<Offer>,
+  onCardTitleClick: (offer: Offer) => void,
+  onFavoriteButtonClick: (newStatus: string, id: string) => void,
+  onSortClick: (sort: string) => void,
+  onActiveItemChange: (offer: Offer) => void,
+}
 
 const SortingListWrapped = withToggle(SortingList);
 
-const OffersSection = (props) => {
+const OffersSection: React.FC<Props> = (props: Props) => {
   const {
     activeCity,
     activeItem,
@@ -55,91 +67,6 @@ const OffersSection = (props) => {
       </div>
     </div>
   );
-};
-
-OffersSection.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  activeCity: PropTypes.shape({
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }),
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-  activeItem: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  }),
-  activeSort: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`apartment`, `room`, `house`, `hotel`]).isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    preview: PropTypes.string.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-    city: PropTypes.shape({
-      location: PropTypes.shape({
-        lat: PropTypes.number.isRequired,
-        long: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }),
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      long: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  })).isRequired,
-  onActiveItemChange: PropTypes.func,
-  onCardTitleClick: PropTypes.func,
-  onSortClick: PropTypes.func,
-  onFavoriteButtonClick: PropTypes.func,
 };
 
 export default React.memo(OffersSection);
