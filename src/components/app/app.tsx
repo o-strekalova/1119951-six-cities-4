@@ -63,8 +63,6 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
     onUserNameClick,
   } = props;
 
-  console.log(offersAll);
-
   return (
     <Router
       history={history}

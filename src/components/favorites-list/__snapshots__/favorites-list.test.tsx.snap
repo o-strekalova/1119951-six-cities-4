@@ -26,7 +26,7 @@ exports[`Render Favorites with ErrorMessage 1`] = `
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="../../img/logo.svg"
               width="81"
             />
           </a>
@@ -154,7 +154,7 @@ exports[`Render Favorites with offers 1`] = `
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="../../img/logo.svg"
               width="81"
             />
           </a>
@@ -216,7 +216,8 @@ exports[`Render Favorites with offers 1`] = `
               >
                 <a
                   className="locations__item-link"
-                  href="#"
+                  href="/"
+                  onClick={[Function]}
                 >
                   <span>
                     Amsterdam
@@ -345,7 +346,8 @@ exports[`Render Favorites with offers 1`] = `
               >
                 <a
                   className="locations__item-link"
-                  href="#"
+                  href="/"
+                  onClick={[Function]}
                 >
                   <span>
                     Paris
@@ -512,7 +514,7 @@ exports[`Render Favorites without offers 1`] = `
               alt="6 cities logo"
               className="header__logo"
               height="41"
-              src="img/logo.svg"
+              src="../../img/logo.svg"
               width="81"
             />
           </a>

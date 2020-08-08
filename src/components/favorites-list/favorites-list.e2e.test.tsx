@@ -68,20 +68,20 @@ it(`Press city in Favorites`, () => {
       <Router
         history={history}
       >
-      <FavoritesList
-        authInfo={authInfo}
-        authorizationStatus={AuthorizationStatus.AUTH}
-        errorMessage={null}
-        offers={offersAll}
-        onCardTitleClick={noop}
-        onCityClick={onCityClick}
-        onFavoriteButtonClick={noop}
-      />
+        <FavoritesList
+          authInfo={authInfo}
+          authorizationStatus={AuthorizationStatus.AUTH}
+          errorMessage={null}
+          offers={offersAll}
+          onCardTitleClick={noop}
+          onCityClick={onCityClick}
+          onFavoriteButtonClick={noop}
+        />
       </Router>
   );
 
   const cities = main.find(`.locations__item-link`);
   cities.forEach((it) => it.simulate(`click`));
 
-  expect(onCityClick).toHaveBeenCalledTimes(2);
+  expect(onCityClick).toHaveBeenCalledTimes(6);
 });

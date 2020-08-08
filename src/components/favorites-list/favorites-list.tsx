@@ -41,7 +41,7 @@ class FavoritesList extends React.PureComponent<Props> {
                         className="locations__item-link"
                         onClick={() => onCityClick(city)}
                         to={AppRoute.MAIN}
-                        >
+                      >
                         <span>{city.name}</span>
                       </Link>
                     </div>
