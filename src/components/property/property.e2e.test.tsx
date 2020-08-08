@@ -1,5 +1,5 @@
-import Adapter from "enzyme-adapter-react-16";
-import Enzyme, {mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import * as Enzyme from "enzyme";
 import * as React from "react";
 import {Router} from "react-router-dom";
 import Property from "./property";
@@ -14,7 +14,7 @@ Enzyme.configure({
 it(`Press card title in Property`, () => {
   const onCardTitleClick = jest.fn();
 
-  const property = mount(
+  const property = Enzyme.mount(
       <Router
         history={history}
       >
@@ -45,7 +45,7 @@ it(`Press card title in Property`, () => {
 it(`Submit review form`, () => {
   const onReviewSubmit = jest.fn();
 
-  const property = mount(
+  const property = Enzyme.mount(
       <Router
         history={history}
       >
@@ -77,7 +77,7 @@ it(`Press favorite button in Property`, () => {
   const onFavoriteButtonClick = jest.fn();
   const onToggleClick = jest.fn();
 
-  const property = mount(
+  const property = Enzyme.mount(
       <Router
         history={history}
       >

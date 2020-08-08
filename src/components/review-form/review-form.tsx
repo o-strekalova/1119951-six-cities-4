@@ -16,7 +16,7 @@ class ReviewForm extends React.PureComponent<Props> {
   private submitButtonRef: React.RefObject<HTMLButtonElement>;
   private rating: string | null;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.formRef = React.createRef();
@@ -64,7 +64,7 @@ class ReviewForm extends React.PureComponent<Props> {
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           {STARS_REVIEWS.map((starTitle, i) => {
-            let count = STARS_REVIEWS.length - i;
+            const count = STARS_REVIEWS.length - i;
 
             return (
               <React.Fragment key={count}>

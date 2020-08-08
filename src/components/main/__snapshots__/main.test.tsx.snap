@@ -99,8 +99,8 @@ exports[`Render Main for unauthorized user 1`] = `
             <p
               className="cities__status-description"
             >
-              We could not find any property availbale at the moment in 
-              Amsterdam
+              We could not find any property availbale at the moment
+               in Amsterdam
             </p>
           </div>
         </section>
@@ -212,8 +212,8 @@ exports[`Render Main for with ErrorMessage 1`] = `
             <p
               className="cities__status-description"
             >
-              We could not find any property availbale at the moment in 
-              Amsterdam
+              We could not find any property availbale at the moment
+               in Amsterdam
             </p>
           </div>
         </section>
@@ -384,7 +384,7 @@ exports[`Render Main with offers 1`] = `
             <span
               className="places__sorting-type"
               onClick={[Function]}
-              tabIndex="0"
+              tabIndex={0}
             >
               Popular
               <svg
@@ -734,8 +734,8 @@ exports[`Render Main without offers 1`] = `
             <p
               className="cities__status-description"
             >
-              We could not find any property availbale at the moment in 
-              Amsterdam
+              We could not find any property availbale at the moment
+               in Amsterdam
             </p>
           </div>
         </section>

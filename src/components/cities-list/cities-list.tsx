@@ -9,13 +9,13 @@ interface Props {
 }
 
 class CitiesList extends React.PureComponent<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.handleCityClick = this.handleCityClick.bind(this);
   }
 
-  handleCityClick(city) {
+  handleCityClick(city: City) {
     this.props.onActiveItemChange(city);
     this.props.onCityClick(city);
   }

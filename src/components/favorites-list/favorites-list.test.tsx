@@ -19,6 +19,7 @@ it(`Render Favorites with offers`, () => {
             offers={offersAll}
             onCardTitleClick={noop}
             onFavoriteButtonClick={noop}
+            onLogoClick={noop}
           />
         </Router>)
     .toJSON();
@@ -39,6 +40,7 @@ it(`Render Favorites without offers`, () => {
             offers={[]}
             onCardTitleClick={noop}
             onFavoriteButtonClick={noop}
+            onLogoClick={noop}
           />
         </Router>)
     .toJSON();
@@ -59,6 +61,7 @@ it(`Render Favorites with ErrorMessage`, () => {
             offers={[]}
             onCardTitleClick={noop}
             onFavoriteButtonClick={noop}
+            onLogoClick={noop}
           />
         </Router>)
     .toJSON();

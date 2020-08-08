@@ -29,7 +29,7 @@ export default class MineMap extends React.PureComponent<Props> {
   private centerLong: number | null;
   private offers: Array<Offer> | [];
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.mapRef = React.createRef();

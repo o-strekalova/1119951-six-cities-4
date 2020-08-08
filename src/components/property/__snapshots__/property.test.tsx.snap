@@ -494,8 +494,8 @@ exports[`Render Property for authorized user 1`] = `
               <textarea
                 className="reviews__textarea form__textarea"
                 id="review"
-                maxLength="300"
-                minLength="50"
+                maxLength={300}
+                minLength={50}
                 name="review"
                 placeholder="Tell how was your stay, what you like and what can be improved"
                 required={true}
@@ -1876,8 +1876,8 @@ exports[`Render Property with ErrorMessage 1`] = `
               <textarea
                 className="reviews__textarea form__textarea"
                 id="review"
-                maxLength="300"
-                minLength="50"
+                maxLength={300}
+                minLength={50}
                 name="review"
                 placeholder="Tell how was your stay, what you like and what can be improved"
                 required={true}

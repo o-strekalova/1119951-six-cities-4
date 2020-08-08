@@ -1,6 +1,6 @@
 import * as React from "react";
-import Adapter from "enzyme-adapter-react-16";
-import Enzyme, {mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import * as Enzyme from "enzyme";
 import {Router} from "react-router-dom";
 import FavoritesList from "./favorites-list";
 import {offersAll, authInfo} from "../mocks";
@@ -14,7 +14,7 @@ Enzyme.configure({
 it(`Press card title in Favorite`, () => {
   const onCardTitleClick = jest.fn();
 
-  const main = mount(
+  const main = Enzyme.mount(
       <Router
         history={history}
       >
@@ -39,7 +39,7 @@ it(`Press card title in Favorite`, () => {
 it(`Press favorite button in Favorite`, () => {
   const onFavoriteButtonClick = jest.fn();
 
-  const main = mount(
+  const main = Enzyme.mount(
       <Router
         history={history}
       >

@@ -44,7 +44,7 @@ it(`Render Property for unauthorized user`, () => {
           history={history}
         >
           <Property
-            authInfo={{}}
+            authInfo={null}
             authorizationStatus={AuthorizationStatus.NO_AUTH}
             errorMessage={null}
             isToggleChecked={offersAll[0].isFavorite}

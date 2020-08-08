@@ -1,6 +1,6 @@
 import * as React from "react";
-import Adapter from "enzyme-adapter-react-16";
-import Enzyme, {mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import * as Enzyme from "enzyme";
 import {Router} from "react-router-dom";
 import Main from "./main";
 import {offersAll, authInfo} from "../mocks";
@@ -14,13 +14,14 @@ Enzyme.configure({
 it(`Press card title in Main`, () => {
   const onCardTitleClick = jest.fn();
 
-  const main = mount(
+  const main = Enzyme.mount(
       <Router
         history={history}
       >
         <Main
           authInfo={authInfo}
           authorizationStatus={AuthorizationStatus.AUTH}
+          errorMessage={null}
           offersAll={offersAll}
           activeCity={offersAll[0].city}
           sortedOffers={offersAll}
@@ -31,6 +32,7 @@ it(`Press card title in Main`, () => {
           onAuthFormSubmit={noop}
           onFavoriteButtonClick={noop}
           onLogoClick={noop}
+          onUserNameClick={noop}
         />
       </Router>
   );
@@ -44,13 +46,14 @@ it(`Press card title in Main`, () => {
 it(`Press city`, () => {
   const onCityClick = jest.fn();
 
-  const main = mount(
+  const main = Enzyme.mount(
       <Router
         history={history}
       >
         <Main
           authInfo={authInfo}
           authorizationStatus={AuthorizationStatus.AUTH}
+          errorMessage={null}
           offersAll={offersAll}
           activeCity={offersAll[0].city}
           sortedOffers={offersAll}
@@ -61,6 +64,7 @@ it(`Press city`, () => {
           onAuthFormSubmit={noop}
           onFavoriteButtonClick={noop}
           onLogoClick={noop}
+          onUserNameClick={noop}
         />
       </Router>
   );
@@ -74,13 +78,14 @@ it(`Press city`, () => {
 it(`Press favorite button`, () => {
   const onFavoriteButtonClick = jest.fn();
 
-  const main = mount(
+  const main = Enzyme.mount(
       <Router
         history={history}
       >
         <Main
           authInfo={authInfo}
           authorizationStatus={AuthorizationStatus.AUTH}
+          errorMessage={null}
           offersAll={offersAll}
           activeCity={offersAll[0].city}
           sortedOffers={offersAll}
@@ -91,6 +96,7 @@ it(`Press favorite button`, () => {
           onAuthFormSubmit={noop}
           onFavoriteButtonClick={onFavoriteButtonClick}
           onLogoClick={noop}
+          onUserNameClick={noop}
         />
       </Router>
   );

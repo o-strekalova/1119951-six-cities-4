@@ -11,6 +11,7 @@ it(`Render CitiesList`, () => {
           activeItem={offersAll[0].city}
           cities={[offersAll[0].city, offersAll[1].city]}
           onCityClick={noop}
+          onActiveItemChange={noop}
         />)
     .toJSON();
 

@@ -34,6 +34,7 @@ it(`Render PrivateRoute for authorized user`, () => {
                     offers={offersAll}
                     onCardTitleClick={noop}
                     onFavoriteButtonClick={noop}
+                    onLogoClick={noop}
                   />
                 );
               }}
@@ -62,12 +63,13 @@ it(`Render PrivateRoute for unauthorized user`, () => {
               render={() => {
                 return (
                   <FavoritesList
-                    authInfo={{}}
+                    authInfo={null}
                     authorizationStatus={AuthorizationStatus.NO_AUTH}
                     errorMessage={null}
                     offers={offersAll}
                     onCardTitleClick={noop}
                     onFavoriteButtonClick={noop}
+                    onLogoClick={noop}
                   />
                 );
               }}

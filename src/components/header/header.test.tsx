@@ -31,7 +31,7 @@ it(`Render Header for not authorized user`, () => {
           history={history}
         >
           <Header
-            authInfo={{}}
+            authInfo={null}
             authorizationStatus={AuthorizationStatus.NO_AUTH}
             onLogoClick={noop}
             onUserNameClick={noop}

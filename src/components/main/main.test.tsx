@@ -77,7 +77,7 @@ it(`Render Main for unauthorized user`, () => {
           history={history}
         >
           <Main
-            authInfo={{}}
+            authInfo={null}
             authorizationStatus={AuthorizationStatus.NO_AUTH}
             errorMessage={null}
             offersAll={[]}
@@ -109,7 +109,7 @@ it(`Render Main for with ErrorMessage`, () => {
           history={history}
         >
           <Main
-            authInfo={{}}
+            authInfo={null}
             authorizationStatus={AuthorizationStatus.NO_AUTH}
             errorMessage={`Failed to load offers`}
             offersAll={[]}

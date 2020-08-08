@@ -54,7 +54,7 @@ it(`Render App for not authorized user`, () => {
   .create(
       <Provider store={store}>
         <App
-          authInfo={{}}
+          authInfo={null}
           authorizationStatus={AuthorizationStatus.NO_AUTH}
           errorMessage={null}
           activeCity={offersAll[0].city}
@@ -93,10 +93,10 @@ it(`Render App with error`, () => {
   .create(
       <Provider store={store}>
         <App
-          authInfo={{}}
+          authInfo={null}
           authorizationStatus={AuthorizationStatus.NO_AUTH}
           errorMessage={`Failed to load offers`}
-          activeCity={{}}
+          activeCity={null}
           activeOffer={null}
           activeSort={SortType.POPULAR}
           favoriteOffers={offersAll}
