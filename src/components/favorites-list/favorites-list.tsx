@@ -1,9 +1,10 @@
 import * as React from "react";
+import {Link} from "react-router-dom";
 import ErrorMessage from "../error-message/error-message";
 import Header from "../header/header";
 import CardsList from "../cards-list/cards-list";
-import {CardClass, getCitiesForList, findOffersByCity, AuthorizationStatus, noop} from "../../utils";
-import {Offer, AuthInfo} from "../../types";
+import {CardClass, getCitiesForList, findOffersByCity, AuthorizationStatus, noop, AppRoute} from "../../utils";
+import {Offer, AuthInfo, City} from "../../types";
 
 interface Props {
   authInfo: AuthInfo | null,
@@ -11,8 +12,8 @@ interface Props {
   errorMessage: string | null,
   offers: Array<Offer> |[],
   onCardTitleClick: (offer: Offer) => void,
+  onCityClick: (city: City) => void,
   onFavoriteButtonClick: (newStatus: string, id: string) => void,
-  onLogoClick: () => void,
 }
 
 class FavoritesList extends React.PureComponent<Props> {
@@ -21,6 +22,7 @@ class FavoritesList extends React.PureComponent<Props> {
       offers,
       onCardTitleClick,
       onFavoriteButtonClick,
+      onCityClick,
     } = this.props;
 
     const cities = getCitiesForList(offers);
@@ -35,9 +37,13 @@ class FavoritesList extends React.PureComponent<Props> {
                 <li className="favorites__locations-items" key={city.name}>
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
-                      <a className="locations__item-link" href="#">
+                      <Link
+                        className="locations__item-link"
+                        onClick={() => onCityClick(city)}
+                        to={AppRoute.MAIN}
+                        >
                         <span>{city.name}</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
 
@@ -75,7 +81,6 @@ class FavoritesList extends React.PureComponent<Props> {
       authorizationStatus,
       errorMessage,
       offers,
-      onLogoClick,
     } = this.props;
 
     const isEmpty = offers.length === 0;
@@ -87,7 +92,6 @@ class FavoritesList extends React.PureComponent<Props> {
         <Header
           authInfo={authInfo}
           authorizationStatus={authorizationStatus}
-          onLogoClick={onLogoClick}
           onUserNameClick={noop}
         />
 

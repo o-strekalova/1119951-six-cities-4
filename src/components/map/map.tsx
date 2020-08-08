@@ -11,12 +11,12 @@ interface Props {
 }
 
 const ICON = leaflet.icon({
-  iconUrl: `img/pin.svg`,
+  iconUrl: `../../img/pin.svg`,
   iconSize: [27, 39]
 });
 
 const ACTIVE_ICON = leaflet.icon({
-  iconUrl: `img/pin-active.svg`,
+  iconUrl: `../../img/pin-active.svg`,
   iconSize: [27, 39]
 });
 

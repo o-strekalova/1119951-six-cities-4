@@ -24,7 +24,7 @@ it(`Press card title in Favorite`, () => {
           errorMessage={null}
           offers={offersAll}
           onCardTitleClick={onCardTitleClick}
-          onLogoClick={noop}
+          onCityClick={noop}
           onFavoriteButtonClick={noop}
         />
       </Router>
@@ -49,7 +49,7 @@ it(`Press favorite button in Favorite`, () => {
           errorMessage={null}
           offers={offersAll}
           onCardTitleClick={noop}
-          onLogoClick={noop}
+          onCityClick={noop}
           onFavoriteButtonClick={onFavoriteButtonClick}
         />
       </Router>
@@ -59,4 +59,29 @@ it(`Press favorite button in Favorite`, () => {
   favoriteButtons.forEach((it) => it.simulate(`click`));
 
   expect(onFavoriteButtonClick).toHaveBeenCalledTimes(2);
+});
+
+it(`Press city in Favorites`, () => {
+  const onCityClick = jest.fn();
+
+  const main = Enzyme.mount(
+      <Router
+        history={history}
+      >
+      <FavoritesList
+        authInfo={authInfo}
+        authorizationStatus={AuthorizationStatus.AUTH}
+        errorMessage={null}
+        offers={offersAll}
+        onCardTitleClick={noop}
+        onCityClick={onCityClick}
+        onFavoriteButtonClick={noop}
+      />
+      </Router>
+  );
+
+  const cities = main.find(`.locations__item-link`);
+  cities.forEach((it) => it.simulate(`click`));
+
+  expect(onCityClick).toHaveBeenCalledTimes(2);
 });

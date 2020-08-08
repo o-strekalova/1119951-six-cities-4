@@ -31,7 +31,6 @@ it(`Press card title in Main`, () => {
           onSortClick={noop}
           onAuthFormSubmit={noop}
           onFavoriteButtonClick={noop}
-          onLogoClick={noop}
           onUserNameClick={noop}
         />
       </Router>
@@ -63,7 +62,6 @@ it(`Press city`, () => {
           onSortClick={noop}
           onAuthFormSubmit={noop}
           onFavoriteButtonClick={noop}
-          onLogoClick={noop}
           onUserNameClick={noop}
         />
       </Router>
@@ -95,7 +93,6 @@ it(`Press favorite button`, () => {
           onSortClick={noop}
           onAuthFormSubmit={noop}
           onFavoriteButtonClick={onFavoriteButtonClick}
-          onLogoClick={noop}
           onUserNameClick={noop}
         />
       </Router>

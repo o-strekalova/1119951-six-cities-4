@@ -19,7 +19,7 @@ interface Props {
   reviews: Array<Review>,
   onCardTitleClick: (offer: Offer) => void,
   onFavoriteButtonClick: (newStatus: string, id: string) => void,
-  onLogoClick: () => void,
+
   onReviewSubmit: ({comment, rating}: {comment: string; rating: string}, id: string) => void,
   onToggleClick: () => void,
   onUserNameClick: () => void,
@@ -39,7 +39,7 @@ const Property: React.FC<Props> = (props: Props) => {
     reviews,
     onCardTitleClick,
     onFavoriteButtonClick,
-    onLogoClick,
+
     onReviewSubmit,
     onToggleClick,
     onUserNameClick,
@@ -86,7 +86,6 @@ const Property: React.FC<Props> = (props: Props) => {
         authInfo={authInfo}
         authorizationStatus={authorizationStatus}
         onUserNameClick={onUserNameClick}
-        onLogoClick={onLogoClick}
       />
 
       <main className="page__main page__main--property">
@@ -124,7 +123,7 @@ const Property: React.FC<Props> = (props: Props) => {
                     }
                   }}
                 >
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                  <svg className="place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -168,7 +167,7 @@ const Property: React.FC<Props> = (props: Props) => {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className={`property__avatar-wrapper user__avatar-wrapper` + avatarClass}>
-                    <img className="property__avatar user__avatar" src={owner.avatar} width="74" height="74" alt="Host avatar" />
+                    <img className="property__avatar user__avatar" src={`../../` + owner.avatar} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {owner.name}

@@ -20,7 +20,6 @@ interface Props {
   onCardTitleClick: (offer: Offer) => void,
   onCityClick: (city: City) => void,
   onFavoriteButtonClick: (newStatus: string, id: string) => void,
-  onLogoClick: () => void,
   onSortClick: (sort: string) => void,
   onUserNameClick: () => void,
 }
@@ -70,7 +69,6 @@ class Main extends React.PureComponent<Props> {
       offersAll,
       sortedOffers,
       onCityClick,
-      onLogoClick,
       onUserNameClick,
     } = this.props;
 
@@ -83,7 +81,6 @@ class Main extends React.PureComponent<Props> {
           authInfo={authInfo}
           authorizationStatus={authorizationStatus}
           onUserNameClick={onUserNameClick}
-          onLogoClick={onLogoClick}
         />
         <main className={`page__main page__main--index` + isEmpty}>
           <h1 className="visually-hidden">Cities</h1>

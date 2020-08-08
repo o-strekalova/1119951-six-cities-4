@@ -15,7 +15,6 @@ it(`Render Header for authorized user`, () => {
           <Header
             authInfo={authInfo}
             authorizationStatus={AuthorizationStatus.AUTH}
-            onLogoClick={noop}
             onUserNameClick={noop}
           />
         </Router>)
@@ -33,7 +32,6 @@ it(`Render Header for not authorized user`, () => {
           <Header
             authInfo={null}
             authorizationStatus={AuthorizationStatus.NO_AUTH}
-            onLogoClick={noop}
             onUserNameClick={noop}
           />
         </Router>)

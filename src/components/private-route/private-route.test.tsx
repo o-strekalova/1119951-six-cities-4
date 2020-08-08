@@ -34,7 +34,7 @@ it(`Render PrivateRoute for authorized user`, () => {
                     offers={offersAll}
                     onCardTitleClick={noop}
                     onFavoriteButtonClick={noop}
-                    onLogoClick={noop}
+                    onCityClick={noop}
                   />
                 );
               }}
@@ -69,7 +69,7 @@ it(`Render PrivateRoute for unauthorized user`, () => {
                     offers={offersAll}
                     onCardTitleClick={noop}
                     onFavoriteButtonClick={noop}
-                    onLogoClick={noop}
+                    onCityClick={noop}
                   />
                 );
               }}

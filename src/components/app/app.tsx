@@ -8,7 +8,7 @@ import PrivateRoute from "../private-route/private-route";
 import Property from "../property/property";
 import {ActionCreator as DataActionCreator, Operation as DataOperation} from "../../reducer/data/data";
 import {getOffersAll, getActiveCity, getActiveSort, getSortedOffers, getFavoriteOffers, getOffersNearby, getReviews} from "../../reducer/data/selectors";
-import {Operation as AppOperation, ActionCreator as AppActionCreator} from "../../reducer/app/app";
+import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
 import {getActiveOffer, getErrorMessage} from "../../reducer/app/selectors";
 import {Operation as UserOperation} from "../../reducer/user/user";
 import {getAuthorizationStatus, getAuthInfo} from "../../reducer/user/selectors";
@@ -33,7 +33,6 @@ interface Props {
   onCardTitleClick: (offer: Offer) => void,
   onCityClick: (city: City) => void,
   onFavoriteButtonClick: (newStatus: string, id: string) => void,
-  onLogoClick: () => void,
   onReviewSubmit: ({comment, rating}: {comment: string; rating: string}, id: string) => void,
   onSortClick: (sort: string) => void,
   onUserNameClick: () => void,
@@ -59,11 +58,12 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
     onCardTitleClick,
     onCityClick,
     onFavoriteButtonClick,
-    onLogoClick,
     onReviewSubmit,
     onSortClick,
     onUserNameClick,
   } = props;
+
+  console.log(offersAll);
 
   return (
     <Router
@@ -83,7 +83,6 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
             onCardTitleClick={onCardTitleClick}
             onCityClick={onCityClick}
             onFavoriteButtonClick={onFavoriteButtonClick}
-            onLogoClick={onLogoClick}
             onSortClick={onSortClick}
             onUserNameClick={onUserNameClick}
           />
@@ -98,7 +97,6 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
             reviews={reviews}
             onCardTitleClick={onCardTitleClick}
             onFavoriteButtonClick={onFavoriteButtonClick}
-            onLogoClick={onLogoClick}
             onReviewSubmit={onReviewSubmit}
             onUserNameClick={onUserNameClick}
           />
@@ -110,7 +108,6 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
             return (
               authorizationStatus === AuthorizationStatus.NO_AUTH
                 ? <Login
-                  onLogoClick={onLogoClick}
                   onSubmit={onAuthFormSubmit}
                 />
                 : history.push(AppRoute.MAIN)
@@ -127,8 +124,8 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
                 authorizationStatus={authorizationStatus}
                 errorMessage={errorMessage}
                 offers={favoriteOffers}
-                onLogoClick={onLogoClick}
                 onCardTitleClick={onCardTitleClick}
+                onCityClick={onCityClick}
                 onFavoriteButtonClick={onFavoriteButtonClick}
               />
             );
@@ -167,13 +164,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataActionCreator.changeActiveSort(SortType.POPULAR));
   },
   onFavoriteButtonClick(newStatus, id) {
-    dispatch(AppOperation.updateFavoriteStatus(newStatus, id));
-  },
-  onLogoClick() {
-    dispatch(DataOperation.loadOffers());
+    dispatch(DataOperation.updateFavoriteStatus(newStatus, id));
   },
   onReviewSubmit(reviewData, id) {
-    dispatch(AppOperation.postReview(reviewData, id));
+    dispatch(DataOperation.postReview(reviewData, id));
   },
   onSortClick(sort) {
     dispatch(DataActionCreator.changeActiveSort(sort));

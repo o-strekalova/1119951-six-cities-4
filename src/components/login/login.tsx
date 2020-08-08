@@ -3,7 +3,6 @@ import {AuthorizationStatus} from "../../utils";
 import Header from "../header/header";
 
 interface Props {
-  onLogoClick: () => void,
   onSubmit: ({login, password}: {login: string; password: string}) => void,
 }
 
@@ -36,7 +35,6 @@ class Login extends React.PureComponent<Props> {
       <div className="page page--gray page--login">
         <Header
           authorizationStatus={AuthorizationStatus.NO_AUTH}
-          onLogoClick={this.props.onLogoClick}
         />
         <main className="page__main page__main--login">
           <div className="page__login-container container">

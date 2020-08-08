@@ -25,7 +25,6 @@ it(`Render Main with offers`, () => {
             onSortClick={noop}
             onAuthFormSubmit={noop}
             onFavoriteButtonClick={noop}
-            onLogoClick={noop}
             onUserNameClick={noop}
           />
         </Router>, {
@@ -57,7 +56,6 @@ it(`Render Main without offers`, () => {
             onSortClick={noop}
             onAuthFormSubmit={noop}
             onFavoriteButtonClick={noop}
-            onLogoClick={noop}
             onUserNameClick={noop}
           />
         </Router>, {
@@ -89,7 +87,6 @@ it(`Render Main for unauthorized user`, () => {
             onSortClick={noop}
             onAuthFormSubmit={noop}
             onFavoriteButtonClick={noop}
-            onLogoClick={noop}
             onUserNameClick={noop}
           />
         </Router>, {
@@ -121,7 +118,6 @@ it(`Render Main for with ErrorMessage`, () => {
             onSortClick={noop}
             onAuthFormSubmit={noop}
             onFavoriteButtonClick={noop}
-            onLogoClick={noop}
             onUserNameClick={noop}
           />
         </Router>, {

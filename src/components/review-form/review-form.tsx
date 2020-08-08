@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Review} from "../../types";
 
 const MIN_COMMENT_LENGTH = 50;
 const MAX_COMMENT_LENGTH = 300;
@@ -38,6 +39,7 @@ class ReviewForm extends React.PureComponent<Props> {
       rating: this.rating,
     }, id);
 
+    this.rating = null;
     this.formRef.current.reset();
     this.submitButtonRef.current.setAttribute(`disabled`, `disabled`);
   }

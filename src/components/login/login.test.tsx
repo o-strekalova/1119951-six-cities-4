@@ -11,7 +11,6 @@ it(`Login component render correctly`, () => {
         history={history}
       >
         <Login
-          onLogoClick={noop}
           onSubmit={noop}
         />
       </Router>
