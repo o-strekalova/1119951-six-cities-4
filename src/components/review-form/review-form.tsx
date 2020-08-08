@@ -1,5 +1,4 @@
 import * as React from "react";
-import {Review} from "../../types";
 
 const MIN_COMMENT_LENGTH = 50;
 const MAX_COMMENT_LENGTH = 300;

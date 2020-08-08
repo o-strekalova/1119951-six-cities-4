@@ -12,7 +12,7 @@ import {Offer, Review, AuthInfo} from "../../types";
 interface Props {
   authInfo: AuthInfo | null,
   authorizationStatus: string,
-  errorMessage: string | null | null,
+  errorMessage: string | null,
   isToggleChecked: boolean,
   offer: Offer,
   offersNear: Array<Offer>,

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Switch, Route, Router} from "react-router-dom";
+import {Switch, Route, Router, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import FavoritesList from "../favorites-list/favorites-list";
 import Login from "../login/login";
@@ -90,6 +90,7 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
             authInfo={authInfo}
             authorizationStatus={authorizationStatus}
             isToggleChecked={getToggleValue(activeOffer)}
+            errorMessage={errorMessage}
             offer={activeOffer}
             offersNear={offersNearby}
             reviews={reviews}
@@ -107,8 +108,9 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
               authorizationStatus === AuthorizationStatus.NO_AUTH
                 ? <Login
                   onSubmit={onAuthFormSubmit}
+                  errorMessage={errorMessage}
                 />
-                : history.push(AppRoute.MAIN)
+                : <Redirect to={AppRoute.MAIN} />
             );
           }}>
         </Route>

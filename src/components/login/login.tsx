@@ -1,9 +1,11 @@
 import * as React from "react";
 import {AuthorizationStatus} from "../../utils";
 import Header from "../header/header";
+import ErrorMessage from "../error-message/error-message";
 
 interface Props {
   onSubmit: ({login, password}: {login: string; password: string}) => void,
+  errorMessage: string | null,
 }
 
 class Login extends React.PureComponent<Props> {
@@ -70,6 +72,9 @@ class Login extends React.PureComponent<Props> {
             </section>
           </div>
         </main>
+        <ErrorMessage
+          errorMessage={this.props.errorMessage}
+        />
       </div>
     );
   }
