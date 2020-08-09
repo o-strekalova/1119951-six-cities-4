@@ -2,7 +2,7 @@ import * as React from "react";
 import {City} from "../../types";
 
 interface Props {
-  activeCity: City | null,
+  activeCity: City,
 }
 
 const MainEmpty: React.FC<Props> = (props: Props) => {

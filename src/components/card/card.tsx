@@ -78,7 +78,6 @@ const Card: React.FC<Props> = (props: Props) => {
               } else {
                 onFavoriteButtonClick(newStatus, id);
                 onToggleClick();
-                offer.isFavorite = !offer.isFavorite;
               }
             }}
           >

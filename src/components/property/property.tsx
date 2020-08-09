@@ -119,7 +119,6 @@ const Property: React.FC<Props> = (props: Props) => {
                     } else {
                       onFavoriteButtonClick(newStatus, id);
                       onToggleClick();
-                      offer.isFavorite = !offer.isFavorite;
                     }
                   }}
                 >
@@ -180,7 +179,6 @@ const Property: React.FC<Props> = (props: Props) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewsList
                   reviews={reviews}
                 />

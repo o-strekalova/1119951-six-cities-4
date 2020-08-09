@@ -1,22 +1,18 @@
-import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api";
-import {reducer, ActionType, Operation, ActionCreator} from "./data";
-import {offersAll, offersRaw, reviews} from "../../components/mocks";
-import {SortType, noop} from "../../utils";
-
-const api = createAPI(noop);
+import {reducer, ActionType, ActionCreator} from "./data";
+import {offersAll, reviews} from "../../components/mocks";
+import {SortType} from "../../utils";
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer({
-      activeCity: null,
+      activeCity: {},
       activeSort: SortType.POPULAR,
       favoriteOffers: [],
       offersAll: [],
       offersNearby: [],
       reviews: [],
     }, {})).toEqual({
-      activeCity: null,
+      activeCity: {},
       activeSort: SortType.POPULAR,
       favoriteOffers: [],
       offersAll: [],
@@ -25,17 +21,14 @@ describe(`Reducer works correctly`, () => {
     });
   });
 
-  it(`Reducer should update offersAll and activeCity by load offersAll`, () => {
+  it(`Reducer should update offersAll by load`, () => {
     expect(reducer({
       offersAll: [],
-      activeCity: null,
     }, {
       type: ActionType.LOAD_OFFERS,
-      offersAll,
-      activeCity: offersAll[0].city,
+      payload: offersAll,
     })).toEqual({
       offersAll,
-      activeCity: offersAll[0].city,
     });
   });
 
@@ -95,35 +88,11 @@ describe(`Reducer works correctly`, () => {
   });
 });
 
-
-describe(`Operation work correctly`, () => {
-  it(`Should make a correct API call to /hotels`, function () {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const offersLoader = Operation.loadOffers();
-
-    apiMock
-      .onGet(`/hotels`)
-      .reply(200, offersRaw);
-
-    return offersLoader(dispatch, noop, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_OFFERS,
-          offersAll,
-          activeCity: offersAll[0].city,
-        });
-      });
-  });
-});
-
 describe(`Action creators work correctly`, () => {
   it(`Action creator for loading offers returns correct action`, () => {
     expect(ActionCreator.loadOffers(offersAll)).toEqual({
       type: ActionType.LOAD_OFFERS,
-      offersAll,
-      activeCity: offersAll[0].city,
+      payload: offersAll,
     });
   });
 

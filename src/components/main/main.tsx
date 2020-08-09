@@ -9,7 +9,7 @@ import {getCitiesForList} from "../../utils";
 import {Offer, AuthInfo, City} from "../../types";
 
 interface Props {
-  activeCity: City | null,
+  activeCity: City,
   activeSort: string,
   authInfo: AuthInfo | null,
   authorizationStatus: string,

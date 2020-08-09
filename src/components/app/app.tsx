@@ -18,7 +18,7 @@ import history from "../../history";
 import {Offer, Review, AuthInfo, City} from "../../types";
 
 interface Props {
-  activeCity: City | null,
+  activeCity: City,
   activeOffer: Offer | null,
   activeSort: string,
   authInfo: AuthInfo | null,

@@ -2,9 +2,10 @@ import {extend, SortType} from "../../utils";
 import Offer from "../../models/offer";
 import Review from "../../models/review";
 import {ActionCreator as AppActionCreator} from "../app/app";
+import {getActiveCity} from "../data/selectors";
 
 const initialState = {
-  activeCity: null,
+  activeCity: {},
   activeSort: SortType.POPULAR,
   favoriteOffers: [],
   offersAll: [],
@@ -19,7 +20,6 @@ const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_OFFERS_NEARBY: `LOAD_OFFERS_NEARBY`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
-  UPDATE_OFFERS: `UPDATE_OFFERS`,
 };
 
 const ActionCreator = {
@@ -47,8 +47,7 @@ const ActionCreator = {
   loadOffers: (offersAll) => {
     return {
       type: ActionType.LOAD_OFFERS,
-      offersAll,
-      activeCity: offersAll[0].city,
+      payload: offersAll,
     };
   },
 
@@ -65,13 +64,6 @@ const ActionCreator = {
       payload: reviews,
     };
   },
-
-  updateOffers: (offers) => {
-    return {
-      type: ActionType.UPDATE_OFFERS,
-      payload: offers,
-    };
-  },
 };
 
 const Operation = {
@@ -82,6 +74,10 @@ const Operation = {
       })
       .then((offersAll) => {
         dispatch(ActionCreator.loadOffers(offersAll));
+        const state = getState();
+        if (Object.keys(getActiveCity(state)).length === 0) {
+          dispatch(ActionCreator.changeActiveCity(offersAll[0].city));
+        }
       })
       .catch((err) => {
         dispatch(AppActionCreator.changeErrorMessage(`Failed to load offers. Try again later`));
@@ -168,14 +164,9 @@ const Operation = {
       id,
       newStatus,
     })
-    .then((response) => {
-      return Offer.parseOffer(response.data);
-    })
-    .then((offer) => {
-      const state = getState();
-      const offers = state.DATA.offersAll;
-      offers[id - 1] = offer;
-      dispatch(ActionCreator.updateOffers(offers));
+    .then(() => {
+      dispatch(Operation.loadFavoriteOffers());
+      dispatch(Operation.loadOffers());
     })
     .catch((err) => {
       dispatch(AppActionCreator.changeErrorMessage(`Failed to update favorite status. Try again later`));
@@ -206,8 +197,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.LOAD_OFFERS:
       return extend(state, {
-        offersAll: action.offersAll,
-        activeCity: action.activeCity,
+        offersAll: action.payload,
       });
 
     case ActionType.LOAD_OFFERS_NEARBY:
@@ -218,11 +208,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
-      });
-
-    case ActionType.UPDATE_OFFERS:
-      return extend(state, {
-        offersAll: action.payload,
       });
   }
   return state;

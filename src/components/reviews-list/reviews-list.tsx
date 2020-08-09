@@ -2,11 +2,11 @@ import * as React from "react";
 import Review from "../review/review";
 import {Review as ReviewType} from "../../types";
 
+const MAX_REVIEWS_COUNT = 10;
+
 interface Props {
   reviews: Array<ReviewType>,
 }
-
-const MAX_REVIEWS_COUNT = 10;
 
 const ReviewsList: React.FC<Props> = (props: Props) => {
   const {reviews} = props;
@@ -16,14 +16,17 @@ const ReviewsList: React.FC<Props> = (props: Props) => {
   const reviewsShown = reviewsSorted.length <= MAX_REVIEWS_COUNT ? reviewsSorted : reviewsSorted.slice(0, MAX_REVIEWS_COUNT);
 
   return (
-    <ul className="reviews__list">
-      {reviewsShown.map((review) => {
-        return <Review
-          key={review.id}
-          review={review}
-        />;
-      })}
-    </ul>
+    <React.Fragment>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsShown.length}</span></h2>
+      <ul className="reviews__list">
+        {reviewsShown.map((review) => {
+          return <Review
+            key={review.id}
+            review={review}
+          />;
+        })}
+      </ul>
+    </React.Fragment>
   );
 };
 

@@ -7,7 +7,7 @@ import {CardClass} from "../../utils";
 import {Offer, City} from "../../types";
 
 interface Props {
-  activeCity: City | null,
+  activeCity: City,
   activeItem: Offer,
   activeSort: string,
   authorizationStatus: string,
