@@ -26,36 +26,6 @@ const ActionCreator = {
   },
 };
 
-const Operation = {
-  postReview: (reviewData, id) => (dispatch, getState, api) => {
-    return api.post(`/comments/${id}`, {
-      comment: reviewData.comment,
-      rating: reviewData.rating,
-    })
-    .catch((err) => {
-      dispatch(ActionCreator.changeErrorMessage(`Failed to post review. Try again later`));
-      setTimeout(() => {
-        dispatch(ActionCreator.changeErrorMessage(null));
-      }, 5000);
-      throw err;
-    });
-  },
-
-  updateFavoriteStatus: (newStatus, id) => (dispatch, getState, api) => {
-    return api.post(`/favorite/${id}/${newStatus}`, {
-      id,
-      newStatus,
-    })
-    .catch((err) => {
-      dispatch(ActionCreator.changeErrorMessage(`Failed to update favorite status. Try again later`));
-      setTimeout(() => {
-        dispatch(ActionCreator.changeErrorMessage(null));
-      }, 5000);
-      throw err;
-    });
-  }
-};
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_ACTIVE_OFFER:
@@ -78,5 +48,4 @@ export {
   reducer,
   ActionType,
   ActionCreator,
-  Operation,
 };

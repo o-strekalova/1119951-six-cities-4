@@ -9,14 +9,14 @@ const api = createAPI(noop);
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer({
-      activeCity: {},
+      activeCity: null,
       activeSort: SortType.POPULAR,
       favoriteOffers: [],
       offersAll: [],
       offersNearby: [],
       reviews: [],
     }, {})).toEqual({
-      activeCity: {},
+      activeCity: null,
       activeSort: SortType.POPULAR,
       favoriteOffers: [],
       offersAll: [],
@@ -28,7 +28,7 @@ describe(`Reducer works correctly`, () => {
   it(`Reducer should update offersAll and activeCity by load offersAll`, () => {
     expect(reducer({
       offersAll: [],
-      activeCity: {},
+      activeCity: null,
     }, {
       type: ActionType.LOAD_OFFERS,
       offersAll,

@@ -4,7 +4,7 @@ import Review from "../../models/review";
 import {ActionCreator as AppActionCreator} from "../app/app";
 
 const initialState = {
-  activeCity: {},
+  activeCity: null,
   activeSort: SortType.POPULAR,
   favoriteOffers: [],
   offersAll: [],
@@ -19,6 +19,7 @@ const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_OFFERS_NEARBY: `LOAD_OFFERS_NEARBY`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
+  UPDATE_OFFERS: `UPDATE_OFFERS`,
 };
 
 const ActionCreator = {
@@ -62,6 +63,13 @@ const ActionCreator = {
     return {
       type: ActionType.LOAD_REVIEWS,
       payload: reviews,
+    };
+  },
+
+  updateOffers: (offers) => {
+    return {
+      type: ActionType.UPDATE_OFFERS,
+      payload: offers,
     };
   },
 };
@@ -134,6 +142,49 @@ const Operation = {
         throw err;
       });
   },
+
+  postReview: (reviewData, id) => (dispatch, getState, api) => {
+    return api.post(`/comments/${id}`, {
+      comment: reviewData.comment,
+      rating: reviewData.rating,
+    })
+    .then((response) => {
+      return Review.parseReviews(response.data);
+    })
+    .then((reviews) => {
+      dispatch(ActionCreator.loadReviews(reviews));
+    })
+    .catch((err) => {
+      dispatch(AppActionCreator.changeErrorMessage(`Failed to post review. Try again later`));
+      setTimeout(() => {
+        dispatch(AppActionCreator.changeErrorMessage(null));
+      }, 5000);
+      throw err;
+    });
+  },
+
+  updateFavoriteStatus: (newStatus, id) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${id}/${newStatus}`, {
+      id,
+      newStatus,
+    })
+    .then((response) => {
+      return Offer.parseOffer(response.data);
+    })
+    .then((offer) => {
+      const state = getState();
+      const offers = state.DATA.offersAll;
+      offers[id - 1] = offer;
+      dispatch(ActionCreator.updateOffers(offers));
+    })
+    .catch((err) => {
+      dispatch(AppActionCreator.changeErrorMessage(`Failed to update favorite status. Try again later`));
+      setTimeout(() => {
+        dispatch(AppActionCreator.changeErrorMessage(null));
+      }, 5000);
+      throw err;
+    });
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -167,6 +218,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
+      });
+
+    case ActionType.UPDATE_OFFERS:
+      return extend(state, {
+        offersAll: action.payload,
       });
   }
   return state;
