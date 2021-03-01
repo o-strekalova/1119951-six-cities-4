@@ -1,52 +1,36 @@
-# Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
+# Personal project «Six Cities»
 
-* Студент: [Ольга Стрекалова](https://up.htmlacademy.ru/react/4/user/1119951).
-* Наставник: [Богдан Волик](https://htmlacademy.ru/profile/id997699).
+It’s an SPA made with React/Redux and TypeScript.
 
----
+## How to run the project:
 
-_Не удаляйте и не изменяйте папки и файлы:_
-_`.editorconfig`, `.gitattributes`, `.gitignore`, `.travis.yml`, `package.json`._
+1.	Clone the repository
+`git clone git@github.com:o-strekalova/1119951-six-cities-4.git`
+2.	Install dependencies
+`npm i`
+3.	Run web serever
+`npm start`
+4.	Open in browser
+`https://localhost/1334`
 
----
+## This project includes four routes:
 
-### Памятка
+`/`
+Main page where you can choose a city and sort through offers. You can also see them on the map made with leaflet library. You can also favorite offers to see them in the favorites list later. Offers are downloaded from this server: https://4.react.pages.academy/six-cities. Server requests are made with axios and promises.
 
-#### 1. Зарегистрируйтесь на Гитхабе
 
-Если у вас ещё нет аккаунта на [github.com](https://github.com/join), скорее зарегистрируйтесь.
+`offer/{:id}`
+Detailed page of an offer includes reviews section where you can leave a review if you’re logged in. Review form goes through validation and then the data gets sent to the server.
 
-#### 2. Создайте форк
+`/login`
+Authorization page. This project doesn’t have a registration form so you can enter any email and be “authorized”.
 
-Откройте репозиторий и нажмите кнопку «Fork» в правом верхнем углу. Репозиторий из Академии будет скопирован в ваш аккаунт.
+`/favorites`
+Click on the email after logging in and you’ll see list of favorited offers.
 
-<img width="769" alt="Press 'Fork'" src="https://cloud.githubusercontent.com/assets/259739/20264045/a1ddbf40-aa7a-11e6-9a1a-724a1c0123c8.png">
+## Testing
+All components have snapshot tests made with Jest. Some of them also have end-to-end tests using Enzyme.
 
-Получится вот так:
+## TypeScript
+In this project TypeScript was used for props.
 
-<img width="769" alt="Forked" src="https://cloud.githubusercontent.com/assets/259739/20264122/f63219a6-aa7a-11e6-945a-89818fc7c014.png">
-
-#### 3. Клонируйте репозиторий на свой компьютер
-
-Будьте внимательны: нужно клонировать свой репозиторий (форк), а не репозиторий Академии. Также обратите внимание, что клонировать репозиторий нужно через SSH, а не через HTTPS. Нажмите зелёную кнопку в правой части экрана, чтобы скопировать SSH-адрес вашего репозитория:
-
-<img width="769" alt="SSH" src="https://cloud.githubusercontent.com/assets/259739/20264180/42704126-aa7b-11e6-9ab4-73372b812a53.png">
-
-Клонировать репозиторий можно так:
-
-```
-git clone SSH-адрес_вашего_форка
-```
-
-Команда клонирует репозиторий на ваш компьютер и подготовит всё необходимое для старта работы.
-
-#### 4. Начинайте обучение!
-
----
-
-<a href="https://htmlacademy.ru/intensive/react"><img align="left" width="50" height="50" title="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/react/logo-for-github.png"></a>
-
-Репозиторий создан для обучения на профессиональном онлайн‑курсе «[JavaScript, уровень 3](https://htmlacademy.ru/intensive/react)» от [HTML Academy](https://htmlacademy.ru).
-
-[travis-image]: https://travis-ci.com/htmlacademy-react/1119951-six-cities-4.svg?branch=master
-[travis-url]: https://travis-ci.com/htmlacademy-react/1119951-six-cities-4
