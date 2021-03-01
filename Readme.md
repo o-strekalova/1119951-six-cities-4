@@ -19,7 +19,7 @@ It’s an SPA made with React/Redux and TypeScript.
 Main page where you can choose a city and sort through offers. You can also see them on the map made with leaflet library. You can also favorite offers to see them in the favorites list later. Offers are downloaded from this server: https://4.react.pages.academy/six-cities. Server requests are made with axios and promises.
 
 
-`offer/{:id}`
+`/offer/{:id}`
 Detailed page of an offer includes reviews section where you can leave a review if you’re logged in. Review form goes through validation and then the data gets sent to the server.
 
 `/login`
